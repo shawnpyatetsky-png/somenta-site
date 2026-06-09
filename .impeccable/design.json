@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-11T00:00:00Z",
+  "title": "Design System: Somenta Landing Page",
+  "extensions": {
+    "colorMeta": {
+      "warm-ivory":    { "role": "neutral",  "displayName": "Warm Ivory",    "canonical": "#F7F3EC", "tonalRamp": ["#2A2219","#4A3D2E","#6B5A42","#8C7A58","#B0987A","#CEBBA0","#E4D9C8","#F7F3EC"] },
+      "amber-tan":     { "role": "neutral",  "displayName": "Amber Tan",     "canonical": "#F0E9DC", "tonalRamp": ["#28200F","#483B1E","#6B572E","#907440","#B09060","#CEB088","#E3D0B4","#F0E9DC"] },
+      "espresso-deep": { "role": "neutral",  "displayName": "Espresso Deep", "canonical": "#1A1108", "tonalRamp": ["#1A1108","#2E1E0C","#453016","#5E4220","#7A582C","#9A7242","#C09A6A","#E8CEAA"] },
+      "warm-brown":    { "role": "neutral",  "displayName": "Warm Brown",    "canonical": "#281B0D", "tonalRamp": ["#281B0D","#3E2A14","#573C1E","#74512A","#936838","#B58456","#D4A87C","#EDD4B4"] },
+      "parchment":     { "role": "neutral",  "displayName": "Parchment",     "canonical": "#FDFBF6", "tonalRamp": ["#2C2820","#4A4438","#6A6050","#8C806C","#ACA08C","#CCC2AE","#E8E2D6","#FDFBF6"] },
+      "warm-taupe":    { "role": "neutral",  "displayName": "Warm Taupe",    "canonical": "#8C7C68", "tonalRamp": ["#1E1810","#38301E","#56492E","#766040","#8C7C68","#A89880","#C4B49C","#E0D3C2"] },
+      "amber-glow":    { "role": "primary",  "displayName": "Amber Glow",    "canonical": "#C87840", "tonalRamp": ["#2C1A06","#4E2E0A","#704410","#8E5818","#A86C28","#C87840","#E09C62","#F0C898"] },
+      "amber-hush":    { "role": "primary",  "displayName": "Amber Hush",    "canonical": "#B06A30", "tonalRamp": ["#281606","#48280A","#643A10","#804E1A","#9C6026","#B06A30","#CC8C52","#E4B480"] },
+      "warm-divider":  { "role": "neutral",  "displayName": "Warm Divider",  "canonical": "#E0D3BF", "tonalRamp": ["#2A2418","#48402C","#685E44","#887C5E","#A89A7E","#C4B89E","#D8CEB8","#E0D3BF"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero headlines only. The emotional anchor of the page. Never used for section headings." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2s. Establishes the emotional register of each section." },
+      "title":    { "displayName": "Title",    "purpose": "Card headings, shift statements, day themes. The only Fraunces weight at 500." },
+      "body":     { "displayName": "Body",     "purpose": "Paragraph and support copy. Sans-serif only. Max 65ch." },
+      "label":    { "displayName": "Label",    "purpose": "Eyebrows, section tags, attribution lines. Always uppercase, always sans-serif." }
+    },
+    "shadows": [
+      { "name": "cta-hover-glow",      "value": "0 6px 22px rgba(200,120,64,0.28)",                                        "purpose": "Primary accent button hover state only." },
+      { "name": "timeline-dot-rest",   "value": "0 0 0 3px rgba(200,120,64,0.18), 0 0 14px rgba(200,120,64,0.22)",         "purpose": "Ambient amber ring on the timeline dot at rest." },
+      { "name": "timeline-dot-active", "value": "0 0 0 5px rgba(200,120,64,0.28), 0 0 22px rgba(200,120,64,0.42)",         "purpose": "Timeline dot bloom when adjacent card is hovered." }
+    ],
+    "motion": [
+      { "name": "ease-breathe",   "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "All reveals and primary transitions. Deliberately slow at 0.95s — matches the user's interior pace." },
+      { "name": "ease-nav-line",  "value": "cubic-bezier(0.22, 1, 0.36, 1)","purpose": "Nav link underline scaleX animation." },
+      { "name": "duration-slow",  "value": "0.95s",  "purpose": "Reveal animations." },
+      { "name": "duration-base",  "value": "0.2s",   "purpose": "Hover state transitions on buttons and cards." },
+      { "name": "duration-fast",  "value": "0.18s",  "purpose": "Button transform/lift transitions." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "860px", "purpose": "Single column layout; navigation hidden; timeline collapses to left-rail." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Accent)",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "The primary CTA. Amber Glow pill. Used for 'Find your path', 'Join Somenta', and key section CTAs.",
+      "html": "<button class=\"ds-btn-accent\">Find your path →</button>",
+      "css": ".ds-btn-accent { background: #C87840; color: #FDFBF6; border: none; border-radius: 100px; padding: 0.9rem 2.25rem; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s, transform 0.18s, box-shadow 0.2s; } .ds-btn-accent:hover { background: #B06A30; transform: translateY(-2px); box-shadow: 0 6px 22px rgba(200,120,64,0.28); } .ds-btn-accent:focus-visible { outline: 2px solid #C87840; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary CTA. Transparent with amber border. Fills on hover.",
+      "html": "<button class=\"ds-btn-outline\">Find your path →</button>",
+      "css": ".ds-btn-outline { background: transparent; color: #C87840; border: 1.5px solid #C87840; border-radius: 100px; padding: 0.75rem 1.75rem; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: background 0.2s, color 0.2s; } .ds-btn-outline:hover { background: #C87840; color: #FDFBF6; } .ds-btn-outline:focus-visible { outline: 2px solid #C87840; outline-offset: 3px; }"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The standard card used in the changes grid, practice section, and wherever content is chunked. Warm amber whisper on hover.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">You have people who actually understand you.</h3><hr class=\"ds-card-rule\"/><p class=\"ds-card-body\">\"Doing these practices with people from the same place — that changes everything.\"</p><div class=\"ds-card-footer\"><span class=\"ds-card-name\">— Janice · Founding Member</span><span class=\"ds-card-stars\">★★★★★</span></div></div>",
+      "css": ".ds-card { background: rgba(253,251,246,0.55); border: 1px solid #E0D3BF; border-radius: 14px; padding: 2.25rem; display: flex; flex-direction: column; gap: 1.5rem; box-sizing: border-box; transition: background 0.2s; } .ds-card:hover { background: rgba(200,120,64,0.05); } .ds-card-title { font-family: 'Fraunces', Georgia, serif; font-size: 1.25rem; font-weight: 500; line-height: 1.25; color: #281B0D; margin: 0; } .ds-card-rule { width: 28px; height: 1px; background: #E0D3BF; border: none; margin: 0; } .ds-card-body { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 0.9rem; color: #8C7C68; line-height: 1.8; margin: 0; flex: 1; } .ds-card-footer { display: flex; align-items: center; justify-content: space-between; } .ds-card-name { font-size: 0.62rem; color: #8C7C68; letter-spacing: 0.1em; text-transform: uppercase; } .ds-card-stars { color: #C87840; font-size: 0.65rem; letter-spacing: 0.12em; }"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Small-caps section opener. Always appears above the section headline. Warm Taupe, 11px, 0.22em tracking.",
+      "html": "<p class=\"ds-eyebrow\">What it looks like</p>",
+      "css": ".ds-eyebrow { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #8C7C68; font-weight: 500; margin: 0 0 0.85rem; }"
+    },
+    {
+      "name": "Tag / Chip",
+      "kind": "chip",
+      "refersTo": null,
+      "description": "Day-type tags on the weekly timeline cards. Subtly amber-tinted pill.",
+      "html": "<span class=\"ds-tag\">Async Drop</span>",
+      "css": ".ds-tag { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8C7C68; background: rgba(200,120,64,0.07); padding: 0.22rem 0.7rem; border-radius: 100px; transition: background 0.22s, color 0.22s; } .ds-tag:hover { background: rgba(200,120,64,0.14); color: #C87840; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Integration Hearth",
+    "overview": "This system is built around the feeling of coming home after something that changed you. Every surface, spacing decision, and typographic choice evokes warmth without sentimentality, structure without coldness, and depth without mysticism for its own sake. The palette is drawn from earth and ember — ivory, amber, espresso, warm taupe. Nothing synthetic. Nothing that glows or pulses or demands attention.\n\nThe design carries the emotional work before a word is read. A visitor who has just returned from a profound retreat should land here and feel immediately held, not sold to. Whitespace is not emptiness — it is the breath between insights. Restraint is not blandness — it is respect for the user's interior life.\n\nThis system explicitly rejects: the pastel gamification of consumer wellness apps, the clinical coldness of therapy platforms, the neon mysticism of psychedelic hype brands, and the hero-feature-pricing template of SaaS landing pages.",
+    "keyCharacteristics": [
+      "Warm earth palette: all neutrals tinted toward amber, nothing purely grey or white",
+      "Fraunces serif for all display and emotional copy; sans-serif strictly for metadata and labels",
+      "Italic as a voice, not a style — used for intimate and felt moments in copy",
+      "Hover states that whisper: a barely-there amber tint, no lifts, no shadows, no drama",
+      "Motion that breathes: slow reveal (0.95s), exponential ease, no bounce"
+    ],
+    "rules": [
+      { "name": "The One Ember Rule",       "body": "The amber accent (#C87840) appears on ≤10% of any screen. It marks CTAs, active states, and key interactive moments. Using it decoratively dissolves its power — prohibited.", "section": "colors" },
+      { "name": "The No-Cold-Neutral Rule", "body": "Every surface, text, and border colour must carry warmth. Pure grey and pure white are forbidden.", "section": "colors" },
+      { "name": "The Italic-as-Voice Rule", "body": "Italic is not decoration — it is the first-person, felt, interior voice. It appears in member quotes, emotional copy, section subtitles. Never use italic for emphasis within body text.", "section": "typography" },
+      { "name": "The Serif-for-Story Rule", "body": "Fraunces is the emotional register. Sans-serif is the functional register. They never trade roles.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "No card, section, or container has a shadow at rest. Shadows are responses to interaction only. If reaching for a box-shadow on a static element, reach for a tonal background shift instead.", "section": "elevation" }
+    ],
+    "dos": [
+      "Use Fraunces italic for all member quotes, emotional headlines, and intimate copy moments",
+      "Alternate sections between Warm Ivory and Amber Tan for rhythm without contrast shock",
+      "Keep amber accent (#C87840) rare — CTAs, active states, and one emphatic inline italic per card maximum",
+      "Use the card hover tint (rgba(200,120,64,0.05)) consistently across all interactive card types",
+      "Respect the Reveal animation's unhurried pace (0.95s). The slowness is intentional.",
+      "Treat whitespace as content. Section padding of 8rem is not excess — it is the breath of the system.",
+      "Cap body text at ~65ch. Integration copy needs room to land."
+    ],
+    "donts": [
+      "Don't use generic meditation app aesthetics — pastel palettes, rounded illustrations, gamified UI",
+      "Don't use clinical or medical visual language — sterile white surfaces, cold grey text",
+      "Don't use psychedelic hype visual language — neon, cosmic AI imagery, trippy gradients",
+      "Don't use any pure grey neutral or pure white (#FFFFFF)",
+      "Don't use gradient text (background-clip: text)",
+      "Don't use side-stripe border-left accents greater than 1px",
+      "Don't animate layout properties. Animate opacity and transform only.",
+      "Don't bounce or use elastic easing. Exponential ease-out only.",
+      "Don't use amber (#C87840) decoratively — its rarity is its power",
+      "Don't use the hero-metric SaaS template (big number, small label, stats)"
+    ]
+  }
+}
