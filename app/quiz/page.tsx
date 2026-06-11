@@ -862,7 +862,7 @@ export default function QuizPage() {
                   </a>
                 ) : (
                   <a
-                    href="https://somenta.circle.so/checkout/foundation-membership?coupon_code=FOUNDATION"
+                    href="https://community.joinsomenta.com/checkout/foundation-membership?coupon_code=FOUNDATION"
                     target="_blank" rel="noopener noreferrer"
                     style={{ textDecoration: 'none', display: 'block' }}
                     onClick={() => fetch('/api/quiz/conversion', {
