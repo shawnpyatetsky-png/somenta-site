@@ -806,7 +806,7 @@ function PracticeSection() {
 // ── Schedule (Looks) ──────────────────────────────────────────────────────────
 const PHOTO_CARD_STYLE: CSSProperties = {
   position: 'relative', borderRadius: 10, overflow: 'hidden',
-  width: 185, height: 270, flexShrink: 0,
+  width: 200, height: 340, flexShrink: 0,
   boxShadow: '0 4px 18px rgba(40,27,13,0.14)', background: '#E8E0D0',
 }
 const DAY_ABBR  = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -1099,7 +1099,7 @@ function ScheduleSection() {
 
               {/* ── Tuesday / Thursday / Friday: text left, single polaroid right ── */}
               {(isTuesday || isThursday || isFriday || isSaturday) && (() => {
-                const cardImg = isTuesday ? '/assets/body_scan.jpg' : isThursday ? '/assets/reflection_undoing.jpg' : isFriday ? '/assets/pexels-solo-meadow.jpg' : '/assets/Integration_wild.jpg'
+                const cardImg = isTuesday ? '/assets/body_scan.jpg' : isThursday ? '/assets/reflection_undoing.jpg' : isFriday ? '/assets/inviting_good.jpg' : '/assets/Integration_wild.jpg'
                 return (
                   <div key={`content-${openDay}`} className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
                     {/* Left: text */}
