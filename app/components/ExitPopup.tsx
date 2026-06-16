@@ -107,9 +107,10 @@ export default function ExitPopup() {
           style={{
             position: 'absolute', top: 16, right: 16,
             background: 'rgba(247,243,236,0.85)', border: 'none', cursor: 'pointer',
-            color: P.text, fontSize: '20px', lineHeight: 1, padding: 4,
+            color: P.text, fontSize: '18px', lineHeight: 1, padding: 0,
             borderRadius: '50%', width: 28, height: 28,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
+            paddingBottom: '1px',
           }}
         >
           ×
