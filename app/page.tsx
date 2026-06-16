@@ -1091,7 +1091,7 @@ function ScheduleSection() {
                   {/* Right: clean photo */}
                   <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1rem 0' }}>
                     <div className="np-sched-img" style={PHOTO_CARD_STYLE}>
-                      <Image src="/assets/journal_coffee.jpg" alt="" fill loading="eager" sizes="175px" style={{ objectFit: 'cover', objectPosition: 'center center', filter: 'sepia(0.25) saturate(0.82)' }} />
+                      <Image src="/assets/establishing_safety.jpg" alt="" fill loading="eager" sizes="175px" style={{ objectFit: 'cover', objectPosition: 'right center', filter: 'sepia(0.25) saturate(0.82)' }} />
                     </div>
                   </div>
                 </div>
@@ -1099,7 +1099,7 @@ function ScheduleSection() {
 
               {/* ── Tuesday / Thursday / Friday: text left, single polaroid right ── */}
               {(isTuesday || isThursday || isFriday || isSaturday) && (() => {
-                const cardImg = isTuesday ? '/assets/journal2.jpg' : isThursday ? '/assets/journal1.jpg' : isFriday ? '/assets/pexels-solo-meadow.jpg' : '/assets/nature_card.jpg'
+                const cardImg = isTuesday ? '/assets/body_scan.jpg' : isThursday ? '/assets/reflection_undoing.jpg' : isFriday ? '/assets/pexels-solo-meadow.jpg' : '/assets/Integration_wild.jpg'
                 return (
                   <div key={`content-${openDay}`} className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
                     {/* Left: text */}
