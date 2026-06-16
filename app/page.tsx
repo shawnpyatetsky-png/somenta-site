@@ -806,7 +806,7 @@ function PracticeSection() {
 // ── Schedule (Looks) ──────────────────────────────────────────────────────────
 const PHOTO_CARD_STYLE: CSSProperties = {
   position: 'relative', borderRadius: 10, overflow: 'hidden',
-  width: 175, height: 218, flexShrink: 0,
+  width: 185, height: 270, flexShrink: 0,
   boxShadow: '0 4px 18px rgba(40,27,13,0.14)', background: '#E8E0D0',
 }
 const DAY_ABBR  = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -1091,7 +1091,7 @@ function ScheduleSection() {
                   {/* Right: clean photo */}
                   <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1rem 0' }}>
                     <div className="np-sched-img" style={PHOTO_CARD_STYLE}>
-                      <Image src="/assets/establishing_safety.jpg" alt="" fill loading="eager" sizes="175px" style={{ objectFit: 'cover', objectPosition: 'right center', filter: 'sepia(0.25) saturate(0.82)' }} />
+                      <Image src="/assets/establishing_safety.jpg" alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: 'right center', filter: 'sepia(0.25) saturate(0.82)' }} />
                     </div>
                   </div>
                 </div>
@@ -1116,7 +1116,7 @@ function ScheduleSection() {
                     {/* Right: photo */}
                     <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1rem 0' }}>
                       <div className="np-sched-img" style={PHOTO_CARD_STYLE}>
-                        <Image src={cardImg} alt="" fill loading="eager" sizes="175px" style={{ objectFit: 'cover', objectPosition: 'center center', filter: 'sepia(0.25) saturate(0.82)' }} />
+                        <Image src={cardImg} alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: 'center center', filter: 'sepia(0.25) saturate(0.82)' }} />
                       </div>
                     </div>
                   </div>
