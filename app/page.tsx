@@ -302,7 +302,6 @@ const WEEK_DAYS = [
     theme: 'Establishing Safety',
     sentences: [
       AL('2-minute guided body scan to help you find a physical sense of calm.'),
-      JL('Scan your body. Where is one specific place right now that feels steady, relaxed, or even just neutral?'),
       <>The week&rsquo;s new theme arrives {EM('softly, without demand.')} Set your intention, then step away.</>,
     ],
   },
@@ -339,7 +338,6 @@ const WEEK_DAYS = [
     theme: 'Inviting the Good',
     sentences: [
       'A final 2-minute guided practice to gently close the week.',
-      JL('Now that you have released some of that physical tension, what is one small, nourishing thing you can do for your body this weekend just to feel good?'),
       EM('Let what landed, land.'),
     ],
   },
