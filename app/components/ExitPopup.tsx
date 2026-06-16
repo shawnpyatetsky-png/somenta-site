@@ -95,7 +95,7 @@ export default function ExitPopup() {
             src="/assets/inviting_good.jpg"
             alt=""
             fill
-            style={{ objectFit: 'cover', objectPosition: 'center 25%' }}
+            style={{ objectFit: 'cover', objectPosition: 'center 75%' }}
           />
         </div>
 
