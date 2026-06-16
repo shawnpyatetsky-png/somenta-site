@@ -1116,7 +1116,7 @@ function ScheduleSection() {
                     {/* Right: photo */}
                     <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1rem 0' }}>
                       <div className="np-sched-img" style={PHOTO_CARD_STYLE}>
-                        <Image src={cardImg} alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: isSaturday ? '60% center' : 'center center', filter: 'sepia(0.25) saturate(0.82)' }} />
+                        <Image src={cardImg} alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: isSaturday ? '55% center' : 'center center', filter: 'sepia(0.25) saturate(0.82)' }} />
                       </div>
                     </div>
                   </div>
