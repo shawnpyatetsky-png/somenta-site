@@ -92,10 +92,10 @@ export default function ExitPopup() {
         {/* Cover photo */}
         <div style={{ position: 'relative', width: '100%', height: 'clamp(140px, 26vw, 200px)' }}>
           <Image
-            src="/assets/pexels-solo-meadow.jpg"
+            src="/assets/inviting_good.jpg"
             alt=""
             fill
-            style={{ objectFit: 'cover', objectPosition: 'center 72.5%' }}
+            style={{ objectFit: 'cover', objectPosition: 'center center' }}
           />
         </div>
 
