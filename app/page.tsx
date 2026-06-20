@@ -671,33 +671,6 @@ const PILLARS = [
   },
 ]
 
-// ── Photo Strip ───────────────────────────────────────────────────────────────
-function PhotoStripSection() {
-  const photos = [
-    { src: '/assets/group_breathwork_alpine.jpg', pos: 'center 40%' },
-    { src: '/assets/britt_breathing.jpg',          pos: 'center 20%' },
-    { src: '/assets/journal_coffee.jpg',            pos: 'center center' },
-    { src: '/assets/pexels-solo-meadow.jpg',        pos: 'center 35%' },
-    { src: '/assets/group_meditating_coast.jpg',    pos: 'center 40%' },
-  ]
-  return (
-    <section style={{ overflow: 'hidden', background: P.bgDark }}>
-      <div style={{ display: 'flex', height: 'clamp(200px, 26vw, 300px)' }}>
-        {photos.map((photo, i) => (
-          <div key={i} style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
-            <Image
-              src={photo.src}
-              alt=""
-              fill
-              sizes="20vw"
-              style={{ objectFit: 'cover', objectPosition: photo.pos, filter: 'sepia(0.2) saturate(0.82)' }}
-            />
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
 
 function PracticeSection() {
   const [openPillar, setOpenPillar] = useState<number | null>(0)
@@ -1832,7 +1805,6 @@ export default function NewPage() {
         <Hero />
         <WhoSection />
         <PhilosophySection />
-        <PhotoStripSection />
         <PracticeSection />
         <ScheduleSection />
         <ChangesSection />
