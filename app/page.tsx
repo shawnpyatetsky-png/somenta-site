@@ -465,14 +465,14 @@ function Hero() {
 
       {/* Full-bleed photo */}
       <Image
-        src="/assets/mountain_hero_wider.jpg"
+        src="/assets/Integration_wild.jpg"
         alt=""
         aria-hidden="true"
         fill
         priority
         sizes="100vw"
         style={{
-          objectFit: 'cover', objectPosition: 'center 22%',
+          objectFit: 'cover', objectPosition: 'center center',
           filter: 'saturate(0.82) brightness(1.04) contrast(0.94)',
         }}
       />
