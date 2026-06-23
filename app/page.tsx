@@ -465,20 +465,17 @@ function Hero() {
 
       {/* Full-bleed photo */}
       <Image
-        src="/assets/pexels-rachel-claire-7263499.jpg"
+        src="/assets/mountain_hero_wider.jpg"
         alt=""
         aria-hidden="true"
         fill
         priority
         sizes="100vw"
         style={{
-          objectFit: 'cover', objectPosition: 'center 42%',
-          filter: 'saturate(1.2) brightness(1.02) contrast(1.02) sepia(0.12)',
+          objectFit: 'cover', objectPosition: 'center 22%',
+          filter: 'saturate(0.82) brightness(1.04) contrast(0.94)',
         }}
       />
-
-      {/* Subtle amber tint */}
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(200,120,50,0.10)', pointerEvents: 'none', zIndex: 0 }} />
 
       {/* Bottom fade */}
       <div className="np-hero-grad" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
