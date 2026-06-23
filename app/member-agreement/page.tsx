@@ -102,29 +102,14 @@ export default function MemberAgreementPage() {
         <Section num="1" title="How We Communicate">
           <P_>Before anything else, we agree on how we talk to each other. These are the ground rules that apply in every Somenta space: pods, Share Circles, integration circles, live sessions, the community platform, and direct messages.</P_>
 
-          <Sub title="Speak from your own experience.">
-            <P_>Share what happened to you, what you felt, what you noticed. Your stories will naturally involve other people in your life, and that is expected. What we ask is that you stay close to your own experience rather than interpreting someone else's. If you want to reflect something back to another member, offer it as what you noticed, not as an explanation of why they feel the way they do.</P_>
-          </Sub>
-
-          <Sub title="Listen to understand, not to respond.">
-            <P_>When someone is sharing, your role is to witness, not to fix. Do not interrupt. Do not offer unsolicited advice. Do not redirect the conversation to your own experience while someone else is still in theirs.</P_>
-          </Sub>
-
-          <Sub title="No diagnosing, labeling, or prescribing.">
-            <P_>You are not here as a clinician, even if you are one in your professional life. Do not diagnose other members. Do not label their experiences. Do not tell them what they should do, take, try, or stop doing. If someone asks for your perspective, share it as your personal experience, not as a recommendation.</P_>
-          </Sub>
-
-          <Sub title="No cross-talk during sharing.">
-            <P_>In pods and Share Circles, when someone has the floor, they have the floor. Side conversations, reactions in the chat, or interjections break the container. Hold your response until it is your turn.</P_>
-          </Sub>
-
-          <Sub title="Name it if something lands wrong.">
-            <P_>If something another member says triggers a strong reaction in you, you are welcome to name that in the moment or bring it to your coach privately. We do not expect perfection. We expect willingness to stay in the conversation.</P_>
-          </Sub>
-
-          <Sub title="No solicitation or promotion.">
-            <P_>Do not promote your business, services, products, courses, retreats, or any external offering to other members. Do not recruit members for other communities, programs, or organizations. If a genuine connection leads to a professional relationship outside of Somenta, that is between you and the other person, but the community spaces are not the venue for it.</P_>
-          </Sub>
+          <Ul items={[
+            <><strong>Speak from your own experience.</strong> Share what happened to you, what you felt, what you noticed. Your stories will naturally involve other people in your life, and that is expected. What we ask is that you stay close to your own experience rather than interpreting someone else's. If you want to reflect something back to another member, offer it as what you noticed, not as an explanation of why they feel the way they do.</>,
+            <><strong>Listen to understand, not to respond.</strong> When someone is sharing, your role is to witness, not to fix. Do not interrupt. Do not offer unsolicited advice. Do not redirect the conversation to your own experience while someone else is still in theirs.</>,
+            <><strong>No diagnosing, labeling, or prescribing.</strong> You are not here as a clinician, even if you are one in your professional life. Do not diagnose other members. Do not label their experiences. Do not tell them what they should do, take, try, or stop doing. If someone asks for your perspective, share it as your personal experience, not as a recommendation.</>,
+            <><strong>No cross-talk during sharing.</strong> In pods and Share Circles, when someone has the floor, they have the floor. Side conversations, reactions in the chat, or interjections break the container. Hold your response until it is your turn.</>,
+            <><strong>Name it if something lands wrong.</strong> If something another member says triggers a strong reaction in you, you are welcome to name that in the moment or bring it to your coach privately. We do not expect perfection. We expect willingness to stay in the conversation.</>,
+            <><strong>No solicitation or promotion.</strong> Do not promote your business, services, products, courses, retreats, or any external offering to other members. Do not recruit members for other communities, programs, or organizations. If a genuine connection leads to a professional relationship outside of Somenta, that is between you and the other person, but the community spaces are not the venue for it.</>,
+          ]} />
         </Section>
 
         {/* Section 2 */}

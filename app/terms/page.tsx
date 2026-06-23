@@ -91,7 +91,15 @@ export default function TermsPage() {
 
         <Section num="1" title="General Terms of Use and Restrictions">
           <P_>Subject to these Terms, Somenta grants you a limited, revocable, nonexclusive, nontransferable personal right to access and make use of the Services solely for your personal, non-commercial benefit.</P_>
-          <P_>We may discontinue or alter any aspect of the Services or remove content from the Services at any time without prior notice. You agree that we may, under certain circumstances, immediately suspend or terminate your access to or use of the Services or any part thereof. Such circumstances include, without limitation: (a) breaches or violations of these Terms, the Member Agreement, or other incorporated agreements; (b) discontinuance or material modification of the Services; (c) unexpected technical or security issues; (d) extended periods of inactivity; or (e) engagement by you in fraudulent, inappropriate, or illegal activities. You further agree that such measures shall be taken in our sole discretion and without liability to you or any third party.</P_>
+          <P_>We may discontinue or alter any aspect of the Services or remove content from the Services at any time without prior notice. We may also immediately suspend or terminate your access under certain circumstances, including:</P_>
+          <Ul items={[
+            'Breaches or violations of these Terms, the Member Agreement, or other incorporated agreements',
+            'Discontinuance or material modification of the Services',
+            'Unexpected technical or security issues',
+            'Extended periods of inactivity',
+            'Engagement by you in fraudulent, inappropriate, or illegal activities',
+          ]} />
+          <P_>You agree that such measures shall be taken in our sole discretion and without liability to you or any third party.</P_>
         </Section>
 
         <Section num="2" title="Agreement Structure">
@@ -290,11 +298,13 @@ export default function TermsPage() {
         </Section>
 
         <Section num="24" title="General Provisions">
-          <P_><strong>Entire Agreement.</strong> These Terms, together with the Privacy Policy and Member Agreement, constitute the complete and entire agreement between you and Somenta with respect to the Services.</P_>
-          <P_><strong>No Waiver.</strong> No waiver by either party of any breach of these Terms shall be deemed a further or continuing waiver of any other breach.</P_>
-          <P_><strong>Severability.</strong> If any provision of these Terms is found to be unenforceable, the invalidity of such provision will not affect the validity of the remaining provisions.</P_>
-          <P_><strong>Assignment.</strong> You may not assign or transfer your rights or obligations under these Terms without our prior written consent. Somenta may assign its rights and obligations under these Terms without restriction.</P_>
-          <P_><strong>California Residents.</strong> If you are a California resident, you may report complaints to the Complaint Assistance Unit of the Division of Consumer Services of the California Department of Consumer Affairs by contacting it at 1625 North Market Blvd., Suite N 112, Sacramento, CA 95834, or by telephone at (800) 952-5210.</P_>
+          <Ul items={[
+            <><strong>Entire Agreement.</strong> These Terms, together with the Privacy Policy and Member Agreement, constitute the complete and entire agreement between you and Somenta with respect to the Services.</>,
+            <><strong>No Waiver.</strong> No waiver by either party of any breach of these Terms shall be deemed a further or continuing waiver of any other breach.</>,
+            <><strong>Severability.</strong> If any provision of these Terms is found to be unenforceable, the invalidity of such provision will not affect the validity of the remaining provisions.</>,
+            <><strong>Assignment.</strong> You may not assign or transfer your rights or obligations under these Terms without our prior written consent. Somenta may assign its rights and obligations under these Terms without restriction.</>,
+            <><strong>California Residents.</strong> If you are a California resident, you may report complaints to the Complaint Assistance Unit of the Division of Consumer Services of the California Department of Consumer Affairs by contacting it at 1625 North Market Blvd., Suite N 112, Sacramento, CA 95834, or by telephone at (800) 952-5210.</>,
+          ]} />
         </Section>
 
         <Section num="25" title="Contact Information">
