@@ -465,17 +465,20 @@ function Hero() {
 
       {/* Full-bleed photo */}
       <Image
-        src="/assets/mountain_hero_wider.jpg"
+        src="/assets/pexels-rachel-claire-7263499.jpg"
         alt=""
         aria-hidden="true"
         fill
         priority
         sizes="100vw"
         style={{
-          objectFit: 'cover', objectPosition: 'center 22%',
-          filter: 'saturate(0.82) brightness(1.04) contrast(0.94)',
+          objectFit: 'cover', objectPosition: 'center 42%',
+          filter: 'saturate(1.2) brightness(1.02) contrast(1.02) sepia(0.12)',
         }}
       />
+
+      {/* Subtle amber tint */}
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(200,120,50,0.10)', pointerEvents: 'none', zIndex: 0 }} />
 
       {/* Bottom fade */}
       <div className="np-hero-grad" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
@@ -1767,6 +1770,7 @@ function FooterSection() {
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
         <a href="/terms" style={{ fontSize: '0.78rem', color: P.muted, textDecoration: 'none' }}>Terms of Service</a>
         <a href="/privacy" style={{ fontSize: '0.78rem', color: P.muted, textDecoration: 'none' }}>Privacy Policy</a>
+        <a href="/member-agreement" style={{ fontSize: '0.78rem', color: P.muted, textDecoration: 'none' }}>Member Agreement</a>
         <a href="mailto:hello@joinsomenta.com" style={{ fontSize: '0.78rem', color: P.muted, textDecoration: 'none' }}>hello@joinsomenta.com</a>
       </div>
       <span style={{ fontSize: '0.72rem', color: P.muted }}>&copy; 2026 Somenta LLC</span>
