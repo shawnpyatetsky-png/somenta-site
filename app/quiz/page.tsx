@@ -796,7 +796,7 @@ export default function QuizPage() {
                     </span>
                   </p>
                   <p style={{ fontSize: '13px', color: isPod ? 'rgba(253,251,246,0.5)' : P.muted, margin: '0.2rem 0 0' }}>
-                    then {isPod ? '$75' : '$25'} / month — cancel or pause any time
+                    then {isPod ? '$60' : '$25'} / month — cancel or pause any time
                   </p>
                 </div>
               </div>
