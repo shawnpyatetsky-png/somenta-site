@@ -166,26 +166,26 @@ const Q3_BREAK: Record<string, { heading: string; body: string; quote: string; a
   A: {
     heading: 'Willpower alone rarely wins against deeply ingrained routines.',
     body: "It's completely normal for your everyday environment to pull you right back into familiar ruts. Instead, combining a gentle, consistent structure with reliable support creates the ideal foundation to break through and stay on track.",
-    quote: '"I knew exactly what I needed to change, but doing it while the rest of my life kept moving felt impossible. Finding a gentle, structured rhythm is what finally made my new routines stick."',
-    attribution: '— Elena, 38 · Integrating a plant medicine retreat',
+    quote: '"I feel like I\'m falling right back into my standard route as a result of not having [support]... It\'s almost as if I\'m trapped in a world that I don\'t want to live in, but I\'m in."',
+    attribution: '— Damon, 52 · Ayahuasca Retreat',
   },
   B: {
     heading: 'When you go through a profound shift, feeling overwhelmed is completely natural.',
     body: "You don't need to fix everything at once. The most effective integration happens when you have a safe place to land, a guided rhythm and a supportive community to help you gently manage those emotions.",
-    quote: '"I came back so raw and flooded with emotion that I couldn\'t process normal life. Having a safe place to land and simple grounding practices was exactly the anchor my system needed."',
-    attribution: '— Marcus, 42 · Integrating a 5-day breathwork intensive',
+    quote: '"I came back with a ton of anger... there\'s this sense of healing and this sense of anger that I don\'t have anywhere to put at all. It makes integration for me very clouded."',
+    attribution: '— Damon, 52 · Ayahuasca Retreat',
   },
   C: {
     heading: "After a profound insight, it's incredibly common to feel like you're suddenly speaking a different language than the people in your life.",
     body: "When your old relationships no longer align with who you are becoming, that gap can leave you feeling deeply unseen. The most effective way to bridge that gap is finding a safe container of peers who actually get it, so you never have to translate, hide, or defend your journey.",
-    quote: '"Returning home felt like I was suddenly speaking a language my friends and family didn\'t understand. Discovering a community of peers who had walked the same path saved me from complete isolation."',
-    attribution: '— Sarah, 31 · Integrating a psilocybin journey',
+    quote: '"There are things in life that people just don\'t understand. You cannot explain this to people and you can talk to people about it to an extent, but they don\'t really get it."',
+    attribution: '— Steve, 45 · Ayahuasca Retreat',
   },
   D: {
     heading: 'Mental insight is only half of the experience.',
     body: "It's common to try and make sense of profound experiences purely through thought, leaving the physical self behind. But while the mind understands the shift, a safe, guided rhythm with somatic-based practices can bridge the gap between your mind and body.",
-    quote: '"I spent weeks trying to think my way through my integration. It wasn\'t until I had a guided, safe way to drop back into my physical body that the real healing actually began."',
-    attribution: '— David, 45 · Integrating a somatic trauma retreat',
+    quote: '"My brain goes at a million miles an hour. It\'s just f****** going non-stop though. So, I really struggle with that being present... I\'m trying to shut out that external noise."',
+    attribution: '— Steve, 45 · Ayahuasca Retreat',
   },
 }
 
@@ -217,20 +217,20 @@ const Q3_EMPATHY_VAR: Record<string, string> = {
 
 const Q3_TESTIMONIAL: Record<string, { quote: string; attribution: string }> = {
   A: {
-    quote: '"I knew exactly what I needed to change, but doing it while the rest of my life kept moving felt impossible. Finding a gentle, structured rhythm is what finally made my new routines stick."',
-    attribution: 'Elena, 38 · Plant medicine retreat',
+    quote: '"My habits have gotten better, especially when it comes to getting my daily work done and staying off of social media... It\'s a group to help keep you on track and support you as you move through your life."',
+    attribution: 'Cam, 32 · Ayahuasca Retreat',
   },
   B: {
-    quote: '"I came back so raw and flooded with emotion that I couldn\'t process normal life. Having a safe place to land and simple grounding practices was exactly the anchor my system needed."',
-    attribution: 'Marcus, 42 · 5-day breathwork intensive',
+    quote: '"Week one and two, people are going through stuff. But then everything got lighter and lighter. That\'s what I saw with every call. People were just happier, more comfortable with the group."',
+    attribution: 'Coach Kevin',
   },
   C: {
-    quote: '"Returning home felt like I was suddenly speaking a language my friends and family didn\'t understand. Discovering a community of peers who had walked the same path saved me from complete isolation."',
-    attribution: 'Sarah, 31 · Psilocybin journey',
+    quote: '"When people start to be in this environment and other people are being really vulnerable with their shares, it gives them permission to share... and trust the people in the space to feel safe enough to share some real s*** that\'s going on."',
+    attribution: 'Coach Brittany',
   },
   D: {
-    quote: '"I spent weeks trying to think my way through my integration. It wasn\'t until I had a guided, safe way to drop back into my physical body that the real healing actually began."',
-    attribution: 'David, 45 · Somatic trauma retreat',
+    quote: '"It is an active group with great leaders and coaches, and good interactive workshops that really help ground and bring yourself into your body and the present."',
+    attribution: 'Evan, 28 · Ayahuasca Retreat',
   },
 }
 
