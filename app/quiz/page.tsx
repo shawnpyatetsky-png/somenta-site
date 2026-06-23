@@ -189,22 +189,26 @@ const Q3_BREAK: Record<string, { heading: string; body: string; quote: string; a
   },
 }
 
-const Q6_BREAK: Record<string, { heading: string; body: string }> = {
+const Q6_BREAK: Record<string, { heading: string; body1: string; body2: React.ReactNode }> = {
   A: {
     heading: 'Professional help is a powerful starting point, but peer connection adds a completely new layer.',
-    body: 'Having a therapist is incredibly valuable, but it is not the same as being seen and heard by a community of people who are walking a similar path. You need a space to actually put that therapy into practice — a place where your experience is a shared reality.',
+    body1: 'Having a therapist is incredibly valuable, but it is not the same as being seen and heard by a community of people who are walking a similar path.',
+    body2: <>You need a space to <strong>actually put that therapy into practice</strong> — a place where your experience is a shared reality.</>,
   },
   B: {
     heading: "Having friends who care is amazing, but it isn't their fault if they can't understand everything you're going through.",
-    body: "It can be exhausting to constantly explain, filter, or translate your inner shifts to people who haven't been in a similar mental space. The process of integration requires an emotionally safe space where you can share vulnerable, unfiltered thoughts with a community that immediately understands the depth of your journey.",
+    body1: "It can be exhausting to constantly explain, filter, or translate your inner shifts to people who haven't been in a similar mental space.",
+    body2: <>The process of integration requires an emotionally safe space where you can <strong>share vulnerable, unfiltered thoughts</strong> with a community that immediately understands the depth of your journey.</>,
   },
   C: {
     heading: "You don't have to do this alone.",
-    body: "Navigating a profound shift by yourself can feel incredibly isolating, almost like you're speaking a language no one else understands. But there is a profound, immediate relief that happens the moment you share your experience and hear someone else say, \"I know exactly how that feels.\" We're built to be that space for you.",
+    body1: "Navigating a profound shift by yourself can feel incredibly isolating, almost like you're speaking a language no one else understands.",
+    body2: <>But there is a profound, immediate relief that happens the moment you share your experience and hear someone else say, <strong>"I know exactly how that feels."</strong> We're built to be that space for you.</>,
   },
   D: {
     heading: 'A dedicated community changes everything.',
-    body: "Sounds like you've laid a great foundation, but patching together scattered resources can quickly become exhausting. Craving a consistent, dedicated space to share and connect is completely natural at this stage of your journey. Stepping into a reliable community eases your emotional load and provides the exact foundation to anchor your growth to.",
+    body1: "Sounds like you've laid a great foundation, but patching together scattered resources can quickly become exhausting. Craving a consistent, dedicated space to share and connect is completely natural right now.",
+    body2: <>Stepping into a reliable community <strong>eases your emotional load</strong> and provides the exact foundation to anchor your growth to.</>,
   },
 }
 
@@ -604,8 +608,11 @@ export default function QuizPage() {
             }}>
               {b.heading}
             </h2>
+            <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: '0 0 1rem' }}>
+              {b.body1}
+            </p>
             <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0 }}>
-              {b.body}
+              {b.body2}
             </p>
             <div style={{ marginTop: '2rem' }}>
               <button className="qz-btn" onClick={advance}>Continue →</button>
