@@ -167,25 +167,25 @@ const Q3_BREAK: Record<string, { heading: string; body: string; quote: string; a
     heading: 'Willpower alone rarely wins against deeply ingrained routines.',
     body: "It's completely normal for your everyday environment to pull you right back into familiar ruts. Instead, combining a gentle, consistent structure with reliable support creates the ideal foundation to break through and stay on track.",
     quote: '"I feel like I\'m falling right back into my standard route as a result of not having [support]... It\'s almost as if I\'m trapped in a world that I don\'t want to live in, but I\'m in."',
-    attribution: '— Damon, 52 · Ayahuasca Retreat',
+    attribution: '— Damon, 52 · Plant Medicine Retreat',
   },
   B: {
     heading: 'When you go through a profound shift, feeling overwhelmed is completely natural.',
     body: "You don't need to fix everything at once. The most effective integration happens when you have a safe place to land, a guided rhythm and a supportive community to help you gently manage those emotions.",
     quote: '"I came back with a ton of anger... there\'s this sense of healing and this sense of anger that I don\'t have anywhere to put at all. It makes integration for me very clouded."',
-    attribution: '— Damon, 52 · Ayahuasca Retreat',
+    attribution: '— Damon, 52 · Plant Medicine Retreat',
   },
   C: {
     heading: "After a profound insight, it's incredibly common to feel like you're suddenly speaking a different language than the people in your life.",
     body: "When your old relationships no longer align with who you are becoming, that gap can leave you feeling deeply unseen. The most effective way to bridge that gap is finding a safe container of peers who actually get it, so you never have to translate, hide, or defend your journey.",
     quote: '"There are things in life that people just don\'t understand. You cannot explain this to people and you can talk to people about it to an extent, but they don\'t really get it."',
-    attribution: '— Steve, 45 · Ayahuasca Retreat',
+    attribution: '— Steve, 45 · Plant Medicine Retreat',
   },
   D: {
     heading: 'Mental insight is only half of the experience.',
     body: "It's common to try and make sense of profound experiences purely through thought, leaving the physical self behind. But while the mind understands the shift, a safe, guided rhythm with somatic-based practices can bridge the gap between your mind and body.",
     quote: '"My brain goes at a million miles an hour. It\'s just f****** going non-stop though. So, I really struggle with that being present... I\'m trying to shut out that external noise."',
-    attribution: '— Steve, 45 · Ayahuasca Retreat',
+    attribution: '— Steve, 45 · Plant Medicine Retreat',
   },
 }
 
@@ -222,7 +222,7 @@ const Q3_EMPATHY_VAR: Record<string, string> = {
 const Q3_TESTIMONIAL: Record<string, { quote: string; attribution: string }> = {
   A: {
     quote: '"My habits have gotten better, especially when it comes to getting my daily work done and staying off of social media... It\'s a group to help keep you on track and support you as you move through your life."',
-    attribution: 'Cam, 32 · Ayahuasca Retreat',
+    attribution: 'Cam, 32 · Plant Medicine Retreat',
   },
   B: {
     quote: '"Week one and two, people are going through stuff. But then everything got lighter and lighter. That\'s what I saw with every call. People were just happier, more comfortable with the group."',
@@ -234,7 +234,7 @@ const Q3_TESTIMONIAL: Record<string, { quote: string; attribution: string }> = {
   },
   D: {
     quote: '"It is an active group with great leaders and coaches, and good interactive workshops that really help ground and bring yourself into your body and the present."',
-    attribution: 'Evan, 28 · Ayahuasca Retreat',
+    attribution: 'Evan, 28 · Plant Medicine Retreat',
   },
 }
 
@@ -839,14 +839,22 @@ export default function QuizPage() {
                 <div style={{ height: 1, background: P.div, margin: '1.5rem 0' }} />
 
                 {/* Testimonial */}
-                <div style={{ marginBottom: '1.75rem' }}>
-                  <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: P.muted, margin: '0 0 0.85rem' }}>
+                <div style={{
+                  marginBottom: '1.75rem',
+                  background: P.bgWarm,
+                  borderRadius: 14,
+                  padding: '1.5rem 1.5rem 1.25rem',
+                }}>
+                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.75rem' }}>
                     What members like you are saying
                   </p>
-                  <p style={{ ...serif, fontStyle: 'italic', fontSize: '14px', color: P.text, lineHeight: 1.75, margin: '0 0 0.55rem', opacity: 0.88 }}>
-                    {testimonial.quote}
+                  <p style={{ ...serif, fontSize: '2.5rem', color: P.accent, lineHeight: 1, margin: '0 0 0.25rem', fontStyle: 'normal' }}>
+                    &ldquo;
                   </p>
-                  <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.06em' }}>
+                  <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: P.text, lineHeight: 1.75, margin: '0 0 1rem' }}>
+                    {testimonial.quote.replace(/^"|"$/g, '')}
+                  </p>
+                  <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.06em', fontWeight: 500 }}>
                     — {testimonial.attribution}
                   </p>
                 </div>
