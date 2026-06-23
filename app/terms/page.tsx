@@ -35,9 +35,9 @@ function P_({ children }: { children: React.ReactNode }) {
   return <p style={body}>{children}</p>
 }
 
-function Ul({ items }: { items: string[] }) {
+function Ul({ items }: { items: React.ReactNode[] }) {
   return (
-    <ul style={{ margin: '0.5rem 0 1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+    <ul style={{ margin: '0.5rem 0 1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
       {items.map((item, i) => (
         <li key={i} style={{ fontSize: '15px', lineHeight: 1.8, color: 'rgba(40,27,13,0.78)' }}>{item}</li>
       ))}
@@ -97,9 +97,9 @@ export default function TermsPage() {
         <Section num="2" title="Agreement Structure">
           <P_>Your participation in Somenta is governed by three documents, each serving a distinct purpose:</P_>
           <Ul items={[
-            'Terms of Service (this document): the legal contract governing your use of the Services, payment, liability, and dispute resolution.',
-            'Privacy Policy: how we collect, use, store, and protect your personal information.',
-            'Member Agreement: the behavioral and cultural commitments required of all members, including communication ground rules, confidentiality obligations, and participation expectations.',
+            <><strong>Terms of Service (this document):</strong> the legal contract governing your use of the Services, payment, liability, and dispute resolution.</>,
+            <><strong>Privacy Policy:</strong> how we collect, use, store, and protect your personal information.</>,
+            <><strong>Member Agreement:</strong> the behavioral and cultural commitments required of all members, including communication ground rules, confidentiality obligations, and participation expectations.</>,
           ]} />
           <P_>Together, these three documents constitute the complete agreement between you and Somenta. By using the Services, you acknowledge that you have read, understood, and agreed to all three documents.</P_>
         </Section>
@@ -305,6 +305,7 @@ export default function TermsPage() {
         {/* Footer */}
         <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: `1px solid ${P.div}`, display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
           <a href="/privacy" style={{ fontSize: '13px', color: P.muted, textDecoration: 'none' }}>Privacy Policy</a>
+          <a href="/member-agreement" style={{ fontSize: '13px', color: P.muted, textDecoration: 'none' }}>Member Agreement</a>
           <a href="/" style={{ fontSize: '13px', color: P.muted, textDecoration: 'none' }}>Back to Home</a>
         </div>
 

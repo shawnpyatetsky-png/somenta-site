@@ -35,9 +35,9 @@ function P_({ children }: { children: React.ReactNode }) {
   return <p style={body}>{children}</p>
 }
 
-function Ul({ items }: { items: string[] }) {
+function Ul({ items }: { items: React.ReactNode[] }) {
   return (
-    <ul style={{ margin: '0.5rem 0 1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+    <ul style={{ margin: '0.5rem 0 1rem', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
       {items.map((item, i) => (
         <li key={i} style={{ fontSize: '15px', lineHeight: 1.8, color: 'rgba(40,27,13,0.78)' }}>{item}</li>
       ))}
@@ -85,21 +85,21 @@ export default function PrivacyPage() {
 
           <Sub num="1.1" title="Personal Data Provided by You">
             <Ul items={[
-              'Contact Information: including first and last name, email address, and communication preferences. Used to fulfill your requests, communicate with you, and send communications in accordance with your preferences.',
-              'Account Information: including name, email address, account credentials, profile details, and subscription information. Used to administer your account, provide the Services, and for support purposes.',
-              'Introductory Call Information: including details you share during your initial call with our team. Used to match you with an appropriate coach and pod.',
-              'Community Content: including messages, posts, comments, and other content you share within the Somenta community. Used to provide the Services and facilitate community interactions.',
-              'Payment Information: processed through our third-party payment processor. We do not retain full payment card numbers on our servers.',
-              'Communications: including emails, feedback, support requests, and other correspondence you send to us.',
+              <><strong>Contact Information:</strong> including first and last name, email address, and communication preferences. Used to fulfill your requests, communicate with you, and send communications in accordance with your preferences.</>,
+              <><strong>Account Information:</strong> including name, email address, account credentials, profile details, and subscription information. Used to administer your account, provide the Services, and for support purposes.</>,
+              <><strong>Introductory Call Information:</strong> including details you share during your initial call with our team. Used to match you with an appropriate coach and pod.</>,
+              <><strong>Community Content:</strong> including messages, posts, comments, and other content you share within the Somenta community. Used to provide the Services and facilitate community interactions.</>,
+              <><strong>Payment Information:</strong> processed through our third-party payment processor. We do not retain full payment card numbers on our servers.</>,
+              <><strong>Communications:</strong> including emails, feedback, support requests, and other correspondence you send to us.</>,
             ]} />
           </Sub>
 
           <Sub num="1.2" title="Personal Data Collected Automatically">
             <P_>We, and our third-party partners, automatically collect information about how you access and use our Services through cookies, web beacons, pixels, and similar technologies.</P_>
             <Ul items={[
-              'Device and Network Information: including device type, operating system, IP address, browser type, and unique identifiers.',
-              'Usage Information: including how you interact with the Services, pages visited, features used, session duration, and other browsing behavior.',
-              'Location Information: including general geographic location derived from your IP address.',
+              <><strong>Device and Network Information:</strong> including device type, operating system, IP address, browser type, and unique identifiers.</>,
+              <><strong>Usage Information:</strong> including how you interact with the Services, pages visited, features used, session duration, and other browsing behavior.</>,
+              <><strong>Location Information:</strong> including general geographic location derived from your IP address.</>,
             ]} />
           </Sub>
 
@@ -217,13 +217,13 @@ export default function PrivacyPage() {
         <Section num="8" title="Your Rights">
           <P_>Depending on your location and applicable law, you may be able to exercise some or all of the following rights regarding your personal data:</P_>
           <Ul items={[
-            'Right to Know / Access: the right to confirm whether we are processing personal data about you, and to obtain access to and a copy of that data.',
-            'Right to Portability: the right to obtain a copy of your personal data in a structured, commonly used, and machine-readable format.',
-            'Right to Correction: the right to correct inaccuracies in your personal data.',
-            'Right to Deletion: the right to have us delete personal data we maintain about you, subject to certain exceptions.',
-            'Right to Restrict Processing: the right to require us to limit the purposes for which we process your personal data.',
-            'Right to Object: the right to object to processing based on our legitimate interests.',
-            'Right to Withdraw Consent: where consent is the basis for processing, the right to withdraw your consent at any time.',
+            <><strong>Right to Know / Access:</strong> the right to confirm whether we are processing personal data about you, and to obtain access to and a copy of that data.</>,
+            <><strong>Right to Portability:</strong> the right to obtain a copy of your personal data in a structured, commonly used, and machine-readable format.</>,
+            <><strong>Right to Correction:</strong> the right to correct inaccuracies in your personal data.</>,
+            <><strong>Right to Deletion:</strong> the right to have us delete personal data we maintain about you, subject to certain exceptions.</>,
+            <><strong>Right to Restrict Processing:</strong> the right to require us to limit the purposes for which we process your personal data.</>,
+            <><strong>Right to Object:</strong> the right to object to processing based on our legitimate interests.</>,
+            <><strong>Right to Withdraw Consent:</strong> where consent is the basis for processing, the right to withdraw your consent at any time.</>,
           ]} />
           <P_>To exercise any of these rights, please contact us at <a href="mailto:hello@joinsomenta.com" style={{ color: P.rust }}>hello@joinsomenta.com</a>. Before processing your request, we may need to verify your identity.</P_>
         </Section>
@@ -244,9 +244,9 @@ export default function PrivacyPage() {
           <P_>We use cookies and similar tracking technologies to analyze trends, administer our website, and gather usage information. You can control cookies through your browser settings, though disabling cookies may affect your ability to use certain features of the Services.</P_>
           <P_>When you visit our website, a cookie consent banner will appear. Analytics cookies are only set after you explicitly accept. You may withdraw your consent at any time by clearing your browser cookies and declining on your next visit.</P_>
           <Ul items={[
-            'Essential Cookies: required for the basic functionality of the Services, including login and session management.',
-            'Analytics Cookies: we use Google Analytics (provided by Google LLC) to understand how visitors interact with our website, including pages visited, time spent, and general geographic location. Google Analytics collects data anonymously and reports website trends without identifying individual visitors. You can opt out of Google Analytics by declining cookies in our consent banner or by installing the Google Analytics opt-out browser add-on at tools.google.com/dlpage/gaoptout.',
-            'Preference Cookies: used to remember your cookie consent choice and other settings.',
+            <><strong>Essential Cookies:</strong> required for the basic functionality of the Services, including login and session management.</>,
+            <><strong>Analytics Cookies:</strong> we use Google Analytics (provided by Google LLC) to understand how visitors interact with our website, including pages visited, time spent, and general geographic location. Google Analytics collects data anonymously and reports website trends without identifying individual visitors. You can opt out by declining cookies in our consent banner or by installing the Google Analytics opt-out browser add-on at tools.google.com/dlpage/gaoptout.</>,
+            <><strong>Preference Cookies:</strong> used to remember your cookie consent choice and other settings.</>,
           ]} />
         </Section>
 
@@ -274,6 +274,7 @@ export default function PrivacyPage() {
         {/* Footer */}
         <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: `1px solid ${P.div}`, display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
           <a href="/terms" style={{ fontSize: '13px', color: P.muted, textDecoration: 'none' }}>Terms of Service</a>
+          <a href="/member-agreement" style={{ fontSize: '13px', color: P.muted, textDecoration: 'none' }}>Member Agreement</a>
           <a href="/" style={{ fontSize: '13px', color: P.muted, textDecoration: 'none' }}>Back to Home</a>
         </div>
 
