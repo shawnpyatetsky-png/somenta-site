@@ -209,7 +209,7 @@ export default function TermsPage() {
 
         <Section num="10" title="Audio and Video Recordings">
           <Sub num="10.1" title="Session Recordings">
-            <P_>Somenta may record select live sessions, including breathwork, meditation, yoga, and other practice sessions, for the purpose of building an on-demand resource library available to current members. These recordings capture facilitator-led instruction and practice guidance only.</P_>
+            <P_>Somenta may record select live sessions, including breathwork, meditation, yoga, and other practice sessions, for the purpose of building an on-demand resource library available to current members. These recordings capture facilitator-led instruction and practice guidance only. We will always ask for your permission in advance and will never record a session without prior written notice and your consent.</P_>
           </Sub>
           <Sub num="10.2" title="Consent">
             <P_>By participating in the Services, you consent to being recorded during live sessions that are designated as recorded. Somenta will clearly indicate in advance when a session will be recorded. If you do not wish to be recorded, you may choose not to participate in that session, or you may turn off your camera and microphone during recorded portions.</P_>
