@@ -528,7 +528,7 @@ export default function QuizPage() {
       // ── Screen 4: Q3 — Timeframe ─────────────────────────────────────────
       case 4: return (
         <div className="qz-in">
-          <QuestionHeader step={3} question="How long ago was your transformative experience?" />
+          <QuestionHeader step={3} question="How long ago was your retreat or transformative journey?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q3_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q3 === o.key} onSelect={() => setQ3(o.key)} />
