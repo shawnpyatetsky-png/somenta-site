@@ -110,18 +110,18 @@ const CSS = `
 
 // ── Quiz data ─────────────────────────────────────────────────────────────────
 const Q1_OPTS = [
-  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>Beautiful &amp; Expansive:</strong> I feel great and mostly need accountability to build healthy new daily routines to sustain this afterglow.</> },
-  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>Challenging but Deeply Rewarding:</strong> I had massive breakthroughs, but now I need support navigating major, disruptive changes to my life, relationships, or career.</> },
-  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Overwhelming or Frightening:</strong> I feel highly anxious or destabilized and need support calming my nervous system.</> },
-  { key: 'D', label: <><strong style={{ fontWeight: 600 }}>Confusing or Unresolved:</strong> I didn&rsquo;t get the clarity I went looking for and feel stuck or disappointed.</> },
+  { key: 'A', label: 'I feel great and want to build healthy daily routines to sustain my momentum.' },
+  { key: 'B', label: 'I had massive breakthroughs, but need support navigating major, disruptive life changes.' },
+  { key: 'C', label: 'I feel highly anxious or destabilized and need support calming my nervous system.' },
+  { key: 'D', label: "I didn't get the clarity I went looking for and feel stuck or disappointed." },
 ]
 
 const Q2_OPTS = [
-  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>Comfortable &amp; Grounded:</strong> I feel generally comfortable, warm, and at ease, or I honestly don&rsquo;t notice any specific physical discomfort.</> },
-  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>Tense &amp; Armored:</strong> I am holding tight, rigid tension, chronic pain, or spasms in my muscles (e.g., jaw, neck, shoulders, chest, or gut).</> },
-  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Restless &amp; Activated:</strong> I feel jittery and agitated; my heart races, my breathing is shallow, and I have a hard time sitting still.</> },
-  { key: 'D', label: <><strong style={{ fontWeight: 600 }}>Exhausted &amp; Heavy:</strong> I feel extreme physical exhaustion, heaviness, brain fog, or a deep sense of collapse and lethargy.</> },
-  { key: 'E', label: <><strong style={{ fontWeight: 600 }}>Numb &amp; Disconnected:</strong> I feel physically numb, spacy, floating out of my body, or completely disconnected from my physical self.</> },
+  { key: 'A', label: 'I feel generally comfortable, warm, and at ease, without any specific discomfort.' },
+  { key: 'B', label: 'I am holding tight, rigid tension, chronic pain, or spasms in my muscles.' },
+  { key: 'C', label: 'I feel jittery and agitated; my heart races, and I have a hard time sitting still.' },
+  { key: 'D', label: 'I feel extreme physical exhaustion, brain fog, or a deep sense of heaviness.' },
+  { key: 'E', label: 'I feel physically numb, floating out of my body, or disconnected from myself.' },
 ]
 
 const Q3_OPTS = [
@@ -502,7 +502,7 @@ export default function QuizPage() {
       // ── Screen 2: Q1 — Capacity ──────────────────────────────────────────
       case 2: return (
         <div className="qz-in">
-          <QuestionHeader step={1} question="If you had to describe the overall energy of the experience you are bringing back into your life, what does it feel like?" />
+          <QuestionHeader step={1} question="If you had to describe the overall energy of the transition or shift you are currently navigating, what does it feel like?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q1_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q1 === o.key} onSelect={() => setQ1(o.key)} />
@@ -515,7 +515,7 @@ export default function QuizPage() {
       // ── Screen 3: Q2 — Somatic state ─────────────────────────────────────
       case 3: return (
         <div className="qz-in">
-          <QuestionHeader step={2} question="When you tune into your body right now, what physical sensations are most present for you in this integration period?" />
+          <QuestionHeader step={2} question="When you tune into your body right now, what physical sensations are most present for you during this transition?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q2_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q2 === o.key} onSelect={() => setQ2(o.key)} />

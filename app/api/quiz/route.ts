@@ -23,8 +23,8 @@ import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
 const Q_LABELS: Record<string, Record<string, string>> = {
-  q1: { A: 'Beautiful and expansive', B: 'Challenging but deeply rewarding', C: 'Overwhelming or frightening', D: 'Confusing or unresolved' },
-  q2: { A: 'Comfortable & grounded', B: 'Tense & armored', C: 'Restless & activated', D: 'Exhausted & heavy', E: 'Numb & disconnected' },
+  q1: { A: 'Feels great, wants routine', B: 'Breakthroughs, needs change support', C: 'Anxious, needs nervous system support', D: 'Stuck, no clarity yet' },
+  q2: { A: 'Comfortable, no discomfort', B: 'Tight/rigid tension or pain', C: 'Jittery, racing heart', D: 'Exhausted, brain fog', E: 'Numb, disconnected' },
   q3: { A: '0–4 weeks ago', B: '1–6 months ago', C: '6 months–1 year ago', D: 'Over 1 year ago' },
   q4: { A: 'Old routines holding back', B: 'Emotional overwhelm', C: 'Feeling disconnected', D: 'Too much in head' },
   q5: { A: 'Mind & Spirit', B: 'Body & Lifestyle', C: 'Relationships', D: 'Nature & Environment' },
