@@ -8,11 +8,15 @@
 //   q1 text, q2 text, q3 text, q4 text,
 //   q5 text, q6 text, q7 text, q8 text,
 //   recommended_path text,
+//   schema_version text,
 //   answers jsonb
 // );
 //
 // alter table quiz_submissions enable row level security;
 // -- Service role bypasses RLS so no policy needed for server-side inserts.
+//
+// If the table already exists, just add the column:
+// alter table quiz_submissions add column if not exists schema_version text;
 
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
@@ -51,6 +55,7 @@ export async function POST(req: Request) {
       email,
       q1, q2, q3, q4, q5, q6, q7, q8,
       recommended_path,
+      schema_version: 'v2',
       answers: { name, email, q1, q2, q3, q4, q5, q6, q7, q8, recommended_path },
     })
     if (error) console.error('[quiz/route] Supabase insert error:', error.message)
