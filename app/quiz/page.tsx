@@ -117,11 +117,11 @@ const Q1_OPTS = [
 ]
 
 const Q2_OPTS = [
-  { key: 'A', label: 'I am holding tight, rigid tension, chronic pain, or spasms in my muscles (e.g., in my back, shoulders, jaw, neck, chest, or gut).' },
-  { key: 'B', label: 'I feel physically exhausted and heavily fatigued.' },
-  { key: 'C', label: 'I feel physically numb, disconnected, or floating out of my body.' },
-  { key: 'D', label: 'I feel restless, jittery, and unable to sit still.' },
-  { key: 'E', label: "I feel generally comfortable and at ease, or I honestly don't notice any specific physical sensations." },
+  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>Comfortable &amp; Grounded:</strong> I feel generally comfortable, warm, and at ease, or I honestly don&rsquo;t notice any specific physical discomfort.</> },
+  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>Tense &amp; Armored:</strong> I am holding tight, rigid tension, chronic pain, or spasms in my muscles (e.g., jaw, neck, shoulders, chest, or gut).</> },
+  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Restless &amp; Activated:</strong> I feel jittery and agitated; my heart races, my breathing is shallow, and I have a hard time sitting still.</> },
+  { key: 'D', label: <><strong style={{ fontWeight: 600 }}>Exhausted &amp; Heavy:</strong> I feel extreme physical exhaustion, heaviness, brain fog, or a deep sense of collapse and lethargy.</> },
+  { key: 'E', label: <><strong style={{ fontWeight: 600 }}>Numb &amp; Disconnected:</strong> I feel physically numb, spacy, floating out of my body, or completely disconnected from my physical self.</> },
 ]
 
 const Q3_OPTS = [
