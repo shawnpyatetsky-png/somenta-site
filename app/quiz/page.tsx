@@ -110,10 +110,10 @@ const CSS = `
 
 // ── Quiz data ─────────────────────────────────────────────────────────────────
 const Q1_OPTS = [
-  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>Beautiful and expansive:</strong> I feel great and mostly just want to build healthy daily routines to sustain my afterglow.</> },
-  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>Challenging but deeply rewarding:</strong> I realized I need to make some major, difficult changes to my life, relationships, or career.</> },
-  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Overwhelming or frightening:</strong> I feel highly anxious or destabilized and need support calming my nervous system.</> },
-  { key: 'D', label: <><strong style={{ fontWeight: 600 }}>Confusing or unresolved:</strong> I didn&rsquo;t get the clarity I went looking for and feel stuck.</> },
+  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>Beautiful &amp; Expansive:</strong> I feel great and mostly need accountability to build healthy new daily routines to sustain this afterglow.</> },
+  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>Challenging but Deeply Rewarding:</strong> I had massive breakthroughs, but now I need support navigating major, disruptive changes to my life, relationships, or career.</> },
+  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Overwhelming or Frightening:</strong> I feel highly anxious or destabilized and need support calming my nervous system.</> },
+  { key: 'D', label: <><strong style={{ fontWeight: 600 }}>Confusing or Unresolved:</strong> I didn&rsquo;t get the clarity I went looking for and feel stuck or disappointed.</> },
 ]
 
 const Q2_OPTS = [
