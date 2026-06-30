@@ -110,59 +110,62 @@ const CSS = `
 
 // ── Quiz data ─────────────────────────────────────────────────────────────────
 const Q1_OPTS = [
-  { key: 'A', label: 'Plant medicine or transformative journey' },
-  { key: 'B', label: 'Breathwork or somatic intensive' },
-  { key: 'C', label: 'Silent retreat or intensive meditation' },
-  { key: 'D', label: 'Other profound experiential therapy' },
+  { key: 'A', label: 'Beautiful and expansive (I want to sustain these insights and build habits).' },
+  { key: 'B', label: 'Challenging but deeply rewarding (I have tough, messy work to do).' },
+  { key: 'C', label: 'Overwhelming or frightening (I feel anxious and need to stabilize).' },
+  { key: 'D', label: "Confusing or unresolved (I didn't get what I went looking for)." },
 ]
 
 const Q2_OPTS = [
+  { key: 'A', label: 'I am holding tight, rigid tension, chronic pain, or spasms in my muscles (e.g., in my back, shoulders, jaw, neck, chest, or gut).' },
+  { key: 'B', label: 'I feel physically exhausted and heavily fatigued.' },
+  { key: 'C', label: 'I feel physically numb, disconnected, or floating out of my body.' },
+  { key: 'D', label: 'I feel restless, jittery, and unable to sit still.' },
+  { key: 'E', label: "I feel generally comfortable and at ease, or I honestly don't notice any specific physical sensations." },
+]
+
+const Q3_OPTS = [
   { key: 'A', label: '0 to 4 weeks ago' },
   { key: 'B', label: '1 to 6 months ago' },
   { key: 'C', label: '6 months to 1 year ago' },
   { key: 'D', label: 'Over 1 year ago' },
 ]
 
-const Q3_OPTS = [
+const Q4_OPTS = [
   { key: 'A', label: 'Knowing what I need to change, but old routines are holding me back.' },
   { key: 'B', label: 'Navigating emotional overwhelm and struggling to stay grounded.' },
   { key: 'C', label: 'Feeling disconnected or alienated from the people in my life.' },
   { key: 'D', label: 'Spending too much time in my head because it feels safer than my body.' },
 ]
 
-const Q4_OPTS = [
+const Q5_OPTS = [
   { key: 'A', label: <><strong style={{ fontWeight: 600 }}>My Mind & Spirit</strong> — Struggling to process heavy emotions or make sense of my shifting worldview.</> },
   { key: 'B', label: <><strong style={{ fontWeight: 600 }}>My Body & Lifestyle</strong> — Having a hard time breaking old habits or building daily routines that stick.</> },
   { key: 'C', label: <><strong style={{ fontWeight: 600 }}>My Relationships</strong> — Feeling alienated from others or struggling to set new boundaries.</> },
   { key: 'D', label: <><strong style={{ fontWeight: 600 }}>My Nature & Environment</strong> — Feeling called to unplug, change my surroundings, and live more intentionally.</> },
 ]
 
-const Q5_OPTS = [
+const Q6_OPTS = [
   { key: 'A', label: 'I have great intentions, but honestly... I haven\'t built a real routine yet.' },
   { key: 'B', label: 'I only do them reactively — usually just when I\'m already feeling overwhelmed or stressed.' },
   { key: 'C', label: 'I do them in bursts, but I eventually lose momentum and fall completely off track.' },
   { key: 'D', label: 'I am consistent with my practices, but I am looking to deepen my journey alongside others.' },
 ]
 
-const Q6_OPTS = [
+const Q7_OPTS = [
   { key: 'A', label: 'I have a therapist, but no community of peers who have walked a similar path.' },
   { key: 'B', label: 'I have friends and family who care, but they don\'t fully understand the depth of what I\'m navigating.' },
   { key: 'C', label: 'I am navigating this entirely on my own, without a support network.' },
   { key: 'D', label: 'I have pieced together a mix of resources, but my support feels scattered and disconnected.' },
 ]
 
-const Q7_OPTS = [
-  { key: 'A', label: 'Just a few minutes a day to build simple, supported routines.' },
-  { key: 'B', label: 'About an hour a week for a live class, plus simple daily practices.' },
-  { key: 'C', label: 'I have the space and desire to dive deep into multiple hours of practices, journaling, and live community circles.' },
-]
-
 const Q8_OPTS = [
-  { key: 'A', label: 'I want to go deeper. An intimate, facilitated small group where we actively share and navigate our experiences together.' },
-  { key: 'B', label: 'I want community at my own pace. The supportive rhythm of the broader community, but I prefer to absorb and reflect on my own.' },
+  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>At my own pace:</strong> Just a few minutes a day to build simple, supported routines.</> },
+  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>The community rhythm:</strong> About 1 hour a week for a live class, plus simple daily practices.</> },
+  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Going deep:</strong> About 2 hours a week to include the live class plus an intimate, facilitated small group where we actively share together.</> },
 ]
 
-const Q3_BREAK: Record<string, { heading: string; body: string; quote: string; attribution: string }> = {
+const Q4_BREAK: Record<string, { heading: string; body: string; quote: string; attribution: string }> = {
   A: {
     heading: 'Willpower alone rarely wins against deeply ingrained routines.',
     body: "It's completely normal for your everyday environment to pull you right back into familiar ruts. Instead, combining a gentle, consistent structure with reliable support creates the ideal foundation to break through and stay on track.",
@@ -189,7 +192,7 @@ const Q3_BREAK: Record<string, { heading: string; body: string; quote: string; a
   },
 }
 
-const Q6_BREAK: Record<string, { heading: string; body1: string; body2: React.ReactNode }> = {
+const Q7_BREAK: Record<string, { heading: string; body1: string; body2: React.ReactNode }> = {
   A: {
     heading: 'Professional help is a powerful starting point, but peer connection adds a completely new layer.',
     body1: 'Having a therapist is incredibly valuable, but it is not the same as being seen and heard by a community of people who are walking a similar path.',
@@ -212,45 +215,47 @@ const Q6_BREAK: Record<string, { heading: string; body1: string; body2: React.Re
   },
 }
 
-const Q3_EMPATHY_VAR: Record<string, string> = {
+const Q4_EMPATHY_VAR: Record<string, string> = {
   A: 'Breaking old routines is incredibly hard, even when you know what needs to change.',
   B: 'Staying grounded and navigating intense emotions can be exhausting.',
   C: 'Feeling disconnected from the people in your life is a heavy burden to carry.',
   D: "Retreating into your head when your body doesn't feel safe makes complete sense.",
 }
 
-const Q3_TESTIMONIAL: Record<string, { quote: string; attribution: string }> = {
+const Q4_TESTIMONIAL: Record<string, { quote: string; attribution: string; avatar: string }> = {
   A: {
     quote: '"My habits have gotten better, especially when it comes to getting my daily work done and staying off of social media... It\'s a group to help keep you on track and support you as you move through your life."',
     attribution: 'Cam, 32 · Plant Medicine Retreat',
+    avatar: '/assets/cam.jpg',
   },
   B: {
     quote: '"Week one and two, people are going through stuff. But then everything got lighter and lighter. That\'s what I saw with every call. People were just happier, more comfortable with the group."',
     attribution: 'Coach Kevin',
+    avatar: '/assets/kevin.jpg',
   },
   C: {
     quote: '"When people start to be in this environment and other people are being really vulnerable with their shares, it gives them permission to share... and trust the people in the space to feel safe enough to share some real s*** that\'s going on."',
     attribution: 'Coach Brittany',
+    avatar: '/assets/britt_breathing.jpg',
   },
   D: {
     quote: '"It is an active group with great leaders and coaches, and good interactive workshops that really help ground and bring yourself into your body and the present."',
     attribution: 'Evan, 28 · Plant Medicine Retreat',
+    avatar: '/assets/evan.jpg',
   },
 }
 
 // Step shown in progress bar per screen index (null = no bar)
 const SCREEN_STEP: Record<number, number | null> = {
   0: null, 1: null,
-  2: 1, 3: 2, 4: 3, 5: 3,
-  6: 4, 7: 5, 8: 6, 9: 6,
-  10: 7, 11: 8,
+  2: 1, 3: 2, 4: 3, 5: 4, 6: 4,
+  7: 5, 8: 6, 9: 7, 10: 7,
+  11: 8,
   12: null, 13: null, 14: null,
 }
 
-function getRecommendedPath(q7: string | null, q8: string | null): 'pod' | 'foundation' {
-  if (q8 === 'B') return 'foundation'
-  if (q8 === 'A' && q7 === 'A') return 'foundation'
-  if (q8 === 'A' && (q7 === 'B' || q7 === 'C')) return 'pod'
+function getRecommendedPath(q8: string | null): 'pod' | 'foundation' {
+  if (q8 === 'C') return 'pod'
   return 'foundation'
 }
 
@@ -376,10 +381,10 @@ export default function QuizPage() {
   // GA4 quiz funnel tracking
   const SCREEN_NAMES: Record<number, string> = {
     0: 'welcome', 1: 'name_transition',
-    2: 'q1_retreat_type', 3: 'q2_how_long_ago', 4: 'q3_biggest_hurdle',
-    5: 'break1_empathy', 6: 'q4_disconnect_area', 7: 'q5_current_routine',
-    8: 'q6_support_system', 9: 'break2_support_checkin',
-    10: 'q7_time_available', 11: 'q8_journey_preference',
+    2: 'q1_capacity', 3: 'q2_somatic_state', 4: 'q3_how_long_ago', 5: 'q4_biggest_hurdle',
+    6: 'break1_empathy', 7: 'q5_disconnect_area', 8: 'q6_current_routine',
+    9: 'q7_support_system', 10: 'break2_support_checkin',
+    11: 'q8_commitment_level',
     12: 'email_capture', 13: 'calculating', 14: 'pricing',
   }
   useEffect(() => {
@@ -405,7 +410,7 @@ export default function QuizPage() {
   // When we reach pricing, set the recommended plan
   useEffect(() => {
     if (screen === 14) {
-      const path = getRecommendedPath(q7, q8)
+      const path = getRecommendedPath(q8)
       setActivePlan(path)
       setCommunityOpen(false)
     }
@@ -415,7 +420,7 @@ export default function QuizPage() {
   async function submitQuiz() {
     if (submitted) return
     setSubmitted(true)
-    const path = getRecommendedPath(q7, q8)
+    const path = getRecommendedPath(q8)
     try {
       await fetch('/api/quiz', {
         method: 'POST',
@@ -441,7 +446,6 @@ export default function QuizPage() {
 
   const step = SCREEN_STEP[screen]
   const progress = step ? (step / 8) * 100 : 0
-  const isSafetyFilter = q8 === 'A' && q7 === 'A'
 
   // ── Render ──────────────────────────────────────────────────────────────────
   const renderScreen = () => {
@@ -495,10 +499,10 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 2: Q1 ─────────────────────────────────────────────────────
+      // ── Screen 2: Q1 — Capacity ──────────────────────────────────────────
       case 2: return (
         <div className="qz-in">
-          <QuestionHeader step={1} question="What type of retreat are you currently integrating?" />
+          <QuestionHeader step={1} question="If you had to describe the overall energy of the experience you are bringing back into your life, what does it feel like?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q1_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q1 === o.key} onSelect={() => setQ1(o.key)} />
@@ -508,10 +512,10 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 3: Q2 ─────────────────────────────────────────────────────
+      // ── Screen 3: Q2 — Somatic state ─────────────────────────────────────
       case 3: return (
         <div className="qz-in">
-          <QuestionHeader step={2} question="How long ago was your transformative experience?" />
+          <QuestionHeader step={2} question="When you tune into your body right now, what physical sensations are most present for you in this integration period?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q2_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q2 === o.key} onSelect={() => setQ2(o.key)} />
@@ -521,10 +525,10 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 4: Q3 ─────────────────────────────────────────────────────
+      // ── Screen 4: Q3 — Timeframe ─────────────────────────────────────────
       case 4: return (
         <div className="qz-in">
-          <QuestionHeader step={3} question="If you had to choose, what is the single biggest hurdle you're facing right now?" />
+          <QuestionHeader step={3} question="How long ago was your transformative experience?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q3_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q3 === o.key} onSelect={() => setQ3(o.key)} />
@@ -534,9 +538,22 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 5: Dynamic Break 1 ─────────────────────────────────────────
-      case 5: {
-        const b = Q3_BREAK[q3 ?? 'A']
+      // ── Screen 5: Q4 — Biggest hurdle ────────────────────────────────────
+      case 5: return (
+        <div className="qz-in">
+          <QuestionHeader step={4} question="If you had to choose, what is the single biggest hurdle you're facing right now?" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
+            {Q4_OPTS.map(o => (
+              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q4 === o.key} onSelect={() => setQ4(o.key)} />
+            ))}
+          </div>
+          <button className="qz-btn" disabled={!q4} onClick={advance}>Continue →</button>
+        </div>
+      )
+
+      // ── Screen 6: Dynamic Break 1 ─────────────────────────────────────────
+      case 6: {
+        const b = Q4_BREAK[q4 ?? 'A']
         return (
           <div className="qz-in">
             <h2 style={{
@@ -557,23 +574,10 @@ export default function QuizPage() {
         )
       }
 
-      // ── Screen 6: Q4 ─────────────────────────────────────────────────────
-      case 6: return (
-        <div className="qz-in">
-          <QuestionHeader step={4} question="Where do you feel the most disconnect right now?" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
-            {Q4_OPTS.map(o => (
-              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q4 === o.key} onSelect={() => setQ4(o.key)} />
-            ))}
-          </div>
-          <button className="qz-btn" disabled={!q4} onClick={advance}>Continue →</button>
-        </div>
-      )
-
-      // ── Screen 7: Q5 ─────────────────────────────────────────────────────
+      // ── Screen 7: Q5 — Disconnect ─────────────────────────────────────────
       case 7: return (
         <div className="qz-in">
-          <QuestionHeader step={5} question="Which best describes your current routine with integration practices like journaling, breathwork, or meditation?" />
+          <QuestionHeader step={5} question="Where do you feel the most disconnect right now?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q5_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q5 === o.key} onSelect={() => setQ5(o.key)} />
@@ -583,10 +587,10 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 8: Q6 ─────────────────────────────────────────────────────
+      // ── Screen 8: Q6 — Current routine ───────────────────────────────────
       case 8: return (
         <div className="qz-in">
-          <QuestionHeader step={6} question="What does your current support system look like?" />
+          <QuestionHeader step={6} question="Which best describes your current routine with integration practices like journaling, breathwork, or meditation?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q6_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q6 === o.key} onSelect={() => setQ6(o.key)} />
@@ -596,9 +600,22 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 9: Dynamic Break 2 ─────────────────────────────────────────
-      case 9: {
-        const b = Q6_BREAK[q6 ?? 'A']
+      // ── Screen 9: Q7 — Support system ────────────────────────────────────
+      case 9: return (
+        <div className="qz-in">
+          <QuestionHeader step={7} question="What does your current support system look like?" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
+            {Q7_OPTS.map(o => (
+              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q7 === o.key} onSelect={() => setQ7(o.key)} />
+            ))}
+          </div>
+          <button className="qz-btn" disabled={!q7} onClick={advance}>Continue →</button>
+        </div>
+      )
+
+      // ── Screen 10: Dynamic Break 2 ────────────────────────────────────────
+      case 10: {
+        const b = Q7_BREAK[q7 ?? 'A']
         return (
           <div className="qz-in">
             <h2 style={{
@@ -621,23 +638,10 @@ export default function QuizPage() {
         )
       }
 
-      // ── Screen 10: Q7 ────────────────────────────────────────────────────
-      case 10: return (
-        <div className="qz-in">
-          <QuestionHeader step={7} question="How much time can you realistically dedicate to your practice each week?" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
-            {Q7_OPTS.map(o => (
-              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q7 === o.key} onSelect={() => setQ7(o.key)} />
-            ))}
-          </div>
-          <button className="qz-btn" disabled={!q7} onClick={advance}>Continue →</button>
-        </div>
-      )
-
-      // ── Screen 11: Q8 ────────────────────────────────────────────────────
+      // ── Screen 11: Q8 — Commitment level ─────────────────────────────────
       case 11: return (
         <div className="qz-in">
-          <QuestionHeader step={8} question="How do you prefer to journey?" />
+          <QuestionHeader step={8} question="What level of support and time commitment are you looking for right now?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q8_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q8 === o.key} onSelect={() => setQ8(o.key)} />
@@ -723,13 +727,12 @@ export default function QuizPage() {
 
       // ── Screen 14: Pricing ────────────────────────────────────────────────
       case 14: {
-        const testimonial = Q3_TESTIMONIAL[q3 ?? 'A']
+        const testimonial = Q4_TESTIMONIAL[q4 ?? 'A']
         const isPod = activePlan === 'pod'
-        const isSafety = isSafetyFilter && activePlan === 'foundation'
 
-        const headingBody = isSafety
+        const headingBody = q8 === 'A'
           ? `Because you mentioned you only have a few minutes a day right now, Foundation is the perfect place to start your journey and gently build your capacity.`
-          : `${Q3_EMPATHY_VAR[q3 ?? 'A']} That is exactly why we built Somenta. Based on your answers, here is your recommended pathway.`
+          : `${Q4_EMPATHY_VAR[q4 ?? 'A']} That is exactly why we built Somenta. Based on your answers, here is your recommended pathway.`
 
         return (
           <div className="qz-in" style={{ maxWidth: 600, margin: '0 auto' }}>
@@ -787,11 +790,14 @@ export default function QuizPage() {
                   <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: isPod ? P.accent : P.rust, margin: '0 0 0.3rem' }}>
                     Founding Member Invitation
                   </p>
-                  <p style={{ margin: 0 }}>
+                  <p style={{ margin: 0, display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '0.5rem' }}>
                     <span style={{ ...serif, fontSize: '2rem', fontWeight: 400, color: isPod ? P.light : P.text, letterSpacing: '-0.02em' }}>
                       {isPod ? '$40' : '$10'}
                     </span>
-                    <span style={{ fontSize: '14px', color: isPod ? 'rgba(253,251,246,0.6)' : P.muted, marginLeft: '0.35rem' }}>
+                    <span style={{ fontSize: '16px', color: isPod ? 'rgba(253,251,246,0.4)' : 'rgba(40,27,13,0.35)', textDecoration: 'line-through' }}>
+                      {isPod ? '$60' : '$25'}
+                    </span>
+                    <span style={{ fontSize: '14px', color: isPod ? 'rgba(253,251,246,0.6)' : P.muted }}>
                       / month for your first 3 months
                     </span>
                   </p>
@@ -801,37 +807,25 @@ export default function QuizPage() {
                 </div>
               </div>
 
-              {/* Features */}
+              {/* Benefits — short outcome-focused bullets, not a feature checklist */}
               <div className="qz-pricing-inner" style={{ padding: '1.75rem 2rem' }}>
-                {isPod ? (
-                  <>
-                    {[
-                      { title: 'Integration Circles.', body: 'Intimate 12-week facilitated share pods with the exact same trusted people to process what is surfacing.' },
-                      { title: 'Live Regulation.', body: 'Full access to weekly expert-led Guided Classes (breathwork & meditation) and Guest Sessions.' },
-                    ].map((f, i) => (
-                      <div key={i} className="qz-feat-row">
-                        <CheckIcon />
-                        <span style={{ fontSize: '14px', color: bodyText, lineHeight: 1.65 }}>
-                          <strong style={{ fontWeight: 600, color: P.text }}>{f.title}</strong>{' '}{f.body}
-                        </span>
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    {[
-                      { title: 'Live Regulation.', body: 'Weekly Guided Classes to recalibrate your nervous system, plus fresh perspectives from expert Guest Sessions.' },
-                      { title: 'Daily Grounding.', body: 'The Daily Drop (5 minutes of guided somatic audio and journaling) and access to The Practice Room.' },
-                    ].map((f, i) => (
-                      <div key={i} className="qz-feat-row">
-                        <CheckIcon />
-                        <span style={{ fontSize: '14px', color: bodyText, lineHeight: 1.65 }}>
-                          <strong style={{ fontWeight: 600, color: P.text }}>{f.title}</strong>{' '}{f.body}
-                        </span>
-                      </div>
-                    ))}
-                  </>
-                )}
+                {(isPod
+                  ? [
+                      'The same trusted small group, every single session',
+                      'Weekly live breathwork & meditation classes',
+                      'A facilitated space to actually process what is surfacing',
+                    ]
+                  : [
+                      'Weekly live classes to recalibrate your nervous system',
+                      '5-minute daily practices that fit into a busy day',
+                      'A supportive community rhythm, at your own pace',
+                    ]
+                ).map((line, i) => (
+                  <div key={i} className="qz-feat-row">
+                    <CheckIcon />
+                    <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
+                  </div>
+                ))}
 
                 <CommunityDropdown open={communityOpen} onToggle={() => setCommunityOpen(o => !o)} />
 
@@ -854,9 +848,18 @@ export default function QuizPage() {
                   <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: P.text, lineHeight: 1.75, margin: '0 0 1rem' }}>
                     {testimonial.quote.replace(/^"|"$/g, '')}
                   </p>
-                  <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.06em', fontWeight: 500 }}>
-                    — {testimonial.attribution}
-                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <Image
+                      src={testimonial.avatar}
+                      alt={testimonial.attribution}
+                      width={32}
+                      height={32}
+                      style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                    />
+                    <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.06em', fontWeight: 500 }}>
+                      {testimonial.attribution}
+                    </p>
+                  </div>
                 </div>
 
                 {/* CTA */}

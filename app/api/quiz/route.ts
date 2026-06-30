@@ -19,14 +19,14 @@ import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
 const Q_LABELS: Record<string, Record<string, string>> = {
-  q1: { A: 'Plant medicine or transformative journey', B: 'Breathwork or somatic intensive', C: 'Silent retreat or intensive meditation', D: 'Other profound experiential therapy' },
-  q2: { A: '0–4 weeks ago', B: '1–6 months ago', C: '6 months–1 year ago', D: 'Over 1 year ago' },
-  q3: { A: 'Old routines holding back', B: 'Emotional overwhelm', C: 'Feeling disconnected', D: 'Too much in head' },
-  q4: { A: 'Mind & Spirit', B: 'Body & Lifestyle', C: 'Relationships', D: 'Nature & Environment' },
-  q5: { A: 'No routine yet', B: 'Only reactive', C: 'Bursts then fall off', D: 'Consistent, want to deepen' },
-  q6: { A: 'Has therapist, no peer community', B: 'Friends/family but they don\'t get it', C: 'Entirely on own', D: 'Scattered resources' },
-  q7: { A: 'A few minutes a day', B: 'About an hour a week', C: 'Multiple hours, ready to dive deep' },
-  q8: { A: 'Intimate small group (Pod)', B: 'Community at own pace (Foundation)' },
+  q1: { A: 'Beautiful and expansive', B: 'Challenging but deeply rewarding', C: 'Overwhelming or frightening', D: 'Confusing or unresolved' },
+  q2: { A: 'Tight/rigid tension or pain', B: 'Exhausted and fatigued', C: 'Numb or disconnected', D: 'Restless and jittery', E: 'Comfortable, no notable sensations' },
+  q3: { A: '0–4 weeks ago', B: '1–6 months ago', C: '6 months–1 year ago', D: 'Over 1 year ago' },
+  q4: { A: 'Old routines holding back', B: 'Emotional overwhelm', C: 'Feeling disconnected', D: 'Too much in head' },
+  q5: { A: 'Mind & Spirit', B: 'Body & Lifestyle', C: 'Relationships', D: 'Nature & Environment' },
+  q6: { A: 'No routine yet', B: 'Only reactive', C: 'Bursts then fall off', D: 'Consistent, want to deepen' },
+  q7: { A: 'Has therapist, no peer community', B: 'Friends/family but they don\'t get it', C: 'Entirely on own', D: 'Scattered resources' },
+  q8: { A: 'At my own pace (few min/day)', B: 'Community rhythm (1 hr/week)', C: 'Going deep (2 hrs/week, Pod)' },
 }
 
 function label(q: string, val: string | null) {
@@ -77,14 +77,14 @@ export async function POST(req: Request) {
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Name</td><td style="padding:10px 14px">${name}</td></tr>
             <tr><td style="padding:10px 14px;font-weight:600">Email</td><td style="padding:10px 14px"><a href="mailto:${email}" style="color:#B85030">${email}</a></td></tr>
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Recommended path</td><td style="padding:10px 14px;font-weight:700;color:#B85030">${recommended_path === 'pod' ? 'The Intimate Peer Pod' : 'Foundation'}</td></tr>
-            <tr><td style="padding:10px 14px;font-weight:600">Q1 — Retreat type</td><td style="padding:10px 14px">${label('q1', q1)}</td></tr>
-            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q2 — How long ago</td><td style="padding:10px 14px">${label('q2', q2)}</td></tr>
-            <tr><td style="padding:10px 14px;font-weight:600">Q3 — Biggest hurdle</td><td style="padding:10px 14px">${label('q3', q3)}</td></tr>
-            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q4 — Disconnect area</td><td style="padding:10px 14px">${label('q4', q4)}</td></tr>
-            <tr><td style="padding:10px 14px;font-weight:600">Q5 — Current routine</td><td style="padding:10px 14px">${label('q5', q5)}</td></tr>
-            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q6 — Support system</td><td style="padding:10px 14px">${label('q6', q6)}</td></tr>
-            <tr><td style="padding:10px 14px;font-weight:600">Q7 — Time available</td><td style="padding:10px 14px">${label('q7', q7)}</td></tr>
-            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q8 — Journey preference</td><td style="padding:10px 14px">${label('q8', q8)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Q1 — Capacity / energy</td><td style="padding:10px 14px">${label('q1', q1)}</td></tr>
+            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q2 — Somatic state</td><td style="padding:10px 14px">${label('q2', q2)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Q3 — How long ago</td><td style="padding:10px 14px">${label('q3', q3)}</td></tr>
+            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q4 — Biggest hurdle</td><td style="padding:10px 14px">${label('q4', q4)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Q5 — Disconnect area</td><td style="padding:10px 14px">${label('q5', q5)}</td></tr>
+            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q6 — Current routine</td><td style="padding:10px 14px">${label('q6', q6)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Q7 — Support system</td><td style="padding:10px 14px">${label('q7', q7)}</td></tr>
+            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q8 — Commitment level</td><td style="padding:10px 14px">${label('q8', q8)}</td></tr>
           </table>
         </div>
       `,
