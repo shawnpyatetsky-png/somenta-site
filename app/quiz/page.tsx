@@ -110,8 +110,8 @@ const CSS = `
 
 // ── Quiz data ─────────────────────────────────────────────────────────────────
 const Q1_OPTS = [
-  { key: 'A', label: 'I feel great and want to build healthy daily routines to sustain my momentum.' },
-  { key: 'B', label: 'I had massive breakthroughs, but need support navigating major, disruptive life changes.' },
+  { key: 'A', label: 'I feel great and mostly need accountability to build healthy new daily routines to sustain this afterglow.' },
+  { key: 'B', label: 'I had massive breakthroughs, but now I need support navigating major, disruptive changes to my life, relationships, or career.' },
   { key: 'C', label: 'I feel highly anxious or destabilized and need support calming my nervous system.' },
   { key: 'D', label: "I didn't get the clarity I went looking for and feel stuck or disappointed." },
 ]
@@ -502,7 +502,7 @@ export default function QuizPage() {
       // ── Screen 2: Q1 — Capacity ──────────────────────────────────────────
       case 2: return (
         <div className="qz-in">
-          <QuestionHeader step={1} question="If you had to describe the overall energy of the transition or shift you are currently navigating, what does it feel like?" />
+          <QuestionHeader step={1} question="If you had to describe the overall energy of the experience you are bringing back into your life, what does it feel like?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q1_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q1 === o.key} onSelect={() => setQ1(o.key)} />
@@ -515,7 +515,7 @@ export default function QuizPage() {
       // ── Screen 3: Q2 — Somatic state ─────────────────────────────────────
       case 3: return (
         <div className="qz-in">
-          <QuestionHeader step={2} question="When you tune into your body right now, what physical sensations are most present for you during this transition?" />
+          <QuestionHeader step={2} question="When you tune into your body right now, what physical sensations are most present for you in this integration period?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q2_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q2 === o.key} onSelect={() => setQ2(o.key)} />
