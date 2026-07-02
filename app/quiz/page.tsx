@@ -120,7 +120,7 @@ const Q2_OPTS = [
   { key: 'A', label: 'I feel generally comfortable, warm, and at ease, without any specific discomfort.' },
   { key: 'B', label: 'I am holding tight, rigid tension, chronic pain, or spasms in my muscles.' },
   { key: 'C', label: 'I feel jittery and agitated; my heart races, and I have a hard time sitting still.' },
-  { key: 'D', label: 'I feel extreme physical exhaustion, brain fog, or a deep sense of heaviness.' },
+  { key: 'D', label: 'I feel physical exhaustion, brain fog, or a deep sense of heaviness.' },
   { key: 'E', label: 'I feel physically numb, floating out of my body, or disconnected from myself.' },
 ]
 
