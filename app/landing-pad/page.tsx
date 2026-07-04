@@ -93,11 +93,7 @@ function LandingPadContent() {
   const [communityOpen, setCommunityOpen] = useState(false)
 
   const recommendedTier = q8 === 'C' ? 'The Pod' : 'Foundation'
-
-  const subheadline = q8 === 'A'
-    ? 'Because you mentioned you only have a few minutes a day right now, Foundation will be the perfect place to start — and you can begin gently today in the Landing Pad, free, before we open on August 3rd.'
-    : `${Q4_EMPATHY[q4] ?? Q4_EMPATHY.A} That is exactly why we built Somenta. Based on your answers, your recommended pathway is ${recommendedTier}. Live cohorts open August 3rd. Until then, step into the Landing Pad — free — and start today.`
-
+  const empathy = Q4_EMPATHY[q4] ?? Q4_EMPATHY.A
   const testimonial = Q4_TESTIMONIAL[q4] ?? Q4_TESTIMONIAL.A
 
   return (
@@ -134,11 +130,19 @@ function LandingPadContent() {
               fontSize: 'clamp(22px,3.5vw,30px)',
               fontWeight: 400, lineHeight: 1.2, color: P.text, letterSpacing: '-0.015em',
             }}>
-              Welcome, <em>{name}.</em> You&rsquo;ve found a safe place to land.
+              Welcome, <em>{name}.</em>{' '}You&rsquo;ve found a safe place to land.
             </h1>
-            <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0, maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
-              {subheadline}
-            </p>
+            <div style={{ maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
+              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: '0 0 0.9rem' }}>
+                {empathy} That is exactly why we built Somenta.
+              </p>
+              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0 }}>
+                Based on your answers, your recommended pathway is{' '}
+                <strong style={{ color: P.text, fontWeight: 600 }}>{recommendedTier}</strong>. Live cohorts open{' '}
+                <strong style={{ color: P.text, fontWeight: 600 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
+                <strong style={{ color: P.accent, fontWeight: 700 }}>free</strong> — and start today.
+              </p>
+            </div>
           </div>
 
           {/* Card */}
