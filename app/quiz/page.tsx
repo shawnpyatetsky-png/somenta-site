@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import type { CSSProperties } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 // ── Palette (matches landing page) ────────────────────────────────────────────
 const P = {
@@ -373,6 +374,7 @@ export default function QuizPage() {
   const [q7, setQ7] = useState<string | null>(null)
   const [q8, setQ8] = useState<string | null>(null)
   const [activePlan, setActivePlan] = useState<'pod' | 'foundation'>('foundation')
+  const router = useRouter()
   const [communityOpen, setCommunityOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
@@ -398,10 +400,20 @@ export default function QuizPage() {
     }
   }, [screen])
 
-  // Auto-advance: name transition (screen 1) and calculating (screen 13)
+  // Auto-advance: name transition (screen 1)
   useEffect(() => {
-    if (screen === 1 || screen === 13) {
+    if (screen === 1) {
       const t = setTimeout(advance, 1500)
+      return () => clearTimeout(t)
+    }
+  }, [screen])
+
+  // After calculating screen, redirect to pre-launch landing pad
+  useEffect(() => {
+    if (screen === 13) {
+      const t = setTimeout(() => {
+        router.push(`/landing-pad?name=${encodeURIComponent(name)}&q4=${q4 ?? 'A'}&q8=${q8 ?? 'B'}`)
+      }, 1500)
       return () => clearTimeout(t)
     }
   }, [screen])
