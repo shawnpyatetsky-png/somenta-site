@@ -135,27 +135,22 @@ function LandingPadContent() {
 
             <p style={{
               ...serif, fontStyle: 'italic', fontSize: '16px',
-              color: bodyText, lineHeight: 1.7, margin: '0 0 1.5rem',
+              color: bodyText, lineHeight: 1.7, margin: '0 0 1.75rem',
               maxWidth: '38ch', marginLeft: 'auto', marginRight: 'auto',
             }}>
               {empathy}
             </p>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', margin: '0 0 1.5rem' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(184,80,48,0.1)', borderRadius: 100, padding: '7px 16px' }}>
-                <span style={{ fontSize: '11px', color: P.muted, fontWeight: 500, letterSpacing: '0.02em' }}>Your path</span>
-                <span style={{ width: 1, height: 11, background: P.div, display: 'inline-block' }} />
-                <span style={{ fontSize: '12px', color: P.rust, fontWeight: 700 }}>{recommendedTier}</span>
-              </div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: P.bgWarm, border: `1px solid ${P.div}`, borderRadius: 100, padding: '7px 16px' }}>
-                <span style={{ fontSize: '11px', color: P.muted, fontWeight: 500, letterSpacing: '0.02em' }}>Opens</span>
-                <span style={{ width: 1, height: 11, background: P.div, display: 'inline-block' }} />
-                <span style={{ fontSize: '12px', color: P.text, fontWeight: 700 }}>August 3rd</span>
-              </div>
-            </div>
+            <p style={{
+              ...serif, fontSize: 'clamp(18px,2.5vw,22px)',
+              fontWeight: 400, color: P.text, lineHeight: 1.3,
+              margin: '0 0 0.6rem', letterSpacing: '-0.01em',
+            }}>
+              Your recommended pathway is <em>{recommendedTier}</em>.
+            </p>
 
-            <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0, maxWidth: '38ch', marginLeft: 'auto', marginRight: 'auto' }}>
-              Until then, step into the Landing Pad —{' '}
+            <p style={{ fontSize: '14px', color: P.muted, lineHeight: 1.8, margin: 0, maxWidth: '40ch', marginLeft: 'auto', marginRight: 'auto' }}>
+              Live cohorts open <strong style={{ color: P.text, fontWeight: 600 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
               <strong style={{ color: P.accent, fontWeight: 700 }}>free</strong> — and start today.
             </p>
           </div>
