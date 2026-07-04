@@ -126,23 +126,38 @@ function LandingPadContent() {
           {/* Headline */}
           <div style={{ marginBottom: '2.5rem', textAlign: 'center' }}>
             <h1 style={{
-              ...serif, margin: '0 0 1rem',
+              ...serif, margin: '0 0 1.5rem',
               fontSize: 'clamp(22px,3.5vw,30px)',
               fontWeight: 400, lineHeight: 1.2, color: P.text, letterSpacing: '-0.015em',
             }}>
               Welcome, <em>{name}.</em>{' '}You&rsquo;ve found a safe place to land.
             </h1>
-            <div style={{ maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
-              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: '0 0 0.85rem' }}>
-                {empathy} That is exactly why we built Somenta.
-              </p>
-              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0 }}>
-                Based on your answers, your recommended pathway is{' '}
-                <strong style={{ color: P.text, fontWeight: 600 }}>{recommendedTier}</strong>. Live cohorts open{' '}
-                <strong style={{ color: P.text, fontWeight: 600 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
-                <strong style={{ color: P.text, fontWeight: 600 }}>free</strong> — and start today.
-              </p>
+
+            <p style={{
+              ...serif, fontStyle: 'italic', fontSize: '16px',
+              color: bodyText, lineHeight: 1.7, margin: '0 0 1.5rem',
+              maxWidth: '38ch', marginLeft: 'auto', marginRight: 'auto',
+            }}>
+              {empathy}
+            </p>
+
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', margin: '0 0 1.5rem' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(184,80,48,0.1)', borderRadius: 100, padding: '7px 16px' }}>
+                <span style={{ fontSize: '11px', color: P.muted, fontWeight: 500, letterSpacing: '0.02em' }}>Your path</span>
+                <span style={{ width: 1, height: 11, background: P.div, display: 'inline-block' }} />
+                <span style={{ fontSize: '12px', color: P.rust, fontWeight: 700 }}>{recommendedTier}</span>
+              </div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: P.bgWarm, border: `1px solid ${P.div}`, borderRadius: 100, padding: '7px 16px' }}>
+                <span style={{ fontSize: '11px', color: P.muted, fontWeight: 500, letterSpacing: '0.02em' }}>Opens</span>
+                <span style={{ width: 1, height: 11, background: P.div, display: 'inline-block' }} />
+                <span style={{ fontSize: '12px', color: P.text, fontWeight: 700 }}>August 3rd</span>
+              </div>
             </div>
+
+            <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0, maxWidth: '38ch', marginLeft: 'auto', marginRight: 'auto' }}>
+              Until then, step into the Landing Pad —{' '}
+              <strong style={{ color: P.text, fontWeight: 600 }}>free</strong> — and start today.
+            </p>
           </div>
 
           {/* Card */}
