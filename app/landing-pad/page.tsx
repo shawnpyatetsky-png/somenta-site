@@ -93,7 +93,11 @@ function LandingPadContent() {
   const [communityOpen, setCommunityOpen] = useState(false)
 
   const recommendedTier = q8 === 'C' ? 'The Pod' : 'Foundation'
-  const empathy = Q4_EMPATHY[q4] ?? Q4_EMPATHY.A
+
+  const subheadline = q8 === 'A'
+    ? 'Because you mentioned you only have a few minutes a day right now, Foundation will be the perfect place to start — and you can begin gently today in the Landing Pad, free, before we open on August 3rd.'
+    : `${Q4_EMPATHY[q4] ?? Q4_EMPATHY.A} That is exactly why we built Somenta. Based on your answers, your recommended pathway is ${recommendedTier}. Live cohorts open August 3rd. Until then, step into the Landing Pad — free — and start today.`
+
   const testimonial = Q4_TESTIMONIAL[q4] ?? Q4_TESTIMONIAL.A
 
   return (
@@ -126,32 +130,14 @@ function LandingPadContent() {
           {/* Headline */}
           <div style={{ marginBottom: '2.5rem', textAlign: 'center' }}>
             <h1 style={{
-              ...serif, margin: '0 0 1.5rem',
+              ...serif, margin: '0 0 1rem',
               fontSize: 'clamp(22px,3.5vw,30px)',
               fontWeight: 400, lineHeight: 1.2, color: P.text, letterSpacing: '-0.015em',
             }}>
-              Welcome, <em>{name}.</em>{' '}You&rsquo;ve found a safe place to land.
+              Welcome, <em>{name}.</em> You&rsquo;ve found a safe place to land.
             </h1>
-
-            <p style={{
-              ...serif, fontStyle: 'italic', fontSize: '16px',
-              color: bodyText, lineHeight: 1.7, margin: '0 0 1.75rem',
-              maxWidth: '38ch', marginLeft: 'auto', marginRight: 'auto',
-            }}>
-              {empathy}
-            </p>
-
-            <p style={{
-              ...serif, fontSize: 'clamp(18px,2.5vw,22px)',
-              fontWeight: 400, color: P.text, lineHeight: 1.3,
-              margin: '0 0 0.6rem', letterSpacing: '-0.01em',
-            }}>
-              Your recommended pathway is <em>{recommendedTier}</em>.
-            </p>
-
-            <p style={{ fontSize: '14px', color: P.muted, lineHeight: 1.8, margin: 0, maxWidth: '40ch', marginLeft: 'auto', marginRight: 'auto' }}>
-              Live cohorts open <strong style={{ color: P.text, fontWeight: 600 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
-              <strong style={{ color: P.accent, fontWeight: 700 }}>free</strong> — and start today.
+            <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0, maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
+              {subheadline}
             </p>
           </div>
 
@@ -206,7 +192,7 @@ function LandingPadContent() {
               <div style={{ height: 1, background: P.div, margin: '1.25rem 0' }} />
 
               {/* Section 2: At launch */}
-              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
+              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.muted, margin: '0 0 0.5rem' }}>
                 When we open — August 3rd
               </p>
               {[
