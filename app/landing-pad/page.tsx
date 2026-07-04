@@ -145,8 +145,8 @@ function LandingPadContent() {
             </div>
           </div>
 
-          {/* Card */}
-          <div className="lp-plan" style={{ position: 'relative' }}>
+          {/* Card wrapper — badge sits outside overflow:hidden card */}
+          <div style={{ position: 'relative' }}>
 
             {/* Floating badge — centered on card top border */}
             <div style={{
@@ -155,11 +155,15 @@ function LandingPadContent() {
               display: 'inline-flex', alignItems: 'center',
               background: P.bgWarm, border: `1px solid ${P.div}`,
               borderRadius: 100, padding: '5px 14px', whiteSpace: 'nowrap',
+              zIndex: 10,
             }}>
               <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent }}>
                 ★ Your Pre-Launch Invitation
               </span>
             </div>
+
+          {/* Card */}
+          <div className="lp-plan">
 
             {/* Card header */}
             <div style={{ padding: '2.5rem 2rem 1.5rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm }}>
@@ -292,6 +296,7 @@ function LandingPadContent() {
 
             </div>
           </div>
+          </div>{/* end card wrapper */}
 
           {/* Footer */}
           <p style={{ textAlign: 'center', fontSize: '13px', color: P.muted, margin: '2rem 0 0', letterSpacing: '0.04em' }}>
