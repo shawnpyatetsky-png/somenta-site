@@ -146,19 +146,23 @@ function LandingPadContent() {
           </div>
 
           {/* Card */}
-          <div className="lp-plan">
+          <div className="lp-plan" style={{ position: 'relative' }}>
+
+            {/* Floating badge — centered on card top border */}
+            <div style={{
+              position: 'absolute', top: 0, left: '50%',
+              transform: 'translate(-50%, -50%)',
+              display: 'inline-flex', alignItems: 'center',
+              background: P.bgWarm, border: `1px solid ${P.div}`,
+              borderRadius: 100, padding: '5px 14px', whiteSpace: 'nowrap',
+            }}>
+              <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent }}>
+                ★ Your Pre-Launch Invitation
+              </span>
+            </div>
 
             {/* Card header */}
-            <div style={{ padding: '2rem 2rem 1.5rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm }}>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center',
-                background: 'rgba(200,120,64,0.2)', borderRadius: 100,
-                padding: '3px 10px', marginBottom: '0.75rem',
-              }}>
-                <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent }}>
-                  ★ Your Pre-Launch Invitation
-                </span>
-              </div>
+            <div style={{ padding: '2.5rem 2rem 1.5rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm }}>
               <h2 style={{
                 ...serif, margin: '0 0 0.35rem',
                 fontSize: 'clamp(24px,3vw,30px)',
@@ -196,7 +200,7 @@ function LandingPadContent() {
               <div style={{ height: 1, background: P.div, margin: '1.25rem 0' }} />
 
               {/* Section 2: At launch */}
-              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.muted, margin: '0 0 0.5rem' }}>
+              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
                 When we open — August 3rd
               </p>
               {[
