@@ -153,7 +153,7 @@ function LandingPadContent() {
               position: 'absolute', top: 0, left: '50%',
               transform: 'translate(-50%, -50%)',
               display: 'inline-flex', alignItems: 'center',
-              background: 'rgba(200,120,64,0.15)', border: `1px solid rgba(200,120,64,0.3)`,
+              background: P.bg, border: `1px solid rgba(200,120,64,0.4)`,
               borderRadius: 100, padding: '5px 14px', whiteSpace: 'nowrap',
               zIndex: 10,
             }}>
