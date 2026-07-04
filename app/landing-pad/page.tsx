@@ -173,7 +173,28 @@ function LandingPadContent() {
             {/* Card body */}
             <div className="lp-inner" style={{ padding: '1.75rem 2rem' }}>
 
-              {/* Benefits */}
+              {/* Section 1: Free now */}
+              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.5rem' }}>
+                Right now, free in the Landing Pad
+              </p>
+              {[
+                'Your first 5-minute somatic practice, today',
+                'Early practices and updates as we prepare to open',
+                'Your founding spot, saved for launch',
+              ].map((line, i) => (
+                <div key={i} className="lp-feat-row">
+                  <CheckIcon />
+                  <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
+                </div>
+              ))}
+
+              {/* Divider */}
+              <div style={{ height: 1, background: P.div, margin: '1.25rem 0' }} />
+
+              {/* Section 2: At launch */}
+              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.muted, margin: '0 0 0.5rem' }}>
+                When we open — August 3rd
+              </p>
               {[
                 'Weekly live classes to recalibrate your nervous system',
                 '5-minute daily practices that fit into a busy day',
