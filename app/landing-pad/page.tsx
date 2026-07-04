@@ -132,17 +132,16 @@ function LandingPadContent() {
             }}>
               Welcome, <em>{name}.</em>{' '}You&rsquo;ve found a safe place to land.
             </h1>
-            <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: '0 0 1.25rem', maxWidth: '44ch', marginLeft: 'auto', marginRight: 'auto' }}>
-              That is exactly why we built Somenta.
-            </p>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              background: 'rgba(184,80,48,0.1)', borderRadius: 100,
-              padding: '6px 16px',
-            }}>
-              <span style={{ fontSize: '12px', color: P.muted, fontWeight: 500 }}>Your path</span>
-              <span style={{ width: 1, height: 12, background: P.div, display: 'inline-block' }} />
-              <span style={{ fontSize: '13px', color: P.rust, fontWeight: 700, letterSpacing: '0.01em' }}>{recommendedTier}</span>
+            <div style={{ maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
+              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: '0 0 0.85rem' }}>
+                {empathy} That is exactly why we built Somenta.
+              </p>
+              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0 }}>
+                Based on your answers, your recommended pathway is{' '}
+                <strong style={{ color: P.text, fontWeight: 600 }}>{recommendedTier}</strong>. Live cohorts open{' '}
+                <strong style={{ color: P.text, fontWeight: 600 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
+                <strong style={{ color: P.text, fontWeight: 600 }}>free</strong> — and start today.
+              </p>
             </div>
           </div>
 
