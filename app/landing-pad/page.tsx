@@ -157,7 +157,7 @@ function LandingPadContent() {
               borderRadius: 100, padding: '5px 14px', whiteSpace: 'nowrap',
               zIndex: 10,
             }}>
-              <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent }}>
+              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: P.rust }}>
                 ★ Your Pre-Launch Invitation
               </span>
             </div>
