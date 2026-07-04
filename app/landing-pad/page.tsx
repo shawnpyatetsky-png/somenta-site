@@ -153,7 +153,7 @@ function LandingPadContent() {
               position: 'absolute', top: 0, left: '50%',
               transform: 'translate(-50%, -50%)',
               display: 'inline-flex', alignItems: 'center',
-              background: P.bgWarm, border: `1px solid ${P.div}`,
+              background: 'rgba(200,120,64,0.15)', border: `1px solid rgba(200,120,64,0.3)`,
               borderRadius: 100, padding: '5px 14px', whiteSpace: 'nowrap',
               zIndex: 10,
             }}>
@@ -187,25 +187,35 @@ function LandingPadContent() {
 
               {/* Section 1: Free now */}
               <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.5rem' }}>
-                Right now, free in the Landing Pad
+                🌤️ Right now, free in the Landing Pad
               </p>
-              {[
-                'Your first 5-minute somatic practice, today',
-                'Early practices and updates as we prepare to open',
-                'Your founding spot, saved for launch',
-              ].map((line, i) => (
-                <div key={i} className="lp-feat-row">
-                  <CheckIcon />
-                  <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
-                </div>
-              ))}
+              <div className="lp-feat-row">
+                <CheckIcon />
+                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Your first 5-minute somatic practice, today</span>
+              </div>
+              <div className="lp-feat-row">
+                <CheckIcon />
+                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Early practices and updates as we prepare to open</span>
+              </div>
+              <div className="lp-feat-row">
+                <CheckIcon />
+                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>
+                  <span style={{
+                    display: 'inline-flex', alignItems: 'center',
+                    background: 'rgba(184,80,48,0.12)', borderRadius: 4,
+                    padding: '2px 8px', marginRight: '0.4rem',
+                    fontSize: '10px', fontWeight: 700, color: P.rust, letterSpacing: '0.08em',
+                  }}>★ Founding Status</span>
+                  Your spot, saved for launch
+                </span>
+              </div>
 
               {/* Divider */}
               <div style={{ height: 1, background: P.div, margin: '1.25rem 0' }} />
 
               {/* Section 2: At launch */}
               <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
-                When we open — August 3rd
+                🗓️ When we open — August 3rd
               </p>
               {[
                 'Weekly live classes to recalibrate your nervous system',
