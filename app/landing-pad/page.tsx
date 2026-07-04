@@ -212,7 +212,7 @@ function LandingPadContent() {
               <div style={{ height: 1, background: P.div, margin: '1.25rem 0' }} />
 
               {/* Section 2: At launch */}
-              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.5rem' }}>
+              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
                 When we open — August 3rd
               </p>
               {[
