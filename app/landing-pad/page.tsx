@@ -138,8 +138,8 @@ function LandingPadContent() {
               </p>
               <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0 }}>
                 Based on your answers, your recommended pathway is{' '}
-                <strong style={{ color: P.text, fontWeight: 600 }}>{recommendedTier}</strong>. Live cohorts open{' '}
-                <strong style={{ color: P.text, fontWeight: 600 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
+                <strong style={{ color: P.accent, fontWeight: 700 }}>{recommendedTier}</strong>. Live cohorts open{' '}
+                <strong style={{ color: P.accent, fontWeight: 700 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
                 <strong style={{ color: P.accent, fontWeight: 700 }}>free</strong> — and start today.
               </p>
             </div>
