@@ -156,7 +156,7 @@ function LandingPadContent() {
 
             <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0, maxWidth: '38ch', marginLeft: 'auto', marginRight: 'auto' }}>
               Until then, step into the Landing Pad —{' '}
-              <strong style={{ color: P.text, fontWeight: 600 }}>free</strong> — and start today.
+              <strong style={{ color: P.accent, fontWeight: 700 }}>free</strong> — and start today.
             </p>
           </div>
 
