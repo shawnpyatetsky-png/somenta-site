@@ -89,6 +89,7 @@ function LandingPadContent() {
   const name = params.get('name') || ''
   const q4 = params.get('q4') || 'A'
   const q8 = params.get('q8') || 'B'
+  const email = params.get('email') || ''
   const [communityOpen, setCommunityOpen] = useState(false)
 
   const recommendedTier = q8 === 'C' ? 'The Pod' : 'Foundation'
@@ -231,7 +232,7 @@ function LandingPadContent() {
                 onClick={() => fetch('/api/quiz/conversion', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ cta: 'landing_pad_join' }),
+                  body: JSON.stringify({ email, cta: 'landing_pad_join' }),
                 }).catch(() => {})}
               >
                 Enter The Landing Pad (Free) →

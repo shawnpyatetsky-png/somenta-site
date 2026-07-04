@@ -412,7 +412,7 @@ export default function QuizPage() {
   useEffect(() => {
     if (screen === 13) {
       const t = setTimeout(() => {
-        router.push(`/landing-pad?name=${encodeURIComponent(name)}&q4=${q4 ?? 'A'}&q8=${q8 ?? 'B'}`)
+        router.push(`/landing-pad?name=${encodeURIComponent(name)}&q4=${q4 ?? 'A'}&q8=${q8 ?? 'B'}&email=${encodeURIComponent(email)}`)
       }, 1500)
       return () => clearTimeout(t)
     }
