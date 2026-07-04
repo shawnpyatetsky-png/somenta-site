@@ -75,8 +75,13 @@ const CSS = `
   @media(max-width:640px){.lp-inner{padding:1.75rem 1.25rem!important}}
 `
 
-function Check() {
-  return <span style={{ fontSize: '15px', lineHeight: 1, marginTop: 2, flexShrink: 0 }}>✅</span>
+function CheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+      <circle cx="8" cy="8" r="7.5" fill="rgba(184,80,48,0.12)" />
+      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke={P.rust} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
 }
 
 function LandingPadContent() {
@@ -181,36 +186,26 @@ function LandingPadContent() {
             <div className="lp-inner" style={{ padding: '1.75rem 2rem' }}>
 
               {/* Section 1: Free now */}
-              <p style={{ fontSize: '13px', fontWeight: 700, color: P.accent, margin: '0 0 0.6rem', letterSpacing: '0.01em' }}>
-                ☁️ Right now, free in the Landing Pad
+              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.5rem' }}>
+                Right now, free in the Landing Pad
               </p>
-              <div className="lp-feat-row">
-                <Check />
-                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Your first 5-minute somatic practice, today</span>
-              </div>
-              <div className="lp-feat-row">
-                <Check />
-                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Early practices and updates as we prepare to open</span>
-              </div>
-              <div className="lp-feat-row">
-                <Check />
-                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>
-                  <span style={{
-                    display: 'inline-flex', alignItems: 'center',
-                    background: 'rgba(184,80,48,0.12)', borderRadius: 4,
-                    padding: '2px 8px', marginRight: '0.4rem',
-                    fontSize: '10px', fontWeight: 700, color: P.rust, letterSpacing: '0.08em',
-                  }}>★ Founding Status</span>
-                  Your spot, saved for launch
-                </span>
-              </div>
+              {[
+                'Your first 5-minute somatic practice, today',
+                'Early practices and updates as we prepare to open',
+                'Your founding spot, saved for launch',
+              ].map((line, i) => (
+                <div key={i} className="lp-feat-row">
+                  <CheckIcon />
+                  <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
+                </div>
+              ))}
 
               {/* Divider */}
               <div style={{ height: 1, background: P.div, margin: '1.25rem 0' }} />
 
               {/* Section 2: At launch */}
-              <p style={{ fontSize: '13px', fontWeight: 700, color: P.rust, margin: '0 0 0.6rem', letterSpacing: '0.01em' }}>
-                🗓️ When we open — August 3rd
+              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
+                When we open — August 3rd
               </p>
               {[
                 'Weekly live classes to recalibrate your nervous system',
@@ -218,7 +213,7 @@ function LandingPadContent() {
                 'A supportive community rhythm, at your own pace',
               ].map((line, i) => (
                 <div key={i} className="lp-feat-row">
-                  <Check />
+                  <CheckIcon />
                   <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
                 </div>
               ))}
@@ -242,7 +237,7 @@ function LandingPadContent() {
                       'Connection Events. Capped gatherings with small breakout rooms to form real relationships.',
                     ].map((f, i) => (
                       <div key={i} className="lp-feat-row" style={{ paddingLeft: '0.5rem' }}>
-                        <Check />
+                        <CheckIcon />
                         <span style={{ fontSize: '14px', color: bodyText, lineHeight: 1.6 }}>
                           <strong style={{ fontWeight: 600, color: P.text }}>{f.split('.')[0]}.</strong>
                           {f.slice(f.indexOf('.') + 1)}
