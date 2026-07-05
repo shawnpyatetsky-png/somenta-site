@@ -138,9 +138,9 @@ function LandingPadContent() {
               </p>
               <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0 }}>
                 Based on your answers, your recommended pathway is{' '}
-                <strong style={{ color: P.accent, fontWeight: 700 }}>{recommendedTier}</strong>. Live cohorts open{' '}
-                <strong style={{ color: P.accent, fontWeight: 700 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
-                <strong style={{ color: P.accent, fontWeight: 700 }}>free</strong> — and start today.
+                <strong style={{ color: P.text, fontWeight: 700 }}>{recommendedTier}</strong>. Live cohorts open{' '}
+                <strong style={{ color: P.text, fontWeight: 700 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
+                <strong style={{ color: P.text, fontWeight: 700 }}>free</strong> — and start today.
               </p>
             </div>
           </div>
@@ -153,7 +153,7 @@ function LandingPadContent() {
               position: 'absolute', top: 0, left: '50%',
               transform: 'translate(-50%, -50%)',
               display: 'inline-flex', alignItems: 'center',
-              background: P.bg, border: `1px solid rgba(200,120,64,0.4)`,
+              background: P.bg, border: `1px solid rgba(184,80,48,0.3)`,
               borderRadius: 100, padding: '5px 14px', whiteSpace: 'nowrap',
               zIndex: 10,
             }}>
