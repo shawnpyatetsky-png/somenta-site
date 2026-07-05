@@ -111,18 +111,18 @@ const CSS = `
 
 // ── Quiz data ─────────────────────────────────────────────────────────────────
 const Q1_OPTS = [
-  { key: 'A', label: 'I feel great and mostly need accountability to build healthy new daily routines to sustain this afterglow.' },
-  { key: 'B', label: 'I had massive breakthroughs, but now I need support navigating major, disruptive changes to my life, relationships, or career.' },
-  { key: 'C', label: 'I feel highly anxious or destabilized and need support calming my nervous system.' },
-  { key: 'D', label: "I didn't get the clarity I went looking for and feel stuck or disappointed." },
+  { key: 'A', label: 'I feel great and mostly need accountability to build healthy new daily routines to sustain this afterglow' },
+  { key: 'B', label: 'I had massive breakthroughs, but now I need support navigating major, disruptive changes to my life, relationships, or career' },
+  { key: 'C', label: 'I feel highly anxious or destabilized and need support calming my nervous system' },
+  { key: 'D', label: "I didn't get the clarity I went looking for and feel stuck or disappointed" },
 ]
 
 const Q2_OPTS = [
-  { key: 'A', label: 'I feel generally comfortable, warm, and at ease, without any specific discomfort.' },
-  { key: 'B', label: 'I am holding tight, rigid tension, chronic pain, or spasms in my muscles.' },
-  { key: 'C', label: 'I feel jittery and agitated; my heart races, and I have a hard time sitting still.' },
-  { key: 'D', label: 'I feel physical exhaustion, brain fog, or a deep sense of heaviness.' },
-  { key: 'E', label: 'I feel physically numb, floating out of my body, or disconnected from myself.' },
+  { key: 'A', label: 'I feel generally comfortable, warm, and at ease, without any specific discomfort' },
+  { key: 'B', label: 'I am holding tight, rigid tension, chronic pain, or spasms in my muscles' },
+  { key: 'C', label: 'I feel jittery and agitated; my heart races, and I have a hard time sitting still' },
+  { key: 'D', label: 'I feel physical exhaustion, brain fog, or a deep sense of heaviness' },
+  { key: 'E', label: 'I feel physically numb, floating out of my body, or disconnected from myself' },
 ]
 
 const Q3_OPTS = [
@@ -133,37 +133,37 @@ const Q3_OPTS = [
 ]
 
 const Q4_OPTS = [
-  { key: 'A', label: 'Knowing what I need to change, but old routines are holding me back.' },
-  { key: 'B', label: 'Navigating emotional overwhelm and struggling to stay grounded.' },
-  { key: 'C', label: 'Feeling disconnected or alienated from the people in my life.' },
-  { key: 'D', label: 'Spending too much time in my head because it feels safer than my body.' },
+  { key: 'A', label: 'Knowing what I need to change, but old routines are holding me back' },
+  { key: 'B', label: 'Navigating emotional overwhelm and struggling to stay grounded' },
+  { key: 'C', label: 'Feeling disconnected or alienated from the people in my life' },
+  { key: 'D', label: 'Spending too much time in my head because it feels safer than my body' },
 ]
 
 const Q5_OPTS = [
-  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>My Mind & Spirit</strong> — Struggling to process heavy emotions or make sense of my shifting worldview.</> },
-  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>My Body & Lifestyle</strong> — Having a hard time breaking old habits or building daily routines that stick.</> },
-  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>My Relationships</strong> — Feeling alienated from others or struggling to set new boundaries.</> },
-  { key: 'D', label: <><strong style={{ fontWeight: 600 }}>My Nature & Environment</strong> — Feeling called to unplug, change my surroundings, and live more intentionally.</> },
+  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>My Mind & Spirit</strong> — Struggling to process heavy emotions or make sense of my shifting worldview</> },
+  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>My Body & Lifestyle</strong> — Having a hard time breaking old habits or building daily routines that stick</> },
+  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>My Relationships</strong> — Feeling alienated from others or struggling to set new boundaries</> },
+  { key: 'D', label: <><strong style={{ fontWeight: 600 }}>My Nature & Environment</strong> — Feeling called to unplug, change my surroundings, and live more intentionally</> },
 ]
 
 const Q6_OPTS = [
-  { key: 'A', label: 'I have great intentions, but honestly... I haven\'t built a real routine yet.' },
-  { key: 'B', label: 'I only do them reactively — usually just when I\'m already feeling overwhelmed or stressed.' },
-  { key: 'C', label: 'I do them in bursts, but I eventually lose momentum and fall completely off track.' },
-  { key: 'D', label: 'I am consistent with my practices, but I am looking to deepen my journey alongside others.' },
+  { key: 'A', label: 'I have great intentions, but honestly... I haven\'t built a real routine yet' },
+  { key: 'B', label: 'I only do them reactively — usually just when I\'m already feeling overwhelmed or stressed' },
+  { key: 'C', label: 'I do them in bursts, but I eventually lose momentum and fall completely off track' },
+  { key: 'D', label: 'I am consistent with my practices, but I am looking to deepen my journey alongside others' },
 ]
 
 const Q7_OPTS = [
-  { key: 'A', label: 'I have a therapist, but no community of peers who have walked a similar path.' },
-  { key: 'B', label: 'I have friends and family who care, but they don\'t fully understand the depth of what I\'m navigating.' },
-  { key: 'C', label: 'I am navigating this entirely on my own, without a support network.' },
-  { key: 'D', label: 'I have pieced together a mix of resources, but my support feels scattered and disconnected.' },
+  { key: 'A', label: 'I have a therapist, but no community of peers who have walked a similar path' },
+  { key: 'B', label: 'I have friends and family who care, but they don\'t fully understand the depth of what I\'m navigating' },
+  { key: 'C', label: 'I am navigating this entirely on my own, without a support network' },
+  { key: 'D', label: 'I have pieced together a mix of resources, but my support feels scattered and disconnected' },
 ]
 
 const Q8_OPTS = [
-  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>At my own pace:</strong> Just a few minutes a day to build simple, supported routines.</> },
-  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>The community rhythm:</strong> About 1 hour a week for a live class, plus simple daily practices.</> },
-  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Going deep:</strong> About 2 hours a week to include the live class plus an intimate, facilitated small group where we actively share together.</> },
+  { key: 'A', label: <><strong style={{ fontWeight: 600 }}>At my own pace:</strong> Just a few minutes a day to build simple, supported routines</> },
+  { key: 'B', label: <><strong style={{ fontWeight: 600 }}>The community rhythm:</strong> About 1 hour a week for a live class, plus simple daily practices</> },
+  { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Going deep:</strong> About 2 hours a week to include the live class plus an intimate, facilitated small group where we actively share together</> },
 ]
 
 const Q4_BREAK: Record<string, { heading: string; body: string; quote: string; attribution: string }> = {
