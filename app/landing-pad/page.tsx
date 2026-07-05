@@ -272,11 +272,12 @@ function LandingPadContent() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="lp-btn"
-                onClick={() => fetch('/api/quiz/conversion', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ email, cta: 'landing_pad_join' }),
-                }).catch(() => {})}
+                onClick={() => {
+                  navigator.sendBeacon(
+                    '/api/quiz/conversion',
+                    new Blob([JSON.stringify({ email, cta: 'landing_pad_join' })], { type: 'application/json' })
+                  )
+                }}
               >
                 Enter The Landing Pad (Free) →
               </a>
