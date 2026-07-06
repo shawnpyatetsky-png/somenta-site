@@ -492,7 +492,7 @@ function Hero() {
 
           <Reveal>
             <p style={{ ...eyebrow, marginBottom: 24 }}>
-              For the MONTHS after a retreat or plant medicine journey
+              For life after a retreat or plant medicine journey
             </p>
           </Reveal>
 
