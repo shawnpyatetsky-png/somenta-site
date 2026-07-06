@@ -383,7 +383,7 @@ function handleImgLoad(e: SyntheticEvent<HTMLImageElement>) {
 const HERO_QUOTES = [
   { quote: '"To be in a space with people who get it... I\'ve been craving this for years."', name: 'Holly', role: 'Founding Member' },
   { quote: '"My habits have gotten better. I feel like I\'m on the right track."', name: 'Cam', role: 'Founding Member' },
-  { quote: '"The practices really help ground and bring yourself into your body and the present."', name: 'Evan', role: 'Founding Member' },
+  { quote: '"The practices really ground you and bring you into the present."', name: 'Evan', role: 'Founding Member' },
 ]
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
