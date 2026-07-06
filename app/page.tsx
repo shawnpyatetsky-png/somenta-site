@@ -492,7 +492,7 @@ function Hero() {
 
           <Reveal>
             <p style={{ ...eyebrow, marginBottom: 24 }}>
-              Membership community for life integration.
+              For the MONTHS after a retreat or plant medicine journey
             </p>
           </Reveal>
 
@@ -513,7 +513,8 @@ function Hero() {
                 fontSize: 'clamp(14px, min(1.2vw, 1.9vh), 17px)', lineHeight: 1.8,
                 color: P.text, margin: 0, opacity: 0.82,
               }}>
-                Integration thrives in connection. <em style={{ fontStyle: 'italic', fontWeight: 500 }}>Somenta is that bridge:</em> a real community with daily breathwork, guided meditation, and intimate share pods to translate profound insights into everyday reality.
+                Daily somatic practices — breathwork, guided meditation, yoga nidra — plus a live weekly class and an intimate share pod of people who actually get it. Real support to keep what shifted from slipping away.{' '}
+                <em style={{ fontStyle: 'italic', fontWeight: 500 }}>Not another content library.</em>
               </p>
             </div>
           </Reveal>
@@ -547,6 +548,7 @@ function Hero() {
             <Fragment key={q.name}>
               {i > 0 && <div className="np-hero-qdiv" style={{ background: 'rgba(224,211,191,0.5)', alignSelf: 'stretch' }} />}
               <div style={{ textAlign: 'center', padding: '0 1rem' }}>
+                <p style={{ fontSize: '11px', color: P.accent, margin: '0 0 0.4rem', letterSpacing: '0.04em' }}>★★★★★</p>
                 <p style={{
                   ...serif, fontStyle: 'italic',
                   fontSize: '0.88rem', lineHeight: 1.65,
@@ -560,6 +562,13 @@ function Hero() {
             </Fragment>
           ))}
         </div>
+        <p style={{
+          textAlign: 'center', margin: '1.25rem 0 0',
+          fontSize: '11px', letterSpacing: '0.13em', textTransform: 'uppercase',
+          color: P.muted, opacity: 0.7, fontWeight: 500,
+        }}>
+          Founding members · Live sessions led by trained somatic facilitators
+        </p>
       </div>
 
     </section>
