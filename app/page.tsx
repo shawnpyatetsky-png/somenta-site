@@ -513,7 +513,7 @@ function Hero() {
                 fontSize: 'clamp(14px, min(1.2vw, 1.9vh), 17px)', lineHeight: 1.8,
                 color: P.text, margin: 0, opacity: 0.82,
               }}>
-                Daily somatic practices — breathwork, guided meditation, yoga nidra — plus a live weekly class and an intimate share pod of people who actually get it. Real support to keep what shifted from slipping away.{' '}
+                Daily somatic practices — breathwork, meditation, yoga nidra — plus a live weekly class and an intimate share pod of people who actually get it. Real support to turn what shifted into how you live — before it fades.{' '}
                 <em style={{ fontStyle: 'italic', fontWeight: 500 }}>Not another content library.</em>
               </p>
             </div>
