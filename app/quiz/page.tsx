@@ -111,7 +111,7 @@ const CSS = `
 
 // ── Quiz data ─────────────────────────────────────────────────────────────────
 const Q1_OPTS = [
-  { key: 'A', label: 'I feel great and mostly need accountability to build healthy new daily routines to sustain this afterglow' },
+  { key: 'A', label: 'I feel great and mostly need accountability to build healthy new daily routines to hold onto how I feel' },
   { key: 'B', label: 'I had massive breakthroughs, but now I need support navigating major, disruptive changes to my life, relationships, or career' },
   { key: 'C', label: 'I feel highly anxious or destabilized and need support calming my nervous system' },
   { key: 'D', label: "I didn't get the clarity I went looking for and feel stuck or disappointed" },
