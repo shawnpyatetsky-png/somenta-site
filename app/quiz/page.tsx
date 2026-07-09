@@ -249,7 +249,7 @@ const Q4_TESTIMONIAL: Record<string, { quote: string; attribution: string; avata
 // Step shown in progress bar per screen index (null = no bar)
 const SCREEN_STEP: Record<number, number | null> = {
   0: null, 1: null,
-  2: 1, 3: 2, 4: 3, 5: 4, 6: 4,
+  2: 1, 3: 2, 4: 2, 5: 3, 6: 4,
   7: 5, 8: 6, 9: 7, 10: 7,
   11: 8,
   12: null, 13: null, 14: null,
@@ -383,8 +383,8 @@ export default function QuizPage() {
   // GA4 quiz funnel tracking
   const SCREEN_NAMES: Record<number, string> = {
     0: 'welcome', 1: 'name_transition',
-    2: 'q1_capacity', 3: 'q2_somatic_state', 4: 'q3_how_long_ago', 5: 'q4_biggest_hurdle',
-    6: 'break1_empathy', 7: 'q5_disconnect_area', 8: 'q6_current_routine',
+    2: 'q3_how_long_ago', 3: 'q4_biggest_hurdle', 4: 'break1_empathy', 5: 'q5_disconnect_area',
+    6: 'q1_capacity', 7: 'q2_somatic_state', 8: 'q6_current_routine',
     9: 'q7_support_system', 10: 'break2_support_checkin',
     11: 'q8_commitment_level',
     12: 'email_capture', 13: 'calculating', 14: 'pricing',
@@ -511,36 +511,10 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 2: Q1 — Capacity ──────────────────────────────────────────
+      // ── Screen 2: Q3 — Timeframe ─────────────────────────────────────────
       case 2: return (
         <div className="qz-in">
-          <QuestionHeader step={1} question="If you had to describe the overall energy of the experience you are bringing back into your life, what does it feel like?" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
-            {Q1_OPTS.map(o => (
-              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q1 === o.key} onSelect={() => setQ1(o.key)} />
-            ))}
-          </div>
-          <button className="qz-btn" disabled={!q1} onClick={advance}>Continue →</button>
-        </div>
-      )
-
-      // ── Screen 3: Q2 — Somatic state ─────────────────────────────────────
-      case 3: return (
-        <div className="qz-in">
-          <QuestionHeader step={2} question="When you tune into your body right now, what physical sensations are most present for you in this integration period?" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
-            {Q2_OPTS.map(o => (
-              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q2 === o.key} onSelect={() => setQ2(o.key)} />
-            ))}
-          </div>
-          <button className="qz-btn" disabled={!q2} onClick={advance}>Continue →</button>
-        </div>
-      )
-
-      // ── Screen 4: Q3 — Timeframe ─────────────────────────────────────────
-      case 4: return (
-        <div className="qz-in">
-          <QuestionHeader step={3} question="How long ago was your retreat or transformative journey?" />
+          <QuestionHeader step={1} question="How long ago was your retreat or transformative journey?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q3_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q3 === o.key} onSelect={() => setQ3(o.key)} />
@@ -550,10 +524,10 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 5: Q4 — Biggest hurdle ────────────────────────────────────
-      case 5: return (
+      // ── Screen 3: Q4 — Biggest hurdle ────────────────────────────────────
+      case 3: return (
         <div className="qz-in">
-          <QuestionHeader step={4} question="If you had to choose, what is the single biggest hurdle you're facing right now?" />
+          <QuestionHeader step={2} question="If you had to choose, what is the single biggest hurdle you're facing right now?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q4_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q4 === o.key} onSelect={() => setQ4(o.key)} />
@@ -563,8 +537,8 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 6: Dynamic Break 1 ─────────────────────────────────────────
-      case 6: {
+      // ── Screen 4: Dynamic Break 1 ─────────────────────────────────────────
+      case 4: {
         const b = Q4_BREAK[q4 ?? 'A']
         return (
           <div className="qz-in">
@@ -586,16 +560,42 @@ export default function QuizPage() {
         )
       }
 
-      // ── Screen 7: Q5 — Disconnect ─────────────────────────────────────────
-      case 7: return (
+      // ── Screen 5: Q5 — Disconnect ─────────────────────────────────────────
+      case 5: return (
         <div className="qz-in">
-          <QuestionHeader step={5} question="Where do you feel the most disconnect right now?" />
+          <QuestionHeader step={3} question="Where do you feel the most disconnect right now?" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
             {Q5_OPTS.map(o => (
               <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q5 === o.key} onSelect={() => setQ5(o.key)} />
             ))}
           </div>
           <button className="qz-btn" disabled={!q5} onClick={advance}>Continue →</button>
+        </div>
+      )
+
+      // ── Screen 6: Q1 — Capacity ──────────────────────────────────────────
+      case 6: return (
+        <div className="qz-in">
+          <QuestionHeader step={4} question="If you had to describe the overall energy of the experience you are bringing back into your life, what does it feel like?" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
+            {Q1_OPTS.map(o => (
+              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q1 === o.key} onSelect={() => setQ1(o.key)} />
+            ))}
+          </div>
+          <button className="qz-btn" disabled={!q1} onClick={advance}>Continue →</button>
+        </div>
+      )
+
+      // ── Screen 7: Q2 — Somatic state ─────────────────────────────────────
+      case 7: return (
+        <div className="qz-in">
+          <QuestionHeader step={5} question="When you tune into your body right now, what physical sensations are most present for you in this integration period?" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '2rem' }}>
+            {Q2_OPTS.map(o => (
+              <OptionCard key={o.key} optKey={o.key} label={o.label} selected={q2 === o.key} onSelect={() => setQ2(o.key)} />
+            ))}
+          </div>
+          <button className="qz-btn" disabled={!q2} onClick={advance}>Continue →</button>
         </div>
       )
 
