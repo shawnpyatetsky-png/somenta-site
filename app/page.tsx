@@ -667,7 +667,7 @@ const PILLARS = [
     desc: 'Stay present and out of your head with expert-led somatic tracking.',
     features: [
       { name: 'Guided Classes', body: 'Live weekly breathwork, meditation, and movement to recalibrate your nervous system.' },
-      { name: 'Monthly Ritual', body: 'Each month the community votes on where to go deeper — a focused practice, a new theme, or a ceremony like cacao.' },
+      { name: 'Monthly Ritual', body: 'A monthly chance to go deeper together — a focused practice, a new theme, or a ceremony like cacao.' },
     ],
   },
   {
