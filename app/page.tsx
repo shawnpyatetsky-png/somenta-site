@@ -272,7 +272,7 @@ const ICONS: Record<string, ReactNode> = {
       <path d="M10.5 18.5 C10.5 16.5 13.5 16.5 13.5 18.5" />
     </svg>
   ),
-  'Guest Sessions': (
+  'Monthly Ritual': (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="8.5" r="3" />
       <path d="M6 21 C6 17 8.5 15 12 15 C15.5 15 18 17 18 21" />
@@ -667,7 +667,7 @@ const PILLARS = [
     desc: 'Stay present and out of your head with expert-led somatic tracking.',
     features: [
       { name: 'Guided Classes', body: 'Live weekly breathwork, meditation, and movement to recalibrate your nervous system.' },
-      { name: 'Guest Sessions', body: 'Fresh modalities and perspectives from thoughtful, expert facilitators.' },
+      { name: 'Monthly Ritual', body: 'Each month the community votes on where to go deeper — a focused practice, a new theme, or a ceremony like cacao.' },
     ],
   },
   {
