@@ -82,11 +82,11 @@ export async function POST(req: Request) {
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Name</td><td style="padding:10px 14px">${name}</td></tr>
             <tr><td style="padding:10px 14px;font-weight:600">Email</td><td style="padding:10px 14px"><a href="mailto:${email}" style="color:#B85030">${email}</a></td></tr>
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Recommended path</td><td style="padding:10px 14px;font-weight:700;color:#B85030">${recommended_path === 'pod' ? 'The Intimate Peer Pod' : 'Foundation'}</td></tr>
-            <tr><td style="padding:10px 14px;font-weight:600">Q1 — Capacity / energy</td><td style="padding:10px 14px">${label('q1', q1)}</td></tr>
-            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q2 — Somatic state</td><td style="padding:10px 14px">${label('q2', q2)}</td></tr>
-            <tr><td style="padding:10px 14px;font-weight:600">Q3 — How long ago</td><td style="padding:10px 14px">${label('q3', q3)}</td></tr>
-            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q4 — Biggest hurdle</td><td style="padding:10px 14px">${label('q4', q4)}</td></tr>
-            <tr><td style="padding:10px 14px;font-weight:600">Q5 — Disconnect area</td><td style="padding:10px 14px">${label('q5', q5)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Q1 — Timeframe</td><td style="padding:10px 14px">${label('q3', q3)}</td></tr>
+            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q2 — Biggest hurdle</td><td style="padding:10px 14px">${label('q4', q4)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Q3 — Disconnect area</td><td style="padding:10px 14px">${label('q5', q5)}</td></tr>
+            <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q4 — Capacity / energy</td><td style="padding:10px 14px">${label('q1', q1)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Q5 — Somatic state</td><td style="padding:10px 14px">${label('q2', q2)}</td></tr>
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q6 — Current routine</td><td style="padding:10px 14px">${label('q6', q6)}</td></tr>
             <tr><td style="padding:10px 14px;font-weight:600">Q7 — Support system</td><td style="padding:10px 14px">${label('q7', q7)}</td></tr>
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q8 — Commitment level</td><td style="padding:10px 14px">${label('q8', q8)}</td></tr>
