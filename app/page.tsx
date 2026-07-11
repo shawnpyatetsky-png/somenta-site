@@ -118,8 +118,24 @@ const CSS = `
     .np-changes-heading{margin-bottom:1.5rem!important}
 
     /* General */
-    .np-how-step{grid-template-columns:1fr!important;gap:.5rem!important;padding:1.75rem 1.5rem!important}
+    .np-how-step{grid-template-columns:1fr!important;gap:.5rem!important;padding:1.75rem 1.25rem!important}
     .np-step-num{font-size:1.5rem!important;padding-top:0!important}
+
+    /* Mobile rhythm — tighter gutters, calmer vertical spacing */
+    section:not(.np-hero-section){padding:4.5rem 1.25rem!important}
+    footer{padding:2rem 1.25rem!important}
+    .np-who-card{padding:1.6rem 0.25rem!important;gap:1.1rem!important}
+
+    /* Calendar — tiles and circles sized for narrow screens */
+    .np-week-tray{gap:4px!important;padding:8px 8px 10px!important}
+    .np-week-day{height:98px!important;padding:11px 2px!important}
+    .np-day-circle{width:32px!important;height:32px!important}
+    .np-day-circle span{font-size:0.95rem!important}
+    .np-sched-two-col>div:first-child{padding:1.6rem 1.25rem 1.75rem!important}
+
+    /* Member huddle — smaller circles so ten faces sit comfortably */
+    .np-huddle>div{width:52px!important;height:52px!important}
+    .np-huddle>div:not(:first-child){margin-left:-11px!important}
   }
 
 `
@@ -641,7 +657,7 @@ function PhilosophySection() {
         </Reveal>
         <Reveal d={3}>
           {/* The huddle — real founding members and facilitators, shoulder to shoulder */}
-          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3.25rem' }}>
+          <div className="np-huddle" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3.25rem' }}>
             {[...POD_PHOTOS, '/assets/jake.jpg', '/assets/britt_breathing.jpg'].map((src, i) => (
               <div key={src} style={{
                 position: 'relative', width: 66, height: 66,
@@ -987,7 +1003,7 @@ function ScheduleSection() {
             </div>
 
             {/* Week columns — physical tiles floating on the same surface as the panel below */}
-            <div style={{ display: 'flex', gap: 8, padding: '12px 12px 14px', background: DAY_ACTIVE_BG, borderBottom: `1px solid ${P.div}` }}>
+            <div className="np-week-tray" style={{ display: 'flex', gap: 8, padding: '12px 12px 14px', background: DAY_ACTIVE_BG, borderBottom: `1px solid ${P.div}` }}>
               {WEEK_DAYS.map((d, i) => {
                 const isActive = i === openDay
                 const isAnchorDay = d.day === 'Wednesday' || d.day === 'Sunday'
@@ -1020,7 +1036,7 @@ function ScheduleSection() {
                     </div>
 
                     {/* Date circle */}
-                    <div style={{
+                    <div className="np-day-circle" style={{
                       width: 42, height: 42, borderRadius: '50%', flexShrink: 0,
                       background: isActive ? P.greenDeep : 'transparent',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
