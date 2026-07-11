@@ -1,18 +1,9 @@
 'use client'
 
-import React, { useState, Suspense } from 'react'
-import type { CSSProperties } from 'react'
+import React, { Suspense } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import type { Metadata } from 'next'
-
-const P = {
-  bg: '#F7F3EC', bgWarm: '#F0E9DC',
-  text: '#281B0D', light: '#FDFBF6', muted: '#6B5A47',
-  accent: '#C87840', rust: '#B85030', div: '#E0D3BF',
-}
-const serif: CSSProperties = { fontFamily: 'var(--font-fraunces), Georgia, serif' }
-const bodyText = 'rgba(40,27,13,0.72)'
+import { P, serif, bodyText, photoGrade } from '@/lib/theme'
 
 const CIRCLE_URL = 'https://community.joinsomenta.com/join?invitation_token=62db94618ed1ee9815bfd2323aa78bb89565f2ef-e4478c1a-4a2c-4dd5-b62b-e82e90cdbc7d'
 
@@ -49,9 +40,6 @@ const Q4_TESTIMONIAL: Record<string, { quote: string; attribution: string; avata
 const CSS = `
   @keyframes lp-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
   .lp-in{animation:lp-in .52s cubic-bezier(.16,1,.3,1) both}
-  @keyframes lp-fade{from{opacity:0}to{opacity:1}}
-  .lp-fade{animation:lp-fade .4s ease both}
-
   .lp-plan{border:2px solid ${P.div};border-radius:20px;overflow:hidden;background:${P.light}}
   .lp-feat-row{display:flex;align-items:flex-start;gap:.75rem;padding:.55rem 0}
 
@@ -65,21 +53,17 @@ const CSS = `
   }
   .lp-btn:hover{background:#B06A30;transform:translateY(-2px);box-shadow:0 6px 22px rgba(200,120,64,.28)}
 
-  .lp-community-btn{
-    display:flex;align-items:center;justify-content:space-between;gap:.5rem;
-    width:100%;background:none;border:none;cursor:pointer;padding:.65rem 0;
-    font-family:var(--font-inter),-apple-system,sans-serif;transition:opacity .2s;
-  }
-  .lp-community-btn:hover{opacity:.75}
-
   @media(max-width:640px){.lp-inner{padding:1.75rem 1.25rem!important}}
+
+  /* Paper grain — same material as the rest of the site */
+  .lp-grain::after{content:'';position:fixed;inset:0;pointer-events:none;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.11 0 0 0 0 0.05 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");background-size:240px 240px}
 `
 
 function CheckIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-      <circle cx="8" cy="8" r="7.5" fill="rgba(184,80,48,0.12)" />
-      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke={P.rust} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="8" cy="8" r="7.5" fill="rgba(45,90,64,0.12)" />
+      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke={P.green} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -90,14 +74,14 @@ function LandingPadContent() {
   const q4 = params.get('q4') || 'A'
   const q8 = params.get('q8') || 'B'
   const email = params.get('email') || ''
-  const [communityOpen, setCommunityOpen] = useState(false)
 
-  const recommendedTier = q8 === 'C' ? 'The Pod' : 'Foundation'
+  const isPod = q8 === 'C'
+  const recommendedTier = isPod ? 'The Pod' : 'Foundation'
   const empathy = Q4_EMPATHY[q4] ?? Q4_EMPATHY.A
   const testimonial = Q4_TESTIMONIAL[q4] ?? Q4_TESTIMONIAL.A
 
   return (
-    <div style={{ background: P.bg, minHeight: '100vh', fontFamily: 'var(--font-inter),-apple-system,sans-serif', color: P.text }}>
+    <div className="lp-grain" style={{ background: P.bg, minHeight: '100vh', fontFamily: 'var(--font-inter),-apple-system,sans-serif', color: P.text }}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       {/* Nav */}
@@ -133,15 +117,33 @@ function LandingPadContent() {
               Welcome, <em>{name}.</em>{' '}You&rsquo;ve found a safe place to land.
             </h1>
             <div style={{ maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
-              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: '0 0 0.9rem' }}>
+              {/* The human line — spoken voice, not UI text */}
+              <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: bodyText, lineHeight: 1.75, margin: 0 }}>
                 {empathy} That is exactly why we built Somenta.
               </p>
-              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0 }}>
-                Based on your answers, your recommended pathway is{' '}
-                <strong style={{ color: P.text, fontWeight: 700 }}>{recommendedTier}</strong>. Live cohorts open{' '}
-                <strong style={{ color: P.text, fontWeight: 700 }}>August 3rd</strong>. Until then, step into the Landing Pad —{' '}
-                <strong style={{ color: P.text, fontWeight: 700 }}>free</strong> — and start today.
+
+              {/* The facts — chips, not a paragraph */}
+              <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: P.muted, margin: '1.5rem 0 0.6rem' }}>
+                Based on your answers
               </p>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  border: '1px solid rgba(45,90,64,0.35)', background: 'rgba(45,90,64,0.07)',
+                  borderRadius: 100, padding: '6px 14px',
+                  fontSize: '13px', fontWeight: 600, color: P.green,
+                }}>
+                  Your pathway: {recommendedTier}
+                </span>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center',
+                  border: `1px solid ${P.div}`, background: P.light,
+                  borderRadius: 100, padding: '6px 14px',
+                  fontSize: '13px', fontWeight: 500, color: P.muted,
+                }}>
+                  Live cohorts open August 3rd
+                </span>
+              </div>
             </div>
           </div>
 
@@ -165,8 +167,19 @@ function LandingPadContent() {
           {/* Card */}
           <div className="lp-plan">
 
+            {/* Cover — the circle they're joining, melting into the card */}
+            <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 26vw, 215px)' }}>
+              <Image
+                src="/assets/meditation_class_indoors.jpg"
+                alt="" aria-hidden="true"
+                fill sizes="600px"
+                style={{ objectFit: 'cover', objectPosition: 'center 14%', filter: photoGrade }}
+              />
+              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 55%, #F0E9DC 100%)' }} />
+            </div>
+
             {/* Card header */}
-            <div style={{ padding: '2.5rem 2rem 1.5rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm }}>
+            <div style={{ padding: '0.9rem 2rem 1.5rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm }}>
               <h2 style={{
                 ...serif, margin: '0 0 0.35rem',
                 fontSize: 'clamp(24px,3vw,30px)',
@@ -174,11 +187,8 @@ function LandingPadContent() {
               }}>
                 The Landing Pad
               </h2>
-              <p style={{ fontSize: '14px', color: bodyText, margin: '0 0 1.25rem', lineHeight: 1.6 }}>
-                A free, private space to catch your breath and prepare your nervous system before the full community opens.
-              </p>
-              <p style={{ ...serif, fontStyle: 'italic', fontSize: '14px', color: P.muted, margin: 0, lineHeight: 1.6 }}>
-                You&rsquo;re one of our founding members — your spot is saved for launch.
+              <p style={{ fontSize: '14px', color: bodyText, margin: 0, lineHeight: 1.6 }}>
+                Holding a free private space to see what Somenta is all about before the community officially kicks off.
               </p>
             </div>
 
@@ -187,15 +197,15 @@ function LandingPadContent() {
 
               {/* Section 1: Free now */}
               <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.5rem' }}>
-                🌤️ Right now, free in the Landing Pad
+                🌤️ What you get right now:
               </p>
               <div className="lp-feat-row">
                 <CheckIcon />
-                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Your first 5-minute somatic practice, today</span>
+                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Your first 5-minute somatic practice</span>
               </div>
               <div className="lp-feat-row">
                 <CheckIcon />
-                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Early practices and updates as we prepare to open</span>
+                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Early practices, updates, and intros to the facilitators</span>
               </div>
               <div className="lp-feat-row">
                 <CheckIcon />
@@ -206,21 +216,44 @@ function LandingPadContent() {
                     padding: '2px 8px', marginRight: '0.4rem',
                     fontSize: '10px', fontWeight: 700, color: P.rust, letterSpacing: '0.08em',
                   }}>★ Founding Status</span>
-                  Your spot, saved for launch
+                  Your spot saved for when the community opens
                 </span>
               </div>
 
+              {/* Primary action — right where the free offer ends */}
+              <div style={{ margin: '1.4rem 0 0.25rem' }}>
+                <a
+                  href={CIRCLE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lp-btn"
+                  onClick={() => {
+                    navigator.sendBeacon(
+                      '/api/quiz/conversion',
+                      new Blob([JSON.stringify({ email, cta: 'landing_pad_join' })], { type: 'application/json' })
+                    )
+                  }}
+                >
+                  Enter The Landing Pad (Free) →
+                </a>
+                <p style={{ textAlign: 'center', fontSize: '12px', color: P.muted, margin: '0.7rem 0 0', letterSpacing: '0.04em' }}>
+                  Limited spaces available
+                </p>
+              </div>
+
               {/* Divider */}
-              <div style={{ height: 1, background: P.div, margin: '1.25rem 0' }} />
+              <div style={{ height: 1, background: P.div, margin: '1.4rem 0 1.25rem' }} />
 
               {/* Section 2: At launch */}
               <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
-                🗓️ When we open — August 3rd
+                🗓️ When we open, you&rsquo;ll get:
               </p>
               {[
-                'Weekly live classes to recalibrate your nervous system',
-                '5-minute daily practices that fit into a busy day',
-                'A supportive community rhythm, at your own pace',
+                'Rotating weekly live classes from our experienced facilitators',
+                ...(isPod ? ['Small, intimate weekly share circles led by our facilitators'] : []),
+                'Short, daily practices & prompts that fit into your busy day',
+                'Live, weekly practice room to journal, meditate, or simply be next to other members',
+                'Full access to an incredible community of people all around the world who are going through something similar',
               ].map((line, i) => (
                 <div key={i} className="lp-feat-row">
                   <CheckIcon />
@@ -228,59 +261,12 @@ function LandingPadContent() {
                 </div>
               ))}
 
-              {/* Community dropdown */}
-              <div style={{ marginTop: '0.25rem' }}>
-                <button className="lp-community-btn" onClick={() => setCommunityOpen(o => !o)}>
-                  <span style={{ fontSize: '13.5px', color: P.rust, fontWeight: 500 }}>
-                    + Full access to the Somenta Community — opens August 3rd
-                  </span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={P.rust} strokeWidth="1.5" strokeLinecap="round"
-                    style={{ flexShrink: 0, transform: communityOpen ? 'rotate(180deg)' : 'none', transition: 'transform .3s' }}>
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </button>
-                {communityOpen && (
-                  <div className="lp-fade" style={{ paddingBottom: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
-                    {[
-                      'The Daily Drop. 5-minute async guided audio and journaling prompts to anchor your practice.',
-                      'The Practice Room. Silent live journaling space for quiet, shared accountability.',
-                      'Connection Events. Capped gatherings with small breakout rooms to form real relationships.',
-                    ].map((f, i) => (
-                      <div key={i} className="lp-feat-row" style={{ paddingLeft: '0.5rem' }}>
-                        <CheckIcon />
-                        <span style={{ fontSize: '14px', color: bodyText, lineHeight: 1.6 }}>
-                          <strong style={{ fontWeight: 600, color: P.text }}>{f.split('.')[0]}.</strong>
-                          {f.slice(f.indexOf('.') + 1)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Divider */}
-              <div style={{ height: 1, background: P.div, margin: '1.5rem 0' }} />
-
               {/* Price-as-info */}
-              <p style={{ fontSize: '13px', color: P.muted, lineHeight: 1.8, margin: '0 0 1.5rem' }}>
-                Founding rate at launch: Foundation $10/mo for your first 3 months, then $25 (Pod $40, then $60). Your 3 months begin when live cohorts open on August 3rd. Join free now to lock your founding rate — yours for as long as you stay.
+              <p style={{ fontSize: '13px', color: P.muted, lineHeight: 1.8, margin: '0.9rem 0 0' }}>
+                {isPod
+                  ? 'Pod starts at $40/mo for your first 3 months, then $60 after.'
+                  : '$10/mo for your first 3 months, then $25. Pause or cancel anytime.'}
               </p>
-
-              {/* CTA */}
-              <a
-                href={CIRCLE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lp-btn"
-                onClick={() => {
-                  navigator.sendBeacon(
-                    '/api/quiz/conversion',
-                    new Blob([JSON.stringify({ email, cta: 'landing_pad_join' })], { type: 'application/json' })
-                  )
-                }}
-              >
-                Enter The Landing Pad (Free) →
-              </a>
 
               {/* Divider */}
               <div style={{ height: 1, background: P.div, margin: '1.5rem 0' }} />
@@ -308,11 +294,6 @@ function LandingPadContent() {
             </div>
           </div>
           </div>{/* end card wrapper */}
-
-          {/* Footer */}
-          <p style={{ textAlign: 'center', fontSize: '13px', color: P.muted, margin: '2rem 0 0', letterSpacing: '0.04em' }}>
-            Live cohorts open August 3rd. Your spot is saved.
-          </p>
 
         </div>
       </main>

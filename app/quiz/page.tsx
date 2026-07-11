@@ -1,25 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-
-// ── Palette (matches landing page) ────────────────────────────────────────────
-const P = {
-  bg:     '#F7F3EC',
-  bgWarm: '#F0E9DC',
-  bgDark: '#1A1108',
-  text:   '#281B0D',
-  light:  '#FDFBF6',
-  muted:  '#6B5A47',
-  accent: '#C87840',
-  rust:   '#B85030',
-  div:    '#E0D3BF',
-}
-
-const serif: CSSProperties  = { fontFamily: 'var(--font-fraunces), Georgia, serif' }
-const bodyText = 'rgba(40,27,13,0.72)'
+import { P, serif, bodyText } from '@/lib/theme'
 
 // ── CSS ───────────────────────────────────────────────────────────────────────
 const CSS = `
@@ -36,8 +20,8 @@ const CSS = `
     cursor:pointer;width:100%;text-align:left;
     transition:border-color .18s,background .18s,box-shadow .18s;
   }
-  .qz-opt:hover{border-color:rgba(184,80,48,0.35);background:#FAF6F0;box-shadow:0 2px 12px rgba(40,27,13,0.06)}
-  .qz-opt.selected{border-color:${P.rust};background:rgba(184,80,48,0.05);box-shadow:0 0 0 1px ${P.rust}}
+  .qz-opt:hover{border-color:rgba(45,90,64,0.45);background:#FAF6F0;box-shadow:0 2px 12px rgba(40,27,13,0.06)}
+  .qz-opt.selected{border-color:${P.green};background:rgba(45,90,64,0.05);box-shadow:0 0 0 1px ${P.green}}
 
   .qz-radio{
     width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:1px;
@@ -45,7 +29,7 @@ const CSS = `
     display:flex;align-items:center;justify-content:center;
     transition:border-color .18s,background .18s;
   }
-  .qz-opt.selected .qz-radio{border-color:${P.rust};background:${P.rust}}
+  .qz-opt.selected .qz-radio{border-color:${P.green};background:${P.green}}
   .qz-radio-dot{width:7px;height:7px;border-radius:50%;background:${P.light}}
 
   .qz-btn{
@@ -57,14 +41,6 @@ const CSS = `
   .qz-btn:hover:not(:disabled){background:#B06A30;transform:translateY(-2px);box-shadow:0 6px 22px rgba(200,120,64,.28)}
   .qz-btn:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
 
-  .qz-btn-ghost{
-    background:none;border:1.5px solid ${P.div};color:${P.text};border-radius:100px;
-    padding:16px 36px;font-size:15px;font-weight:600;cursor:pointer;
-    letter-spacing:.01em;transition:border-color .2s,background .2s;
-    font-family:var(--font-inter),-apple-system,sans-serif;
-  }
-  .qz-btn-ghost:hover{border-color:${P.text};background:rgba(40,27,13,.04)}
-
   .qz-input{
     width:100%;padding:14px 18px;border-radius:10px;
     border:1.5px solid ${P.div};background:${P.light};
@@ -75,7 +51,13 @@ const CSS = `
   .qz-input:focus{border-color:${P.rust};box-shadow:0 0 0 3px rgba(184,80,48,.1)}
   .qz-input::placeholder{color:rgba(107,90,71,.45)}
 
-  .qz-progress-bar{height:2px;background:${P.rust};transition:width .5s cubic-bezier(.16,1,.3,1)}
+  .qz-progress-bar{height:2px;background:${P.green};transition:width .5s cubic-bezier(.16,1,.3,1)}
+
+  /* Keyboard focus — same palette ring as the landing page */
+  button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid rgba(184,80,48,.65);outline-offset:3px}
+
+  /* Paper grain — same material as the landing page */
+  .qz-grain::after{content:'';position:fixed;inset:0;pointer-events:none;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.11 0 0 0 0 0.05 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");background-size:240px 240px}
 
   @keyframes qz-line-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .qz-calc-line{opacity:0;animation:qz-line-in .5s cubic-bezier(.16,1,.3,1) forwards}
@@ -83,30 +65,6 @@ const CSS = `
   .qz-calc-line:nth-child(2){animation-delay:.5s}
   .qz-calc-line:nth-child(3){animation-delay:.85s}
 
-  .qz-plan{border:2px solid ${P.div};border-radius:20px;overflow:hidden;background:${P.light}}
-
-  .qz-feat-row{display:flex;align-items:flex-start;gap:.75rem;padding:.55rem 0}
-
-  .qz-community-btn{
-    display:flex;align-items:center;justify-content:space-between;gap:.5rem;
-    width:100%;background:none;border:none;cursor:pointer;padding:.65rem 0;
-    font-family:var(--font-inter),-apple-system,sans-serif;
-    transition:opacity .2s;
-  }
-  .qz-community-btn:hover{opacity:.75}
-
-  .qz-toggle-link{
-    background:none;border:none;cursor:pointer;padding:0;
-    color:${P.muted};font-size:13px;text-decoration:underline;
-    text-underline-offset:3px;text-decoration-color:${P.div};
-    font-family:var(--font-inter),-apple-system,sans-serif;
-    transition:color .2s;
-  }
-  .qz-toggle-link:hover{color:${P.rust}}
-
-  @media(max-width:640px){
-    .qz-pricing-inner{padding:1.75rem 1.25rem!important}
-  }
 `
 
 // ── Quiz data ─────────────────────────────────────────────────────────────────
@@ -216,43 +174,13 @@ const Q7_BREAK: Record<string, { heading: string; body1: string; body2: React.Re
   },
 }
 
-const Q4_EMPATHY_VAR: Record<string, string> = {
-  A: 'Breaking old routines is incredibly hard, even when you know what needs to change.',
-  B: 'Staying grounded and navigating intense emotions can be exhausting.',
-  C: 'Feeling disconnected from the people in your life is a heavy burden to carry.',
-  D: "Retreating into your head when your body doesn't feel safe makes complete sense.",
-}
-
-const Q4_TESTIMONIAL: Record<string, { quote: string; attribution: string; avatar: string }> = {
-  A: {
-    quote: '"My habits have gotten better, especially when it comes to getting my daily work done and staying off of social media... It\'s a group to help keep you on track and support you as you move through your life."',
-    attribution: 'Cam, 32 · Plant Medicine Retreat',
-    avatar: '/assets/cam.jpg',
-  },
-  B: {
-    quote: '"Week one and two, people are going through stuff. But then everything got lighter and lighter. That\'s what I saw with every call. People were just happier, more comfortable with the group."',
-    attribution: 'Coach Kevin',
-    avatar: '/assets/kevin.jpg',
-  },
-  C: {
-    quote: '"When people start to be in this environment and other people are being really vulnerable with their shares, it gives them permission to share... and trust the people in the space to feel safe enough to share some real s*** that\'s going on."',
-    attribution: 'Coach Brittany',
-    avatar: '/assets/britt_breathing.jpg',
-  },
-  D: {
-    quote: '"It is an active group with great leaders and coaches, and good interactive workshops that really help ground and bring yourself into your body and the present."',
-    attribution: 'Evan, 28 · Plant Medicine Retreat',
-    avatar: '/assets/evan.jpg',
-  },
-}
-
 // Step shown in progress bar per screen index (null = no bar)
 const SCREEN_STEP: Record<number, number | null> = {
   0: null, 1: null,
   2: 1, 3: 2, 4: 2, 5: 3, 6: 4,
   7: 5, 8: 6, 9: 7, 10: 7,
   11: 8,
-  12: null, 13: null, 14: null,
+  12: null, 13: null,
 }
 
 function getRecommendedPath(q8: string | null): 'pod' | 'foundation' {
@@ -261,15 +189,6 @@ function getRecommendedPath(q8: string | null): 'pod' | 'foundation' {
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
-function CheckIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-      <circle cx="8" cy="8" r="7.5" fill="rgba(184,80,48,0.12)" stroke="none" />
-      <path d="M4.5 8.5L6.5 10.5L11.5 5.5" stroke={P.rust} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
 function OptionCard({ label, optKey, selected, onSelect }: {
   label: React.ReactNode; optKey: string; selected: boolean; onSelect: () => void
 }) {
@@ -311,50 +230,20 @@ function BreakQuote({ quote, attribution }: { quote: string; attribution: string
   return (
     <div style={{
       marginTop: '1.75rem',
-      padding: '1.25rem 1.5rem',
+      padding: '1.3rem 1.5rem 1.15rem',
       background: P.bgWarm,
-      borderRadius: 12,
-      borderLeft: `3px solid ${P.rust}`,
+      borderRadius: 14,
+      border: `1px solid ${P.div}`,
     }}>
+      <p style={{ ...serif, fontSize: '2rem', color: P.rust, lineHeight: 0.9, margin: '0 0 0.35rem', fontStyle: 'normal' }}>
+        &ldquo;
+      </p>
       <p style={{ ...serif, fontStyle: 'italic', fontSize: '0.9rem', color: P.text, lineHeight: 1.75, margin: '0 0 0.6rem', opacity: 0.88 }}>
         {quote}
       </p>
       <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.08em' }}>
         {attribution}
       </p>
-    </div>
-  )
-}
-
-function CommunityDropdown({ open, onToggle }: { open: boolean; onToggle: () => void }) {
-  return (
-    <div style={{ marginTop: '0.25rem' }}>
-      <button className="qz-community-btn" onClick={onToggle}>
-        <span style={{ fontSize: '13.5px', color: P.rust, fontWeight: 500 }}>
-          + Full access to the Somenta Community
-        </span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={P.rust} strokeWidth="1.5" strokeLinecap="round"
-          style={{ flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .3s' }}>
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
-      {open && (
-        <div className="qz-fade" style={{ paddingBottom: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
-          {[
-            'The Daily Drop. 5-minute async guided audio and journaling prompts to anchor your practice.',
-            'The Practice Room. Silent live journaling space for quiet, shared accountability.',
-            'Connection Events. Capped gatherings with small breakout rooms to form real relationships.',
-          ].map((f, i) => (
-            <div key={i} className="qz-feat-row" style={{ paddingLeft: '0.5rem' }}>
-              <CheckIcon />
-              <span style={{ fontSize: '14px', color: bodyText, lineHeight: 1.6 }}>
-                <strong style={{ fontWeight: 600, color: P.text }}>{f.split('.')[0]}.</strong>
-                {f.slice(f.indexOf('.') + 1)}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   )
 }
@@ -373,9 +262,7 @@ export default function QuizPage() {
   const [q6, setQ6] = useState<string | null>(null)
   const [q7, setQ7] = useState<string | null>(null)
   const [q8, setQ8] = useState<string | null>(null)
-  const [activePlan, setActivePlan] = useState<'pod' | 'foundation'>('foundation')
   const router = useRouter()
-  const [communityOpen, setCommunityOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   const advance = () => setScreen(s => s + 1)
@@ -387,7 +274,7 @@ export default function QuizPage() {
     6: 'q1_capacity', 7: 'q2_somatic_state', 8: 'q6_current_routine',
     9: 'q7_support_system', 10: 'break2_support_checkin',
     11: 'q8_commitment_level',
-    12: 'email_capture', 13: 'calculating', 14: 'pricing',
+    12: 'email_capture', 13: 'calculating',
   }
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -415,16 +302,6 @@ export default function QuizPage() {
         router.push(`/landing-pad?name=${encodeURIComponent(name)}&q4=${q4 ?? 'A'}&q8=${q8 ?? 'B'}&email=${encodeURIComponent(email)}`)
       }, 1500)
       return () => clearTimeout(t)
-    }
-  }, [screen])
-
-
-  // When we reach pricing, set the recommended plan
-  useEffect(() => {
-    if (screen === 14) {
-      const path = getRecommendedPath(q8)
-      setActivePlan(path)
-      setCommunityOpen(false)
     }
   }, [screen])
 
@@ -712,11 +589,11 @@ export default function QuizPage() {
           <div style={{ marginBottom: '2.5rem' }}>
             <div style={{
               width: 48, height: 48, borderRadius: '50%',
-              background: 'rgba(184,80,48,0.1)',
+              background: 'rgba(45,90,64,0.1)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               margin: '0 auto 1.5rem',
             }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={P.rust} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={P.green} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2a10 10 0 1 0 10 10" />
                 <path d="M12 6v6l4 2" />
               </svg>
@@ -737,204 +614,12 @@ export default function QuizPage() {
         </div>
       )
 
-      // ── Screen 14: Pricing ────────────────────────────────────────────────
-      case 14: {
-        const testimonial = Q4_TESTIMONIAL[q4 ?? 'A']
-        const isPod = activePlan === 'pod'
-
-        const headingBody = q8 === 'A'
-          ? `Because you mentioned you only have a few minutes a day right now, Foundation is the perfect place to start your journey and gently build your capacity.`
-          : `${Q4_EMPATHY_VAR[q4 ?? 'A']} That is exactly why we built Somenta. Based on your answers, here is your recommended pathway.`
-
-        return (
-          <div className="qz-in" style={{ maxWidth: 600, margin: '0 auto' }}>
-            {/* Heading */}
-            <div style={{ marginBottom: '2.5rem', textAlign: 'center' }}>
-              <h1 style={{
-                ...serif, margin: '0 0 1rem',
-                fontSize: 'clamp(22px, 3.5vw, 30px)',
-                fontWeight: 400, lineHeight: 1.2, color: P.text, letterSpacing: '-0.015em',
-              }}>
-                Welcome, <em>{name}.</em> You&rsquo;ve found a safe place to land.
-              </h1>
-              <p style={{ fontSize: '15px', color: bodyText, lineHeight: 1.8, margin: 0, maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
-                {headingBody}
-              </p>
-            </div>
-
-            {/* Plan card */}
-            <div className="qz-plan">
-              {/* Card header */}
-              <div style={{
-                padding: '2rem 2rem 1.5rem',
-                borderBottom: `1px solid ${P.div}`,
-                background: isPod ? P.bgDark : P.bgWarm,
-              }}>
-                {isPod && (
-                  <div style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                    background: 'rgba(200,120,64,0.2)', borderRadius: 100,
-                    padding: '3px 10px', marginBottom: '0.75rem',
-                  }}>
-                    <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent }}>
-                      ★ Recommended for you
-                    </span>
-                  </div>
-                )}
-                <h2 style={{
-                  ...serif, margin: '0 0 0.35rem',
-                  fontSize: 'clamp(24px, 3vw, 30px)',
-                  fontWeight: 400, color: isPod ? P.light : P.text,
-                  lineHeight: 1.1, letterSpacing: '-0.015em',
-                }}>
-                  {isPod ? 'The Intimate Peer Pod' : 'Foundation'}
-                </h2>
-                <p style={{ fontSize: '14px', color: isPod ? 'rgba(253,251,246,0.7)' : bodyText, margin: '0 0 1.25rem', lineHeight: 1.6 }}>
-                  {isPod
-                    ? 'Go deeper with facilitated processing in the same trusted group — every session, the same faces.'
-                    : 'Live classes, guided focus, and community — a gentle rhythm to keep you grounded.'}
-                </p>
-                <div style={{
-                  display: 'inline-block',
-                  background: isPod ? 'rgba(200,120,64,0.15)' : 'rgba(184,80,48,0.08)',
-                  borderRadius: 10, padding: '0.85rem 1.25rem',
-                }}>
-                  <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: isPod ? P.accent : P.rust, margin: '0 0 0.3rem' }}>
-                    Founding Member Invitation
-                  </p>
-                  <p style={{ margin: 0, display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '0.5rem' }}>
-                    <span style={{ ...serif, fontSize: '2rem', fontWeight: 400, color: isPod ? P.light : P.text, letterSpacing: '-0.02em' }}>
-                      {isPod ? '$40' : '$10'}
-                    </span>
-                    <span style={{ fontSize: '16px', color: isPod ? 'rgba(253,251,246,0.4)' : 'rgba(40,27,13,0.35)', textDecoration: 'line-through' }}>
-                      {isPod ? '$60' : '$25'}
-                    </span>
-                    <span style={{ fontSize: '14px', color: isPod ? 'rgba(253,251,246,0.6)' : P.muted }}>
-                      / month for your first 3 months
-                    </span>
-                  </p>
-                  <p style={{ fontSize: '13px', color: isPod ? 'rgba(253,251,246,0.5)' : P.muted, margin: '0.2rem 0 0' }}>
-                    then {isPod ? '$60' : '$25'} / month — cancel or pause any time
-                  </p>
-                </div>
-              </div>
-
-              {/* Benefits — short outcome-focused bullets, not a feature checklist */}
-              <div className="qz-pricing-inner" style={{ padding: '1.75rem 2rem' }}>
-                {(isPod
-                  ? [
-                      'The same trusted small group, every single session',
-                      'Weekly live breathwork & meditation classes',
-                      'A facilitated space to actually process what is surfacing',
-                    ]
-                  : [
-                      'Weekly live classes to recalibrate your nervous system',
-                      '5-minute daily practices that fit into a busy day',
-                      'A supportive community rhythm, at your own pace',
-                    ]
-                ).map((line, i) => (
-                  <div key={i} className="qz-feat-row">
-                    <CheckIcon />
-                    <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
-                  </div>
-                ))}
-
-                <CommunityDropdown open={communityOpen} onToggle={() => setCommunityOpen(o => !o)} />
-
-                {/* Divider */}
-                <div style={{ height: 1, background: P.div, margin: '1.5rem 0' }} />
-
-                {/* Testimonial */}
-                <div style={{
-                  marginBottom: '1.75rem',
-                  background: P.bgWarm,
-                  borderRadius: 14,
-                  padding: '1.5rem 1.5rem 1.25rem',
-                }}>
-                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.75rem' }}>
-                    What members like you are saying
-                  </p>
-                  <p style={{ ...serif, fontSize: '2.5rem', color: P.accent, lineHeight: 1, margin: '0 0 0.25rem', fontStyle: 'normal' }}>
-                    &ldquo;
-                  </p>
-                  <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: P.text, lineHeight: 1.75, margin: '0 0 1rem' }}>
-                    {testimonial.quote.replace(/^"|"$/g, '')}
-                  </p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <Image
-                      src={testimonial.avatar}
-                      alt={testimonial.attribution}
-                      width={32}
-                      height={32}
-                      style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
-                    />
-                    <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.06em', fontWeight: 500 }}>
-                      {testimonial.attribution}
-                    </p>
-                  </div>
-                </div>
-
-                {/* CTA */}
-                {isPod ? (
-                  <a
-                    href="https://calendly.com/jake-joinsomenta/30min"
-                    target="_blank" rel="noopener noreferrer"
-                    style={{ textDecoration: 'none', display: 'block' }}
-                    onClick={() => fetch('/api/quiz/conversion', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ email, cta: 'pod_call' }),
-                    })}
-                  >
-                    <button className="qz-btn" style={{ width: '100%', textAlign: 'center' }}>
-                      Book Your Fit Call with Jake →
-                    </button>
-                  </a>
-                ) : (
-                  <a
-                    href="https://community.joinsomenta.com/checkout/foundation-membership?coupon_code=FOUNDATION"
-                    target="_blank" rel="noopener noreferrer"
-                    style={{ textDecoration: 'none', display: 'block' }}
-                    onClick={() => fetch('/api/quiz/conversion', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ email, cta: 'foundation_join' }),
-                    })}
-                  >
-                    <button className="qz-btn" style={{ width: '100%', textAlign: 'center' }}>
-                      Join Foundation Now →
-                    </button>
-                  </a>
-                )}
-
-                <p style={{ fontSize: '12px', color: P.muted, textAlign: 'center', margin: '0.75rem 0 1rem' }}>
-                  Cancel or pause your membership at any time
-                </p>
-
-                {/* Toggle */}
-                <div style={{ textAlign: 'center' }}>
-                  {isPod ? (
-                    <button className="qz-toggle-link" onClick={() => { setActivePlan('foundation'); setCommunityOpen(false) }}>
-                      Looking for a lighter commitment? Explore the Foundation tier.
-                    </button>
-                  ) : (
-                    <button className="qz-toggle-link" onClick={() => { setActivePlan('pod'); setCommunityOpen(false) }}>
-                      Actually, I want the core experience. Take me back to The Pod.
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      }
-
       default: return null
     }
   }
 
   return (
-    <div style={{
+    <div className="qz-grain" style={{
       minHeight: '100vh', background: P.bg, color: P.text,
       fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
     }}>
@@ -969,10 +654,10 @@ export default function QuizPage() {
       {/* Screen content */}
       <main style={{
         minHeight: '100vh',
-        display: 'flex', alignItems: screen === 14 ? 'flex-start' : 'center', justifyContent: 'center',
-        padding: screen === 14 ? '100px clamp(20px, 4vw, 48px) 80px' : '80px clamp(20px, 4vw, 48px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '80px clamp(20px, 4vw, 48px)',
       }}>
-        <div key={screen} style={{ width: '100%', maxWidth: screen === 14 ? 600 : 560 }}>
+        <div key={screen} style={{ width: '100%', maxWidth: 560 }}>
           {renderScreen()}
         </div>
       </main>

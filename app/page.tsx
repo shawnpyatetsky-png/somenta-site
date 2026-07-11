@@ -2,21 +2,9 @@
 
 import { useState, useEffect, useRef, Fragment } from 'react'
 import ExitPopup from './components/ExitPopup'
-import type { ReactNode, CSSProperties, SyntheticEvent } from 'react'
+import type { ReactNode, CSSProperties } from 'react'
 import Image from 'next/image'
-
-// ── Palette ───────────────────────────────────────────────────────────────────
-const P = {
-  bg:     '#F7F3EC',   // warm ivory
-  bgWarm: '#F0E9DC',   // amber tan
-  bgDark: '#1A1108',   // deep warm espresso
-  text:   '#281B0D',   // warm brown
-  light:  '#FDFBF6',   // near white
-  muted:  '#6B5A47',   // warm taupe
-  accent: '#C87840',   // warm amber — CTA buttons only
-  rust:   '#B85030',   // rust/terracotta — icons, highlights, emphasis
-  div:    '#E0D3BF',   // warm divider
-}
+import { P, serif, bodyText, photoGrade } from '@/lib/theme'
 
 // ── CSS ───────────────────────────────────────────────────────────────────────
 const CSS = `
@@ -29,22 +17,18 @@ const CSS = `
   .nf[data-d="5"]{transition-delay:.60s}
   .nf[data-d="6"]{transition-delay:.72s}
 
-  /* Image fade-in */
-  @keyframes img-fade{from{opacity:0}to{opacity:1}}
-  .np-img{opacity:0;transition:opacity 0s}
-  .np-img[data-loaded]{animation:img-fade .6s cubic-bezier(.16,1,.3,1) forwards}
+  /* Keyboard focus — palette ring, invisible to mouse users */
+  button:focus-visible,a:focus-visible{outline:2px solid rgba(184,80,48,.65);outline-offset:3px}
 
-  /* Pod You pulse */
-  @keyframes pod-pulse{0%,100%{box-shadow:0 0 0 3px rgba(184,80,48,0.18)}50%{box-shadow:0 0 0 6px rgba(184,80,48,0.28)}}
-  .np-pod-you{animation:pod-pulse 3s ease-in-out infinite}
+  /* Paper grain — barely-there warm noise so light sections read as material, not flat fill */
+  .np-grain{position:relative}
+  .np-grain::after{content:'';position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.11 0 0 0 0 0.05 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");background-size:240px 240px}
 
   /* Buttons */
   .np-btn-accent{transition:background .2s,transform .18s,box-shadow .2s}
   .np-btn-accent:hover{background:#B06A30!important;transform:translateY(-2px);box-shadow:0 6px 22px rgba(200,120,64,.28)!important}
   .np-btn-outline{transition:background .2s,color .2s,border-color .2s}
   .np-btn-outline:hover{background:#C87840!important;color:#FDFBF6!important}
-  .np-btn-ghost{transition:background .2s}
-  .np-btn-ghost:hover{background:rgba(40,27,13,.06)!important}
   .np-btn-light{transition:background .2s,transform .18s}
   .np-btn-light:hover{background:#EDE5D8!important;transform:translateY(-1px)}
 
@@ -74,12 +58,6 @@ const CSS = `
   .np-selector-btn:hover{opacity:.8}
   .np-inline-quote{display:none}
 
-  /* Hero gradient — default: starts at 46% so photo reads fully above that */
-  .np-hero-grad{background:linear-gradient(180deg,transparent 50%,rgba(247,243,236,.14) 62%,rgba(247,243,236,.62) 76%,#F7F3EC 89%,#F7F3EC 100%)}
-  @media(max-height:1000px){
-    .np-hero-grad{background:linear-gradient(180deg,transparent 38%,rgba(247,243,236,.14) 52%,rgba(247,243,236,.65) 66%,#F7F3EC 79%,#F7F3EC 100%)}
-  }
-
   /* Schedule image shimmer */
   @keyframes np-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
   .np-sched-img{background:linear-gradient(90deg,#E8E0D0 25%,#EDE5D8 50%,#E8E0D0 75%);background-size:200% 100%;animation:np-shimmer 1.4s ease-in-out infinite}
@@ -91,14 +69,13 @@ const CSS = `
   .np-step:hover .np-step-num{color:#B85030!important}
 
   /* Schedule week calendar */
+  @keyframes np-live-pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .np-live-dot{animation:np-live-pulse 2.2s ease-in-out infinite}
   @keyframes np-day-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .np-day-in{animation:np-day-in .42s cubic-bezier(.16,1,.3,1) forwards}
-  .np-week-day{transition:background .2s,box-shadow .2s;cursor:pointer;border:none;box-sizing:border-box;flex:1 1 0;min-width:0;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:16px 4px}
+  .np-week-day{transition:background .2s,box-shadow .28s,transform .28s cubic-bezier(.16,1,.3,1),border-color .2s;cursor:pointer;border:none;box-sizing:border-box;flex:1 1 0;min-width:0;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:16px 4px}
+  .np-week-day:not(.np-week-day-active):hover{transform:translateY(-1px)}
   .np-week-day:not(.np-week-day-active):hover{background:rgba(184,80,48,0.05)!important}
-
-  /* Pricing cards */
-  .np-plan{transition:transform .2s,box-shadow .2s}
-  .np-plan:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(40,27,13,.1)!important}
 
   @media(max-width:860px){
     /* Nav — flex on mobile so CTA sits at far right */
@@ -107,17 +84,18 @@ const CSS = `
     .np-nav-inner{display:flex!important;justify-content:space-between!important;align-items:center!important;grid-template-columns:unset!important;gap:0!important}
 
     /* Hero */
-    .np-hero-text{padding:0 1.5rem 1.5rem!important}
-    .np-hero-section{overflow:visible!important;height:auto!important;min-height:100vh!important}
-    .np-hero-quotes-wrap{position:static!important;margin-top:3rem!important}
+    .np-hero-text{padding:100px 1.5rem 2rem!important}
+    .np-hero-stage{height:auto!important;min-height:80vh!important}
     .np-hero-quotes{grid-template-columns:1fr!important;gap:1.5rem 0!important}
     .np-hero-qdiv{display:none!important}
+    .np-hero-q-extra{display:none!important}
 
     /* Changes — bring up bottom quote */
     .np-changes-bottom{margin-top:2rem!important}
 
     /* Who */
-    .np-who-grid{grid-template-columns:1fr!important;gap:2rem!important}
+    .np-who-grid{grid-template-columns:1fr!important;gap:2.5rem!important}
+    .np-who-photo{aspect-ratio:3/2!important;max-height:340px}
 
     /* Practice */
     .np-practice-grid{grid-template-columns:1fr!important;gap:2rem!important}
@@ -128,7 +106,7 @@ const CSS = `
     /* Schedule */
     .np-sched-two-col{grid-template-columns:1fr!important}
     .np-sched-photo{display:none!important}
-    .np-sched-content{height:480px!important;overflow:hidden!important}
+    .np-sched-content{height:auto!important;min-height:480px!important;overflow:hidden!important}
 
     /* Changes — accordion mode on mobile */
     .np-inline-quote{display:block!important}
@@ -139,9 +117,6 @@ const CSS = `
     .np-changes-heading{margin-bottom:1.5rem!important}
 
     /* General */
-    .np-plans{grid-template-columns:1fr!important}
-    .np-change-feat{grid-template-columns:1fr!important}
-    .np-change-row{grid-template-columns:1fr!important;gap:2rem!important}
     .np-how-step{grid-template-columns:1fr!important;gap:.5rem!important;padding:1.75rem 1.5rem!important}
     .np-step-num{font-size:1.5rem!important;padding-top:0!important}
   }
@@ -168,14 +143,15 @@ function Reveal({ children, d = 0, style }: { children: ReactNode; d?: number; s
   )
 }
 
-// Body text color — P.text at 72% opacity gives ~6.4:1 contrast on warm backgrounds (WCAG AA)
-const bodyText = 'rgba(40,27,13,0.72)'
-
 // ── Shared style constants ────────────────────────────────────────────────────
-const serif: CSSProperties = { fontFamily: "var(--font-fraunces), Georgia, serif" }
 const eyebrow: CSSProperties = {
   fontSize: '12px', letterSpacing: '0.22em',
-  textTransform: 'uppercase', color: '#6B5C4E', fontWeight: 500, margin: 0,
+  textTransform: 'uppercase', color: P.muted, fontWeight: 500, margin: 0,
+}
+const btnAccent: CSSProperties = {
+  background: P.accent, color: P.light, border: 'none',
+  borderRadius: 100, padding: '16px 36px',
+  fontSize: '15px', fontWeight: 600, cursor: 'pointer', letterSpacing: '0.01em',
 }
 
 // ── Who icons ─────────────────────────────────────────────────────────────────
@@ -235,13 +211,6 @@ const ICONS: Record<string, ReactNode> = {
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
       <path d="M2 12 C4.5 7 7.5 7 9.5 12 C11.5 17 14.5 17 16.5 12 C18.5 7 21 7 22 12" />
       <path d="M5 17.5 C6.2 15.2 7.8 15.2 9 17.5" strokeOpacity="0.38" />
-    </svg>
-  ),
-  'Weekly Focus': (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="8" />
-      <path d="M12 5.5 L13.8 10.5 L12 12.5 L10.2 10.5 Z" fill="currentColor" fillOpacity="0.22" />
-      <path d="M12 12.5 L13.5 17 L12 18.5 L10.5 17 Z" fill="currentColor" fillOpacity="0.1" />
     </svg>
   ),
   'Integration Circles': (
@@ -374,11 +343,6 @@ const STEPS = [
   { num: '04', title: 'Stay connected', body: 'Between sessions, your community is always there. Drop into our live Practice Rooms for silent social accountability, or lean on your pod as you translate your insights into daily action.', aside: null },
 ]
 
-// ── Shared handlers ───────────────────────────────────────────────────────────
-function handleImgLoad(e: SyntheticEvent<HTMLImageElement>) {
-  e.currentTarget.setAttribute('data-loaded', '')
-}
-
 // ── Hero quote data ───────────────────────────────────────────────────────────
 const HERO_QUOTES = [
   { quote: '"I\'ve been craving this for years."', name: 'Holly', role: 'Founding Member' },
@@ -455,39 +419,44 @@ function Nav() {
 // ── Hero ──────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section className="np-hero-section" style={{
-      position: 'relative', height: 'max(100vh, 780px)',
-      display: 'flex', flexDirection: 'column',
-      justifyContent: 'center', overflow: 'hidden',
-      background: P.bg,
-      paddingTop: 120, paddingBottom: 0,
-    }}>
+    <section className="np-hero-section" style={{ background: P.bg }}>
 
-      {/* Full-bleed photo */}
-      <Image
-        src="/assets/mountain_hero_wider.jpg"
-        alt=""
-        aria-hidden="true"
-        fill
-        priority
-        sizes="100vw"
-        style={{
-          objectFit: 'cover', objectPosition: 'center 22%',
-          filter: 'saturate(0.82) brightness(1.04) contrast(0.94)',
-        }}
-      />
-
-      {/* Bottom fade */}
-      <div className="np-hero-grad" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
-
-      {/* Content — top-anchored so text stays in the sky, not over trees */}
-      <div className="np-hero-text" style={{
-        position: 'relative', zIndex: 1, width: '100%',
-        padding: '0 clamp(20px, 4vw, 56px)',
-        flex: 1, display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'flex-start',
-        paddingTop: 'clamp(40px, 5vh, 72px)',
+      {/* Photo stage — real people at rest, forest green, misty text zone */}
+      <div className="np-hero-stage" style={{
+        position: 'relative', height: 'max(88vh, 660px)', overflow: 'hidden',
+        display: 'flex', flexDirection: 'column',
       }}>
+        <Image
+          src="/assets/pexels-natalka-17844889.jpg"
+          alt=""
+          aria-hidden="true"
+          fill
+          priority
+          sizes="100vw"
+          style={{
+            objectFit: 'cover', objectPosition: 'center 68%',
+            filter: `${photoGrade} sepia(0.1) brightness(1.03)`,
+          }}
+        />
+
+        {/* Fog system: full-width fade over the top half (nav + headline), plus a concentrated pocket behind the subhead and CTA */}
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse 60% 38% at 50% 50%, rgba(247,243,236,0.9) 0%, rgba(247,243,236,0.5) 55%, transparent 80%), linear-gradient(180deg, rgba(247,243,236,0.95) 0%, rgba(247,243,236,0.84) 16%, rgba(247,243,236,0.58) 34%, rgba(247,243,236,0.26) 50%, transparent 66%)',
+        }} />
+
+        {/* Long soft dissolve — the meadow melts gradually into the page, no hard edge */}
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'linear-gradient(180deg, transparent 58%, rgba(247,243,236,0.18) 70%, rgba(247,243,236,0.45) 80%, rgba(247,243,236,0.75) 89%, rgba(247,243,236,0.94) 96%, #F7F3EC 100%)',
+        }} />
+
+        {/* Content — words live in the veiled mist, the people rest below */}
+        <div className="np-hero-text" style={{
+          position: 'relative', zIndex: 1, width: '100%',
+          padding: 'clamp(110px, 15vh, 150px) clamp(20px, 4vw, 56px) 0',
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+        }}>
         <div style={{ maxWidth: 920, width: '100%', textAlign: 'center' }}>
 
           <Reveal>
@@ -520,34 +489,29 @@ function Hero() {
           </Reveal>
 
           <Reveal d={3}>
-            <a href="/quiz" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: 'clamp(24px, 5vh, 56px)' }}>
-              <button className="np-btn-accent" style={{
-                background: P.accent, color: P.light, border: 'none',
-                borderRadius: 100, padding: '16px 36px',
-                fontSize: '15px', fontWeight: 600, cursor: 'pointer', letterSpacing: '0.01em',
-              }}>
+            <a href="/quiz" style={{ textDecoration: 'none', display: 'inline-block' }}>
+              <button className="np-btn-accent" style={btnAccent}>
                 Find your path →
               </button>
             </a>
           </Reveal>
 
         </div>
+        </div>
       </div>
 
-      {/* Quotes pinned to bottom — no background */}
-      <div className="np-hero-quotes-wrap" style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 3,
-      }}>
+      {/* Quotes rise out of the dissolve — no hard strip */}
+      <div className="np-hero-quotes-wrap" style={{ position: 'relative', zIndex: 2, marginTop: '-4.5rem', padding: '0 0 1.5rem' }}>
         <div className="np-hero-quotes" style={{
           maxWidth: 960, margin: '0 auto',
-          padding: '2rem clamp(20px, 4vw, 56px)',
+          padding: '1.5rem clamp(20px, 4vw, 56px) 0',
           display: 'grid', gridTemplateColumns: '1fr 1px 1fr 1px 1fr',
           gap: '0 2.5rem', alignItems: 'center',
         }}>
           {HERO_QUOTES.map((q, i) => (
             <Fragment key={q.name}>
               {i > 0 && <div className="np-hero-qdiv" style={{ background: 'rgba(224,211,191,0.5)', alignSelf: 'stretch' }} />}
-              <div style={{ textAlign: 'center', padding: '0 1rem' }}>
+              <div className={i > 0 ? 'np-hero-q-extra' : undefined} style={{ textAlign: 'center', padding: '0 1rem' }}>
                 <p style={{ fontSize: '11px', color: P.accent, margin: '0 0 0.4rem', letterSpacing: '0.04em' }}>★★★★★</p>
                 <p style={{
                   ...serif, fontStyle: 'italic',
@@ -562,13 +526,6 @@ function Hero() {
             </Fragment>
           ))}
         </div>
-        <p style={{
-          textAlign: 'center', margin: '1.25rem 0 0',
-          fontSize: '11px', letterSpacing: '0.13em', textTransform: 'uppercase',
-          color: P.muted, opacity: 0.7, fontWeight: 500,
-        }}>
-          Founding members · Live sessions led by trained somatic facilitators
-        </p>
       </div>
 
     </section>
@@ -579,46 +536,74 @@ function Hero() {
 // ── Who ───────────────────────────────────────────────────────────────────────
 function WhoSection() {
   return (
-    <section id="np-who" style={{ background: P.bg, padding: '8rem 3rem' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <Reveal style={{ marginBottom: '4.5rem', textAlign: 'center' }}>
-          <h2 style={{
-            ...serif, margin: '0 auto',
-            fontSize: 'clamp(34px, 4.2vw, 52px)',
-            fontWeight: 400, lineHeight: 1.08,
-            color: P.text, letterSpacing: '-0.018em', maxWidth: '22ch',
-          }}>
-            For anyone navigating life after a <em>transformative retreat.</em>
-          </h2>
-        </Reveal>
+    <section id="np-who" className="np-grain" style={{ background: P.bg, padding: '7rem 3rem 8rem' }}>
+      <div style={{ maxWidth: 1140, margin: '0 auto' }}>
+        <div className="np-who-grid" style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: '5rem', alignItems: 'start' }}>
 
-        <div className="np-who-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '2rem' }}>
-          {WHO_ITEMS.map((item, i) => (
-            <Reveal key={item.title} d={i + 1 as 1 | 2 | 3 | 4}>
-              <div className="np-who-card" style={{
-                padding: '1rem 0',
-                display: 'flex', flexDirection: 'column', gap: '1.25rem',
-                alignItems: 'center', textAlign: 'center',
+          {/* Left: heading + photo */}
+          <div>
+            <Reveal>
+              <h2 style={{
+                ...serif, margin: 0,
+                fontSize: 'clamp(34px, 4.2vw, 52px)',
+                fontWeight: 400, lineHeight: 1.08,
+                color: P.text, letterSpacing: '-0.018em', maxWidth: '14ch',
               }}>
-                <div style={{
-                  width: 52, height: 52, borderRadius: 12,
-                  background: 'rgba(184,80,48,0.10)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: P.rust, flexShrink: 0,
+                For anyone navigating life after a <em>transformative retreat.</em>
+              </h2>
+            </Reveal>
+            <Reveal d={1}>
+              {/* Mounted print — same physical-photo language as the calendar polaroids */}
+              <div style={{
+                background: P.light, border: `1px solid ${P.div}`,
+                borderRadius: 12, padding: 10,
+                boxShadow: '0 12px 32px rgba(40,27,13,0.10)',
+                marginTop: '2.75rem',
+              }}>
+                <div className="np-who-photo" style={{
+                  position: 'relative', borderRadius: 6, overflow: 'hidden', aspectRatio: '4/5',
                 }}>
-                  {WHO_ICONS[item.title]}
-                </div>
-                <div>
-                  <h3 style={{ ...serif, fontSize: 'clamp(16px, 1.3vw, 19px)', fontWeight: 500, color: P.text, margin: '0 0 0.65rem', lineHeight: 1.25 }}>
-                    {item.title}
-                  </h3>
-                  <p style={{ fontSize: '0.875rem', color: P.text, opacity: 0.72, lineHeight: 1.85, margin: 0 }}>
-                    {item.body}
-                  </p>
+                  <Image
+                    src="/assets/Girl_park_v3.png"
+                    alt="" aria-hidden="true"
+                    fill sizes="(max-width: 860px) 100vw, 40vw"
+                    style={{ objectFit: 'cover', objectPosition: 'center 55%', filter: photoGrade }}
+                  />
                 </div>
               </div>
             </Reveal>
-          ))}
+          </div>
+
+          {/* Right: editorial numbered list */}
+          <div style={{ borderTop: `1px solid ${P.div}` }}>
+            {WHO_ITEMS.map((item, i) => (
+              <Reveal key={item.title} d={i + 1 as 1 | 2 | 3 | 4}>
+                <div className="np-who-card" style={{
+                  display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '1.75rem',
+                  alignItems: 'start', padding: '2.4rem 0.75rem 2.4rem 0.5rem',
+                  borderBottom: `1px solid ${P.div}`, borderRadius: 2,
+                }}>
+                  <div style={{ color: P.rust, paddingTop: 2 }}>
+                    {WHO_ICONS[item.title]}
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.85rem', marginBottom: '0.55rem' }}>
+                      <span style={{ ...serif, fontStyle: 'italic', fontSize: '12px', color: 'rgba(45,90,64,0.7)' }}>
+                        0{i + 1}
+                      </span>
+                      <h3 style={{ ...serif, fontSize: 'clamp(18px, 1.5vw, 22px)', fontWeight: 500, color: P.text, margin: 0, lineHeight: 1.25 }}>
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p style={{ fontSize: '0.9rem', color: P.text, opacity: 0.72, lineHeight: 1.85, margin: 0, maxWidth: '56ch' }}>
+                      {item.body}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
@@ -628,7 +613,7 @@ function WhoSection() {
 // ── Philosophy ────────────────────────────────────────────────────────────────
 function PhilosophySection() {
   return (
-    <section style={{ background: P.bgDark, padding: '8rem 3rem' }}>
+    <section style={{ background: P.greenDeep, padding: '9rem 3rem' }}>
       <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
         <Reveal d={1}>
           <h2 style={{
@@ -643,9 +628,33 @@ function PhilosophySection() {
           </h2>
         </Reveal>
         <Reveal d={2}>
-          <p style={{ fontSize: '16.5px', lineHeight: 1.7, color: P.rust, maxWidth: '48ch', margin: '0 auto' }}>
+          <p style={{
+            ...serif, fontStyle: 'italic',
+            fontSize: 'clamp(16.5px, 1.5vw, 20px)', lineHeight: 1.7,
+            color: 'rgba(247,243,236,0.85)', maxWidth: '44ch', margin: '0 auto',
+          }}>
             Profound experiences can leave you feeling disconnected from the everyday world. Your journey makes more sense when you are truly seen and heard by others.
           </p>
+        </Reveal>
+        <Reveal d={3}>
+          {/* The huddle — real founding members and facilitators, shoulder to shoulder */}
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3.25rem' }}>
+            {[...POD_PHOTOS, '/assets/jake.jpg', '/assets/britt_breathing.jpg'].map((src, i) => (
+              <div key={src} style={{
+                position: 'relative', width: 66, height: 66,
+                borderRadius: '50%', overflow: 'hidden', flexShrink: 0,
+                border: '2px solid rgba(247,243,236,0.9)',
+                marginLeft: i > 0 ? -15 : 0,
+                background: '#2A4636',
+              }}>
+                <Image
+                  src={src} alt="" aria-hidden="true"
+                  fill sizes="66px"
+                  style={{ objectFit: 'cover', objectPosition: 'center 25%', filter: photoGrade }}
+                />
+              </div>
+            ))}
+          </div>
         </Reveal>
       </div>
     </section>
@@ -684,7 +693,7 @@ const PILLARS = [
 function PracticeSection() {
   const [openPillar, setOpenPillar] = useState<number | null>(0)
   return (
-    <section id="np-value" style={{ background: P.bg, padding: '8rem 3rem' }}>
+    <section id="np-value" className="np-grain" style={{ background: P.bg, padding: '8rem 3rem' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="np-practice-grid" style={{ display: 'grid', gridTemplateColumns: '42% 58%', gap: '5rem', alignItems: 'start' }}>
 
@@ -697,22 +706,33 @@ function PracticeSection() {
               }}>
                 A compassionate, <em style={{ whiteSpace: 'nowrap' }}>safe place to land.</em>
               </h2>
-              <p style={{ fontSize: '0.95rem', color: P.rust, letterSpacing: '0.08em', margin: '0.75rem 0 0' }}>
+              <p style={{ fontSize: '0.95rem', color: P.green, letterSpacing: '0.08em', margin: '0.75rem 0 0' }}>
                 Welcome to Somenta
               </p>
               <p style={{ fontSize: '0.95rem', color: bodyText, lineHeight: 1.85, margin: 0 }}>
                 We are so much more than <em>just</em> a community. Think of Somenta as a living rhythm of practice, reflection, and real support. A real space to breathe, reflect, and grow alongside people who deeply understand what you are going through.
               </p>
             </Reveal>
-            <button className="np-btn-accent" style={{
-              display: 'inline-flex', alignItems: 'center', width: 'fit-content',
-              background: P.accent, border: 'none',
-              color: P.light, borderRadius: 100, padding: '16px 36px',
-              fontSize: '15px', fontWeight: 600, cursor: 'pointer', letterSpacing: '0.01em',
-              marginTop: '4.5rem',
-            }}>
-              Find your path →
-            </button>
+            <Reveal d={1}>
+              {/* Mounted print — same physical-photo language as the calendar polaroids */}
+              <div style={{
+                background: P.light, border: `1px solid ${P.div}`,
+                borderRadius: 12, padding: 10,
+                boxShadow: '0 12px 32px rgba(40,27,13,0.10)',
+                marginTop: '2.5rem',
+              }}>
+                <div style={{
+                  position: 'relative', borderRadius: 6, overflow: 'hidden', aspectRatio: '4/3',
+                }}>
+                  <Image
+                    src="/assets/group_backyard_v2.png"
+                    alt="" aria-hidden="true"
+                    fill sizes="(max-width: 860px) 100vw, 38vw"
+                    style={{ objectFit: 'cover', objectPosition: '88% 45%', filter: photoGrade }}
+                  />
+                </div>
+              </div>
+            </Reveal>
           </div>
 
           <div className="np-practice-right" style={{ borderTop: `1px solid ${P.div}` }}>
@@ -806,6 +826,15 @@ function PracticeSection() {
                 </Reveal>
               )
             })}
+            <Reveal>
+              <div style={{ marginTop: '2.75rem', textAlign: 'center' }}>
+                <a href="/quiz" style={{ textDecoration: 'none', display: 'inline-block' }}>
+                  <button className="np-btn-accent" style={btnAccent}>
+                    Find your path →
+                  </button>
+                </a>
+              </div>
+            </Reveal>
           </div>
         </div>
       </div>
@@ -831,28 +860,96 @@ const POD_PHOTOS = [
   '/assets/kevin.jpg', '/assets/ben.jpg',
 ]
 
+// Weekday polaroid photos, keyed by day name — Wednesday and Sunday have custom right columns
+const POLAROIDS: Record<string, { src: string; pos: string }> = {
+  Monday:   { src: '/assets/establishing_safety.jpg', pos: 'right center' },
+  Tuesday:  { src: '/assets/body_scan.jpg',           pos: 'center center' },
+  Thursday: { src: '/assets/reflection_undoing.jpg',  pos: 'center center' },
+  Friday:   { src: '/assets/pexels-solo-meadow.jpg',  pos: 'center center' },
+  Saturday: { src: '/assets/Integration_wild.jpg',    pos: '65% center' },
+}
+
+// ── Shared day-panel frame: text column left, day-specific right column ──────
+function DayPanel({ day, tone, headingWeight, compact = false, children }: {
+  day: (typeof WEEK_DAYS)[number]
+  tone: string
+  headingWeight: 400 | 500
+  compact?: boolean
+  children: ReactNode
+}) {
+  return (
+    <div className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
+      {/* Left: text */}
+      <div style={{ padding: '2.25rem 2rem 2rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+          <span style={{ ...eyebrow, color: tone, margin: 0 }}>{day.day}</span>
+          <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: tone, background: tone === P.rust ? 'rgba(184,80,48,0.12)' : 'rgba(184,80,48,0.08)', padding: '3px 8px', borderRadius: 100 }}>{day.tag}</span>
+        </div>
+        <h3 style={{
+          ...serif,
+          fontSize: compact ? 'clamp(20px, 2.4vw, 28px)' : 'clamp(22px, 2.8vw, 34px)',
+          fontWeight: headingWeight, color: P.text, lineHeight: 1.15,
+          margin: '0 0 0.85rem', letterSpacing: '-0.015em',
+          ...(compact ? {} : { maxWidth: '26ch' }),
+        }}>{day.theme}</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: compact ? '0.45rem' : '0.55rem', ...(compact ? {} : { maxWidth: '52ch' }) }}>
+          {day.sentences.map((s, si) => <p key={si} style={{ fontSize: compact ? '0.82rem' : '0.875rem', color: bodyText, lineHeight: 1.75, margin: 0 }}>{s}</p>)}
+        </div>
+      </div>
+      {children}
+    </div>
+  )
+}
+
 function ScheduleSection() {
-  const [openDay, setOpenDay] = useState<number>(2)
+  const [openDay, setOpenDay] = useState<number>(0)
+  const calRef = useRef<HTMLDivElement>(null)
+  const tourRef = useRef<{ done: boolean }>({ done: false })
+
+  // Scroll-linked intro: as the calendar rises toward the center of the viewport,
+  // the week advances Mon → Tue → Wed, then settles. Reversible while approaching.
+  // The first click ends the intro for good — after that, scroll never moves the days.
+  useEffect(() => {
+    const el = calRef.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setOpenDay(2)
+      return
+    }
+    const tour = tourRef.current
+    const onScroll = () => {
+      if (tour.done) return
+      const r = el.getBoundingClientRect()
+      const vh = window.innerHeight
+      const start = vh                          // card top at bottom edge → progress 0
+      const end = vh / 2 - r.height / 2         // card centered → progress 1
+      const p = Math.min(1, Math.max(0, (start - r.top) / Math.max(1, start - end)))
+      setOpenDay(p >= 0.85 ? 2 : p >= 0.5 ? 1 : 0)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  function pickDay(i: number) {
+    tourRef.current.done = true
+    setOpenDay(i)
+  }
 
   const day = WEEK_DAYS[openDay]
   const isWednesday = openDay === 2
   const isSunday = openDay === 6
-  const isMonday = openDay === 0
-  const isTuesday = openDay === 1
-  const isThursday = openDay === 3
-  const isFriday = openDay === 4
-  const isSaturday = openDay === 5
-  const hasPolaroid = isMonday || isTuesday || isThursday || isFriday || isSaturday
+  const polaroid = POLAROIDS[day.day]
 
   return (
-    <section id="np-looks" style={{ background: P.bgWarm, padding: '8rem 3rem' }}>
+    <section id="np-looks" className="np-grain" style={{ background: P.bgWarm, padding: '8rem 3rem' }}>
       <div style={{ maxWidth: 960, margin: '0 auto' }}>
 
         <Reveal style={{ marginBottom: '4rem' }}>
           <h2 style={{
             ...serif, margin: '0 0 1.25rem',
             fontSize: 'clamp(34px, 4.2vw, 52px)',
-            fontWeight: 400, lineHeight: 1.08, color: P.text, textAlign: 'center',
+            fontWeight: 400, lineHeight: 1.08, color: P.text, letterSpacing: '-0.018em', textAlign: 'center',
           }}>
             Real people. Real growth. <em>Every week.</em>
           </h2>
@@ -863,16 +960,12 @@ function ScheduleSection() {
         </Reveal>
 
         <Reveal>
-          <p style={{ fontSize: '0.78rem', color: P.muted, margin: '0 0 1.25rem', letterSpacing: '0.01em', fontStyle: 'italic', textAlign: 'center' }}>
-            (See an example of our weekly rhythm in action. Click through the days below to explore Week 1: &ldquo;The Body&rdquo;)
-          </p>
-
           {/* One rounded container — calendar header + content as a single unit */}
-          <div style={{
-            border: '2px solid #C8B89A',
+          <div ref={calRef} style={{
+            border: '1px solid rgba(30,59,42,0.22)',
             borderRadius: 20,
             overflow: 'hidden',
-            boxShadow: '0 8px 40px rgba(40,27,13,0.07), 0 2px 8px rgba(40,27,13,0.04)',
+            boxShadow: '0 28px 80px rgba(40,27,13,0.16), 0 6px 18px rgba(40,27,13,0.06)',
           }}>
 
             {/* Month / week context bar */}
@@ -890,23 +983,25 @@ function ScheduleSection() {
               </div>
             </div>
 
-            {/* Week columns — gap:1px on parent creates hairline dividers; no borderBottom so active column bleeds into content */}
-            <div style={{ display: 'flex', gap: '1px', background: P.div }}>
+            {/* Week columns — physical tiles floating on the same surface as the panel below */}
+            <div style={{ display: 'flex', gap: 8, padding: '12px 12px 14px', background: DAY_ACTIVE_BG, borderBottom: `1px solid ${P.div}` }}>
               {WEEK_DAYS.map((d, i) => {
                 const isActive = i === openDay
                 const isAnchorDay = d.day === 'Wednesday' || d.day === 'Sunday'
                 const isRestDay = d.day === 'Saturday'
                 const isPracticeDay = d.day === 'Tuesday' || d.day === 'Thursday'
                 const isAsyncDay = !isAnchorDay && !isRestDay && !isPracticeDay
-                const cellBg = isActive ? DAY_ACTIVE_BG : isAnchorDay ? '#F0E8DC' : DAY_INACTIVE_BG
                 return (
                   <button
                     key={d.day}
                     className={`np-week-day${isActive ? ' np-week-day-active' : ''}`}
-                    onClick={() => setOpenDay(i)}
+                    onClick={() => pickDay(i)}
                     style={{
-                      background: cellBg,
-                      borderBottom: isActive ? 'none' : `1px solid ${P.div}`,
+                      background: isActive ? '#F6F0E4' : 'rgba(253,251,246,0.45)',
+                      borderRadius: 12,
+                      border: isActive ? '1px solid rgba(45,90,64,0.32)' : '1px solid rgba(224,211,191,0.65)',
+                      boxShadow: isActive ? '0 12px 26px rgba(40,27,13,0.16)' : 'none',
+                      transform: isActive ? 'translateY(-3px)' : 'none',
                     }}
                   >
                     {/* Day abbreviation */}
@@ -924,7 +1019,7 @@ function ScheduleSection() {
                     {/* Date circle */}
                     <div style={{
                       width: 42, height: 42, borderRadius: '50%', flexShrink: 0,
-                      background: isActive ? '#3D2810' : 'transparent',
+                      background: isActive ? P.greenDeep : 'transparent',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       transition: 'background 0.25s cubic-bezier(.16,1,.3,1)',
                     }}>
@@ -949,7 +1044,15 @@ function ScheduleSection() {
                           padding: '2px 6px', borderRadius: 100,
                           transition: 'color 0.2s, background 0.2s',
                         }}>
-                          {d.day === 'Wednesday' ? 'Live' : 'Pod'}
+                          {d.day === 'Wednesday' ? (
+                            <>
+                              <span className="np-live-dot" style={{
+                                display: 'inline-block', width: 5, height: 5, borderRadius: '50%',
+                                background: 'currentColor', marginRight: 4, verticalAlign: 'middle',
+                              }} />
+                              Live
+                            </>
+                          ) : 'Pod'}
                         </span>
                       ) : isPracticeDay ? (
                         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '3px', height: 10 }}>
@@ -986,26 +1089,15 @@ function ScheduleSection() {
             </div>
 
             {/* Content area — fixed height so every day is identical */}
-            <div className="np-sched-content" style={{ background: DAY_ACTIVE_BG, height: 400, overflow: 'hidden', display: 'flex', alignItems: (isWednesday || isSunday || hasPolaroid) ? 'stretch' : 'center' }}>
+            <div className="np-sched-content" style={{ background: DAY_ACTIVE_BG, height: 400, overflow: 'hidden', display: 'flex', alignItems: 'stretch' }}>
 
-              {/* ── Wednesday: text left, Britt photo right ── */}
+              {/* ── Wednesday: Britt photo right ── */}
               {isWednesday && (
-                <div key={`content-${openDay}`} className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
-                  {/* Left: text */}
-                  <div style={{ padding: '2.25rem 2rem 2rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                      <span style={{ ...eyebrow, color: P.rust, margin: 0 }}>{day.day}</span>
-                      <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: P.rust, background: 'rgba(184,80,48,0.12)', padding: '3px 8px', borderRadius: 100 }}>{day.tag}</span>
-                    </div>
-                    <h3 style={{ ...serif, fontSize: 'clamp(22px, 2.8vw, 34px)', fontWeight: 500, color: P.text, lineHeight: 1.15, margin: '0 0 0.85rem', letterSpacing: '-0.015em', maxWidth: '26ch' }}>{day.theme}</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', maxWidth: '52ch' }}>
-                      {day.sentences.map((s, si) => <p key={si} style={{ fontSize: '0.875rem', color: bodyText, lineHeight: 1.75, margin: 0 }}>{s}</p>)}
-                    </div>
-                  </div>
+                <DayPanel key={`content-${openDay}`} day={day} tone={P.rust} headingWeight={500}>
                   {/* Right: Britt photo card */}
                   <div className="np-sched-photo" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', padding: '2.5rem 1.75rem 3rem 0.25rem' }}>
                     <div className="np-sched-img" style={{ position: 'relative', width: 165, height: 274, borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 18px rgba(40,27,13,0.18)', flexShrink: 0 }}>
-                      <Image src="/assets/britt_breathing.jpg" alt="Britt" fill loading="eager" sizes="165px" style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'saturate(0.88)' }} />
+                      <Image src="/assets/britt_breathing.jpg" alt="Britt" fill loading="eager" sizes="165px" style={{ objectFit: 'cover', objectPosition: 'center top', filter: photoGrade }} />
                       <div style={{ position: 'absolute', inset: 0, background: 'rgba(247,243,236,0.18)' }} />
                       {/* LIVE badge */}
                       <div style={{ position: 'absolute', top: 6, right: 8, display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(40,27,13,0.45)', borderRadius: 100, padding: '3px 8px 3px 6px', backdropFilter: 'blur(4px)' }}>
@@ -1017,24 +1109,12 @@ function ScheduleSection() {
                       This week led by <strong style={{ fontWeight: 600, color: P.text }}>Britt</strong>, Somatic Facilitator
                     </p>
                   </div>
-                </div>
+                </DayPanel>
               )}
 
-              {/* ── Sunday: text left, avatar grid right ── */}
+              {/* ── Sunday: avatar grid right ── */}
               {isSunday && (
-                <div key={`content-${openDay}`} className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
-                  {/* Left: text */}
-                  <div style={{ padding: '2.25rem 2rem 2rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                      <span style={{ ...eyebrow, color: P.rust, margin: 0 }}>{day.day}</span>
-                      <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: P.rust, background: 'rgba(184,80,48,0.12)', padding: '3px 8px', borderRadius: 100 }}>{day.tag}</span>
-                    </div>
-                    <h3 style={{ ...serif, fontSize: 'clamp(20px, 2.4vw, 28px)', fontWeight: 500, color: P.text, lineHeight: 1.15, margin: '0 0 0.85rem', letterSpacing: '-0.015em' }}>{day.theme}</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-                      {day.sentences.map((s, si) => <p key={si} style={{ fontSize: '0.82rem', color: bodyText, lineHeight: 1.75, margin: 0 }}>{s}</p>)}
-                    </div>
-                  </div>
-
+                <DayPanel key={`content-${openDay}`} day={day} tone={P.rust} headingWeight={500} compact>
                   {/* Right: Zoom-style wide grid with window frame */}
                   <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1.5rem 0.5rem' }}>
                     <div style={{ position: 'relative', border: '2px solid rgba(40,27,13,0.18)', borderRadius: 12, padding: '10px', background: 'rgba(40,27,13,0.025)', boxShadow: '0 3px 14px rgba(40,27,13,0.08)' }}>
@@ -1043,7 +1123,7 @@ function ScheduleSection() {
                         <div style={{ display: 'flex', gap: 4 }}>
                           {POD_PHOTOS.slice(0, 3).map((p, i) => (
                             <div key={i} className="np-sched-img" style={{ position: 'relative', width: 90, height: 70, borderRadius: 6, overflow: 'hidden', flexShrink: 0 }}>
-                              <Image src={p} alt="" fill loading="eager" sizes="90px" style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: 'saturate(0.88)' }} />
+                              <Image src={p} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: photoGrade }} />
                               <div style={{ position: 'absolute', inset: 0, background: 'rgba(247,243,236,0.28)' }} />
                             </div>
                           ))}
@@ -1051,7 +1131,7 @@ function ScheduleSection() {
                         {/* Row 2: evan, You, janice */}
                         <div style={{ display: 'flex', gap: 4 }}>
                           <div style={{ position: 'relative', width: 90, height: 70, borderRadius: 6, overflow: 'hidden', flexShrink: 0, background: '#E8E0D0' }}>
-                            <Image src={POD_PHOTOS[3]} alt="" fill loading="eager" sizes="90px" style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: 'saturate(0.88)' }} />
+                            <Image src={POD_PHOTOS[3]} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: photoGrade }} />
                             <div style={{ position: 'absolute', inset: 0, background: 'rgba(247,243,236,0.28)' }} />
                           </div>
                           {/* You */}
@@ -1060,7 +1140,7 @@ function ScheduleSection() {
                             <span style={{ ...serif, fontStyle: 'italic', fontSize: '14px', color: P.rust, lineHeight: 1, opacity: 0.85 }}>You</span>
                           </div>
                           <div style={{ position: 'relative', width: 90, height: 70, borderRadius: 6, overflow: 'hidden', flexShrink: 0, background: '#E8E0D0' }}>
-                            <Image src={POD_PHOTOS[4]} alt="" fill loading="eager" sizes="90px" style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: 'saturate(0.88)' }} />
+                            <Image src={POD_PHOTOS[4]} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: photoGrade }} />
                             <div style={{ position: 'absolute', inset: 0, background: 'rgba(247,243,236,0.28)' }} />
                           </div>
                         </div>
@@ -1072,7 +1152,7 @@ function ScheduleSection() {
                             { src: POD_PHOTOS[7], pos: 'center 20%', scale: false },
                           ].map(({ src, pos, scale }, i) => (
                             <div key={i} className="np-sched-img" style={{ position: 'relative', width: 90, height: 70, borderRadius: 6, overflow: 'hidden', flexShrink: 0 }}>
-                              <Image src={src} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: pos, filter: 'saturate(0.88)', ...(scale ? { transform: 'scale(1.28)', transformOrigin: 'center 65%' } : {}) }} />
+                              <Image src={src} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: pos, filter: photoGrade, ...(scale ? { transform: 'scale(1.28)', transformOrigin: 'center 65%' } : {}) }} />
                               <div style={{ position: 'absolute', inset: 0, background: 'rgba(247,243,236,0.28)' }} />
                             </div>
                           ))}
@@ -1080,64 +1160,36 @@ function ScheduleSection() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </DayPanel>
               )}
 
-              {/* ── All other days: standard centered layout ── */}
-              {/* ── Monday: text left, journal full-bleed right ── */}
-              {isMonday && (
-                <div key={`content-${openDay}`} className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
-                  {/* Left: text */}
-                  <div style={{ padding: '2.25rem 2rem 2rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                      <span style={{ ...eyebrow, color: P.muted, margin: 0 }}>{day.day}</span>
-                      <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: P.muted, background: 'rgba(184,80,48,0.08)', padding: '3px 8px', borderRadius: 100 }}>{day.tag}</span>
-                    </div>
-                    <h3 style={{ ...serif, fontSize: 'clamp(22px, 2.8vw, 34px)', fontWeight: 400, color: P.text, lineHeight: 1.15, margin: '0 0 0.85rem', letterSpacing: '-0.015em', maxWidth: '26ch' }}>{day.theme}</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', maxWidth: '52ch' }}>
-                      {day.sentences.map((s, si) => <p key={si} style={{ fontSize: '0.875rem', color: bodyText, lineHeight: 1.75, margin: 0 }}>{s}</p>)}
-                    </div>
-                  </div>
-                  {/* Right: clean photo */}
+              {/* ── All other days: single polaroid right ── */}
+              {polaroid && (
+                <DayPanel key={`content-${openDay}`} day={day} tone={P.muted} headingWeight={400}>
+                  {/* Right: photo */}
                   <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1rem 0' }}>
                     <div className="np-sched-img" style={PHOTO_CARD_STYLE}>
-                      <Image src="/assets/establishing_safety.jpg" alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: 'right center', filter: 'sepia(0.25) saturate(0.82)' }} />
+                      <Image src={polaroid.src} alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: polaroid.pos, filter: photoGrade }} />
                     </div>
                   </div>
-                </div>
+                </DayPanel>
               )}
-
-              {/* ── Tuesday / Thursday / Friday: text left, single polaroid right ── */}
-              {(isTuesday || isThursday || isFriday || isSaturday) && (() => {
-                const cardImg = isTuesday ? '/assets/body_scan.jpg' : isThursday ? '/assets/reflection_undoing.jpg' : isFriday ? '/assets/pexels-solo-meadow.jpg' : '/assets/Integration_wild.jpg'
-                return (
-                  <div key={`content-${openDay}`} className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
-                    {/* Left: text */}
-                    <div style={{ padding: '2.25rem 2rem 2rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-                        <span style={{ ...eyebrow, color: P.muted, margin: 0 }}>{day.day}</span>
-                        <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: P.muted, background: 'rgba(184,80,48,0.08)', padding: '3px 8px', borderRadius: 100 }}>{day.tag}</span>
-                      </div>
-                      <h3 style={{ ...serif, fontSize: 'clamp(22px, 2.8vw, 34px)', fontWeight: 400, color: P.text, lineHeight: 1.15, margin: '0 0 0.85rem', letterSpacing: '-0.015em', maxWidth: '26ch' }}>{day.theme}</h3>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem', maxWidth: '52ch' }}>
-                        {day.sentences.map((s, si) => <p key={si} style={{ fontSize: '0.875rem', color: bodyText, lineHeight: 1.75, margin: 0 }}>{s}</p>)}
-                      </div>
-                    </div>
-                    {/* Right: photo */}
-                    <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1rem 0' }}>
-                      <div className="np-sched-img" style={PHOTO_CARD_STYLE}>
-                        <Image src={cardImg} alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: isSaturday ? '65% center' : 'center center', filter: 'sepia(0.25) saturate(0.82)' }} />
-                      </div>
-                    </div>
-                  </div>
-                )
-              })()}
 
             </div>
 
           </div>
 
         </Reveal>
+
+        {/* Hidden preload — fetches every day's photos up front so switching days is instant */}
+        <div style={{ display: 'none' }} aria-hidden="true">
+          {Object.values(POLAROIDS).map(({ src }) => (
+            <Image key={src} src={src} alt="" width={165} height={274} loading="eager" sizes="185px" />
+          ))}
+          {POD_PHOTOS.map(src => (
+            <Image key={src} src={src} alt="" width={90} height={70} loading="eager" sizes="90px" />
+          ))}
+        </div>
 
       </div>
     </section>
@@ -1161,7 +1213,7 @@ function ChangesSection() {
   const firstName = item.name.split(/[,·]/)[0].trim()
 
   return (
-    <section id="np-stories" style={{ background: '#2D5A40', padding: '8rem 3rem' }}>
+    <section id="np-stories" style={{ background: P.green, padding: '8rem 3rem' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
 
         <div className="np-changes-grid" style={{ display: 'grid', gridTemplateColumns: '38% 1fr', gap: '5rem', alignItems: 'end' }}>
@@ -1172,7 +1224,7 @@ function ChangesSection() {
               <h2 className="np-changes-heading" style={{
                 ...serif, margin: 0,
                 fontSize: 'clamp(30px, 3.6vw, 46px)',
-                fontWeight: 400, lineHeight: 1.08, color: P.bg,
+                fontWeight: 400, lineHeight: 1.08, color: P.bg, letterSpacing: '-0.018em',
               }}>
                 The real shifts our members feel.
               </h2>
@@ -1307,13 +1359,13 @@ function ChangesSection() {
 // ── How ───────────────────────────────────────────────────────────────────────
 function HowSection() {
   return (
-    <section id="np-how" style={{ background: P.bgWarm, padding: '8rem 3rem' }}>
+    <section id="np-how" className="np-grain" style={{ background: P.bgWarm, padding: '8rem 3rem' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <Reveal style={{ marginBottom: '4.5rem' }}>
           <h2 style={{
             ...serif, margin: 0,
             fontSize: 'clamp(34px, 4.2vw, 52px)',
-            fontWeight: 400, lineHeight: 1.08, color: P.text,
+            fontWeight: 400, lineHeight: 1.08, color: P.text, letterSpacing: '-0.018em',
           }}>
             A simple rhythm, <em>designed to hold you.</em>
           </h2>
@@ -1359,11 +1411,7 @@ function HowSection() {
         <Reveal d={1}>
           <div style={{ marginTop: '4rem', textAlign: 'center' }}>
             <a href="/quiz" style={{ textDecoration: 'none' }}>
-              <button className="np-btn-accent" style={{
-                background: P.accent, color: P.light, border: 'none',
-                borderRadius: 100, padding: '16px 36px',
-                fontSize: '15px', fontWeight: 600, cursor: 'pointer', letterSpacing: '0.01em',
-              }}>
+              <button className="np-btn-accent" style={btnAccent}>
                 Find your path →
               </button>
             </a>
@@ -1377,7 +1425,7 @@ function HowSection() {
 // ── Final CTA ─────────────────────────────────────────────────────────────────
 function FinalCTASection() {
   return (
-    <section style={{ background: P.bgDark, padding: '8rem 3rem', textAlign: 'center' }}>
+    <section style={{ background: P.greenDeep, padding: '8rem 3rem', textAlign: 'center' }}>
       <div style={{ maxWidth: 680, margin: '0 auto' }}>
         <Reveal>
           <h2 style={{
@@ -1394,7 +1442,7 @@ function FinalCTASection() {
           <p style={{
             ...serif, fontStyle: 'italic',
             fontSize: 'clamp(1.3rem, 2.2vw, 1.9rem)',
-            color: P.rust, margin: '0 0 3.5rem',
+            color: P.accent, margin: '0 0 3.5rem',
           }}>
             Your people are here.
           </p>
@@ -1433,10 +1481,10 @@ function renderAnswer(paras: string[]) {
           const hasTitle = colonIdx > 0 && colonIdx < 40
           return (
             <li key={i} style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem', fontSize: '0.93rem', color: bodyText, lineHeight: 1.7 }}>
-              <span style={{ color: P.rust, fontWeight: 600, flexShrink: 0 }}>✓</span>
+              <span style={{ color: P.green, fontWeight: 600, flexShrink: 0 }}>✓</span>
               <span>
                 {hasTitle ? (
-                  <><span style={{ color: P.rust, fontWeight: 500 }}>{text.slice(0, colonIdx + 1)}</span>{text.slice(colonIdx + 1)}</>
+                  <><span style={{ color: P.green, fontWeight: 500 }}>{text.slice(0, colonIdx + 1)}</span>{text.slice(colonIdx + 1)}</>
                 ) : text}
               </span>
             </li>
@@ -1679,14 +1727,14 @@ function FAQSection() {
   const [showAll, setShowAll] = useState(false)
 
   return (
-    <section id="np-faq" style={{ background: P.bg, padding: '8rem 3rem' }}>
+    <section id="np-faq" className="np-grain" style={{ background: P.bg, padding: '8rem 3rem' }}>
       <div style={{ maxWidth: 800, margin: '0 auto' }}>
         <Reveal style={{ marginBottom: '4rem' }}>
           <p style={{ ...eyebrow, marginBottom: '0.85rem' }}>FAQ</p>
           <h2 style={{
             ...serif, margin: 0,
             fontSize: 'clamp(34px, 4.2vw, 52px)',
-            fontWeight: 400, lineHeight: 1.08, color: P.text,
+            fontWeight: 400, lineHeight: 1.08, color: P.text, letterSpacing: '-0.018em',
           }}>
             Still have questions?
           </h2>
@@ -1790,7 +1838,7 @@ const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: 'What exactly is Somenta?', acceptedAnswer: { '@type': 'Answer', text: 'Somenta is an online, peer-supported digital sanctuary designed to help you integrate profound insights and live in balance. Our framework is built on a unique blend of holistic integration, peer support, and somatic (body-based) practices — such as breathwork, guided meditation, and Yoga Nidra — designed to gently regulate your nervous system and help you build supportive daily rhythms.' } },
-    { '@type': 'Question', name: 'How much does Somenta cost?', acceptedAnswer: { '@type': 'Answer', text: 'Foundation membership begins at $10/month for your first 3 months (then $25/month). The Intimate Peer Pod begins at $40/month for your first 3 months (then $75/month). You can cancel or pause anytime.' } },
+    { '@type': 'Question', name: 'How much does Somenta cost?', acceptedAnswer: { '@type': 'Answer', text: 'Foundation membership begins at $10/month for your first 3 months (then $25/month). The Intimate Peer Pod begins at $40/month for your first 3 months (then $60/month). You can cancel or pause anytime.' } },
     { '@type': 'Question', name: 'How much time does Somenta take each week?', acceptedAnswer: { '@type': 'Answer', text: 'Your baseline commitment is just over an hour a week: a 60-minute Live Class and four bite-sized, 2-minute daily check-ins. There is no falling behind — flexible participation builds in permission to miss days without guilt.' } },
     { '@type': 'Question', name: 'How is Somenta different from meditation or breathwork apps?', acceptedAnswer: { '@type': 'Answer', text: 'Most wellness apps are solo content libraries that rely entirely on your own willpower. Somenta removes this friction by giving you a single curated daily rhythm anchored by a live peer community — giving you the accountability and human connection required to make your insights land permanently.' } },
     { '@type': 'Question', name: 'What is an Intimate Peer Pod?', acceptedAnswer: { '@type': 'Answer', text: 'An Intimate Peer Pod is a 12-week facilitated share circle sprint designed for deep, reflective work. You are carefully matched with a small group of 8 to 10 peers and an expert facilitator, meeting with the same trusted people each week to build profound emotional safety and peer accountability.' } },

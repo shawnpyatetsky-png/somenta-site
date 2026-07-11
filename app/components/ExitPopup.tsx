@@ -2,19 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { P, serif, photoGrade } from '@/lib/theme'
 
 const SHOWN_KEY = 'somenta_exit_popup_shown'
-
-const serif: React.CSSProperties = { fontFamily: 'var(--font-fraunces), Georgia, serif' }
-
-const P = {
-  bg:     '#F7F3EC',
-  text:   '#281B0D',
-  muted:  '#6B5A47',
-  accent: '#C87840',
-  rust:   '#B85030',
-  div:    '#E0D3BF',
-}
 
 export default function ExitPopup() {
   const [visible, setVisible] = useState(false)
@@ -95,7 +85,7 @@ export default function ExitPopup() {
             src="/assets/inviting_good.jpg"
             alt=""
             fill
-            style={{ objectFit: 'cover', objectPosition: 'center 55%' }}
+            style={{ objectFit: 'cover', objectPosition: 'center 55%', filter: photoGrade }}
           />
         </div>
 

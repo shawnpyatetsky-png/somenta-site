@@ -53,7 +53,7 @@ const serviceSchema = {
         '@type': 'PriceSpecification',
         price: '40.00',
         priceCurrency: 'USD',
-        description: 'Introductory rate for first 3 months, then $75/month',
+        description: 'Introductory rate for first 3 months, then $60/month',
       },
       eligibleDuration: 'P3M',
       url: 'https://www.joinsomenta.com/quiz',
