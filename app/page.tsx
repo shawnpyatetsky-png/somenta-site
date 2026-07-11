@@ -5,6 +5,7 @@ import ExitPopup from './components/ExitPopup'
 import type { ReactNode, CSSProperties } from 'react'
 import Image from 'next/image'
 import { P, serif, bodyText, photoGrade } from '@/lib/theme'
+import heroImg from '@/public/assets/pexels-natalka-17844889.jpg'
 
 // ── CSS ───────────────────────────────────────────────────────────────────────
 const CSS = `
@@ -427,11 +428,13 @@ function Hero() {
         display: 'flex', flexDirection: 'column',
       }}>
         <Image
-          src="/assets/pexels-natalka-17844889.jpg"
+          src={heroImg}
           alt=""
           aria-hidden="true"
           fill
           priority
+          placeholder="blur"
+          quality={70}
           sizes="100vw"
           style={{
             objectFit: 'cover', objectPosition: 'center 68%',
