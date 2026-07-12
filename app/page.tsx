@@ -87,6 +87,8 @@ const CSS = `
     /* Hero */
     .np-hero-text{padding:100px 1.5rem 2rem!important}
     .np-hero-stage{height:auto!important;min-height:80vh!important}
+    /* Denser, full-width fog on small screens — the desktop pocket is too narrow for phones */
+    .np-hero-fog{background:radial-gradient(ellipse 130% 36% at 50% 48%, rgba(247,243,236,0.94) 0%, rgba(247,243,236,0.62) 58%, transparent 82%), linear-gradient(180deg, rgba(247,243,236,0.96) 0%, rgba(247,243,236,0.88) 20%, rgba(247,243,236,0.64) 42%, rgba(247,243,236,0.3) 58%, transparent 72%)!important}
     .np-hero-quotes{grid-template-columns:1fr!important;gap:1.5rem 0!important}
     .np-hero-qdiv{display:none!important}
     .np-hero-q-extra{display:none!important}
@@ -107,6 +109,7 @@ const CSS = `
     /* Schedule */
     .np-sched-two-col{grid-template-columns:1fr!important}
     .np-sched-photo{display:none!important}
+    .np-day-photo-m{display:block!important}
     .np-sched-content{height:auto!important;min-height:480px!important;overflow:hidden!important}
 
     /* Changes — accordion mode on mobile */
@@ -362,9 +365,9 @@ const STEPS = [
 
 // ── Hero quote data ───────────────────────────────────────────────────────────
 const HERO_QUOTES = [
-  { quote: '"I\'ve been craving this for years."', name: 'Holly', role: 'Founding Member' },
+  { quote: '"I\'ve been craving a space like this for years."', name: 'Holly', role: 'Founding Member' },
   { quote: '"My habits have gotten better. I feel like I\'m on the right track."', name: 'Cam', role: 'Founding Member' },
-  { quote: '"The practices really ground you."', name: 'Evan', role: 'Founding Member' },
+  { quote: '"The practices bring you back into your body and the present."', name: 'Evan', role: 'Founding Member' },
 ]
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
@@ -459,7 +462,7 @@ function Hero() {
         />
 
         {/* Fog system: full-width fade over the top half (nav + headline), plus a concentrated pocket behind the subhead and CTA */}
-        <div style={{
+        <div className="np-hero-fog" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           background: 'radial-gradient(ellipse 60% 38% at 50% 50%, rgba(247,243,236,0.9) 0%, rgba(247,243,236,0.5) 55%, transparent 80%), linear-gradient(180deg, rgba(247,243,236,0.95) 0%, rgba(247,243,236,0.84) 16%, rgba(247,243,236,0.58) 34%, rgba(247,243,236,0.26) 50%, transparent 66%)',
         }} />
@@ -896,10 +899,29 @@ function DayPanel({ day, tone, headingWeight, compact = false, children }: {
   compact?: boolean
   children: ReactNode
 }) {
+  // Mobile-only banner photo — the desktop photo columns are hidden under 860px,
+  // so each day carries its image as a small cover strip above the text instead
+  const banner = day.day === 'Wednesday'
+    ? { src: '/assets/britt_breathing.jpg', pos: 'center 22%' }
+    : day.day === 'Sunday'
+      ? { src: '/assets/pexels_group_mediation.jpg', pos: 'center 40%' }
+      : POLAROIDS[day.day]
+
   return (
     <div className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
       {/* Left: text */}
       <div style={{ padding: '2.25rem 2rem 2rem 3.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        {banner && (
+          <div className="np-day-photo-m" style={{ position: 'relative', width: '100%', height: 132, borderRadius: 10, overflow: 'hidden', marginBottom: '1.15rem', display: 'none', flexShrink: 0 }}>
+            <Image src={banner.src} alt="" fill sizes="92vw" style={{ objectFit: 'cover', objectPosition: banner.pos, filter: photoGrade }} />
+            {day.day === 'Wednesday' && (
+              <div style={{ position: 'absolute', top: 8, left: 8, display: 'flex', alignItems: 'center', gap: 4, background: P.rust, borderRadius: 100, padding: '3px 8px' }}>
+                <span className="np-live-dot" style={{ width: 5, height: 5, borderRadius: '50%', background: '#FDFBF6', display: 'inline-block' }} />
+                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#FDFBF6', lineHeight: 1 }}>Live</span>
+              </div>
+            )}
+          </div>
+        )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
           <span style={{ ...eyebrow, color: tone, margin: 0 }}>{day.day}</span>
           <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: tone, background: tone === P.rust ? 'rgba(184,80,48,0.12)' : 'rgba(184,80,48,0.08)', padding: '3px 8px', borderRadius: 100 }}>{day.tag}</span>
@@ -1282,8 +1304,8 @@ function ChangesSection() {
                           <p style={{ ...serif, fontStyle: 'italic', fontSize: '14px', color: 'rgba(247,243,236,0.88)', lineHeight: 1.75, margin: '0 0 0.85rem' }}>
                             &ldquo;{t.quote.replace(/^[""]/, '').replace(/[""]$/, '')}&rdquo;
                           </p>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                            <Image src={t.photo} alt={tFirstName} width={32} height={32} style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <Image src={t.photo} alt={tFirstName} width={44} height={44} style={{ borderRadius: 10, objectFit: 'cover', objectPosition: 'center 25%', flexShrink: 0, filter: photoGrade }} />
                             <div>
                               <p style={{ margin: 0, fontSize: '12px', fontWeight: 600, color: P.bg, letterSpacing: '0.02em' }}>{tFirstName}</p>
                               <div style={{ color: P.rust, fontSize: '0.6rem', letterSpacing: '0.1em' }}>★★★★★</div>
@@ -1335,22 +1357,22 @@ function ChangesSection() {
             {/* Divider */}
             <div style={{ height: 1, background: P.rust, opacity: 0.25, margin: '2.25rem 0 1.5rem' }} />
 
-            {/* Attribution */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+            {/* Attribution — the member front and center: a big square portrait, like a printed photo */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.1rem' }}>
               <Image
                 src={item.photo}
                 alt={firstName}
-                width={48} height={48}
-                style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                width={80} height={80}
+                style={{ borderRadius: 12, objectFit: 'cover', objectPosition: 'center 25%', flexShrink: 0, filter: photoGrade, boxShadow: '0 6px 18px rgba(40,27,13,0.18)' }}
               />
               <div>
-                <p style={{ margin: '0 0 0.15rem', fontSize: '13px', fontWeight: 600, color: P.text, letterSpacing: '0.02em' }}>
+                <p style={{ ...serif, margin: '0 0 0.2rem', fontSize: '17px', fontWeight: 500, color: P.text, letterSpacing: '-0.01em' }}>
                   {firstName}
                 </p>
-                <p style={{ margin: '0 0 0.25rem', fontSize: '11px', color: P.muted, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                <p style={{ margin: '0 0 0.35rem', fontSize: '11px', color: P.muted, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                   Founding Member
                 </p>
-                <div style={{ color: P.rust, fontSize: '0.65rem', letterSpacing: '0.12em' }}>★★★★★</div>
+                <div style={{ color: P.rust, fontSize: '0.7rem', letterSpacing: '0.12em' }}>★★★★★</div>
               </div>
             </div>
           </div>
