@@ -136,9 +136,11 @@ const CSS = `
     .np-day-circle span{font-size:0.95rem!important}
     .np-sched-two-col>div:first-child{padding:1.6rem 1.25rem 1.75rem!important}
 
-    /* Member huddle — smaller circles so ten faces sit comfortably */
+    /* Member huddle — smaller circles so ten faces sit comfortably, split 6 / 4 */
+    .np-huddle{row-gap:8px}
     .np-huddle>div{width:52px!important;height:52px!important}
     .np-huddle>div:not(:first-child){margin-left:-11px!important}
+    .np-huddle>div.np-huddle-break{display:block!important;flex-basis:100%!important;width:100%!important;height:0!important;margin:0!important}
   }
 
 `
@@ -662,19 +664,25 @@ function PhilosophySection() {
           {/* The huddle — real founding members and facilitators, shoulder to shoulder */}
           <div className="np-huddle" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3.25rem' }}>
             {[...POD_PHOTOS, '/assets/jake.jpg', '/assets/britt_breathing.jpg'].map((src, i) => (
-              <div key={src} style={{
-                position: 'relative', width: 66, height: 66,
-                borderRadius: '50%', overflow: 'hidden', flexShrink: 0,
-                border: '2px solid rgba(247,243,236,0.9)',
-                marginLeft: i > 0 ? -15 : 0,
-                background: '#2A4636',
-              }}>
-                <Image
-                  src={src} alt="" aria-hidden="true"
-                  fill sizes="66px"
-                  style={{ objectFit: 'cover', objectPosition: 'center 25%', filter: photoGrade }}
-                />
-              </div>
+              <Fragment key={src}>
+                {/* Mobile-only row break after the 6th face — splits the huddle 6 / 4 so nobody sits alone */}
+                {i === 6 && <div className="np-huddle-break" aria-hidden="true" style={{ display: 'none' }} />}
+                <div style={{
+                  position: 'relative', width: 66, height: 66,
+                  borderRadius: '50%', overflow: 'hidden', flexShrink: 0,
+                  border: '2px solid rgba(247,243,236,0.9)',
+                  marginLeft: i > 0 ? -15 : 0,
+                  background: '#2A4636',
+                }}>
+                  <Image
+                    src={src} alt="" aria-hidden="true"
+                    fill sizes="66px"
+                    style={src.includes('shawn')
+                      ? { objectFit: 'cover', objectPosition: '19% 55%', filter: photoGrade, transform: 'scale(2.2)', transformOrigin: '0% 68%' }
+                      : { objectFit: 'cover', objectPosition: 'center 25%', filter: photoGrade }}
+                  />
+                </div>
+              </Fragment>
             ))}
           </div>
         </Reveal>
@@ -882,6 +890,18 @@ const POD_PHOTOS = [
   '/assets/kevin.jpg', '/assets/ben.jpg',
 ]
 
+// Mobile banner crops — wide strips need their own framing, tuned per photo.
+// Wednesday and Sunday get different photos than desktop (better crops at banner ratio).
+const MOBILE_BANNERS: Record<string, { src: string; pos: string }> = {
+  Monday:    { src: '/assets/establishing_safety.jpg',      pos: 'center 20%' },
+  Tuesday:   { src: '/assets/body_scan.jpg',                pos: 'center 18%' },
+  Wednesday: { src: '/assets/meditation_class_indoors.jpg', pos: 'center 20%' },
+  Thursday:  { src: '/assets/reflection_undoing.jpg',       pos: 'center 86%' },
+  Friday:    { src: '/assets/pexels-solo-meadow.jpg',       pos: 'center 92%' },
+  Saturday:  { src: '/assets/Integration_wild.jpg',         pos: '65% center' },
+  Sunday:    { src: '/assets/inviting_good.jpg',            pos: 'center 40%' },
+}
+
 // Weekday polaroid photos, keyed by day name — Wednesday and Sunday have custom right columns
 const POLAROIDS: Record<string, { src: string; pos: string }> = {
   Monday:   { src: '/assets/establishing_safety.jpg', pos: 'right center' },
@@ -901,11 +921,7 @@ function DayPanel({ day, tone, headingWeight, compact = false, children }: {
 }) {
   // Mobile-only banner photo — the desktop photo columns are hidden under 860px,
   // so each day carries its image as a small cover strip above the text instead
-  const banner = day.day === 'Wednesday'
-    ? { src: '/assets/britt_breathing.jpg', pos: 'center 22%' }
-    : day.day === 'Sunday'
-      ? { src: '/assets/pexels_group_mediation.jpg', pos: 'center 40%' }
-      : POLAROIDS[day.day]
+  const banner = MOBILE_BANNERS[day.day]
 
   return (
     <div className="np-day-in np-sched-two-col" style={{ width: '100%', height: '100%', display: 'grid', gridTemplateColumns: '55% 45%' }}>
@@ -1188,12 +1204,12 @@ function ScheduleSection() {
                         {/* Row 3: shawn, kevin, ben */}
                         <div style={{ display: 'flex', gap: 4 }}>
                           {[
-                            { src: POD_PHOTOS[5], pos: 'center 65%', scale: true },
+                            { src: POD_PHOTOS[5], pos: '19% 55%', scale: true },
                             { src: POD_PHOTOS[6], pos: 'center 20%', scale: false },
                             { src: POD_PHOTOS[7], pos: 'center 20%', scale: false },
                           ].map(({ src, pos, scale }, i) => (
                             <div key={i} className="np-sched-img" style={{ position: 'relative', width: 90, height: 70, borderRadius: 6, overflow: 'hidden', flexShrink: 0 }}>
-                              <Image src={src} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: pos, filter: photoGrade, ...(scale ? { transform: 'scale(1.28)', transformOrigin: 'center 65%' } : {}) }} />
+                              <Image src={src} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: pos, filter: photoGrade, ...(scale ? { transform: 'scale(2)', transformOrigin: '-12% 71%' } : {}) }} />
                               <div style={{ position: 'absolute', inset: 0, background: 'rgba(247,243,236,0.28)' }} />
                             </div>
                           ))}

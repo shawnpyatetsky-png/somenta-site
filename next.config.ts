@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
     // request 3840px (678KB for the hero) — invisible gain through the fog veil,
     // very visible cost in load time.
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    // Let browsers and the edge cache optimized images for 31 days. Without this,
+    // /assets-sourced images ship with max-age=0 and every visit re-downloads them.
+    minimumCacheTTL: 2678400,
   },
 }
 
