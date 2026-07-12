@@ -367,7 +367,7 @@ const STEPS = [
 const HERO_QUOTES = [
   { quote: '"I\'ve been craving a space like this for years."', name: 'Holly', role: 'Founding Member' },
   { quote: '"My habits have gotten better. I feel like I\'m on the right track."', name: 'Cam', role: 'Founding Member' },
-  { quote: '"The practices bring you back into your body and the present."', name: 'Evan', role: 'Founding Member' },
+  { quote: '"The practices ground you in your body and the present."', name: 'Evan', role: 'Founding Member' },
 ]
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
@@ -1221,16 +1221,6 @@ function ScheduleSection() {
           </div>
 
         </Reveal>
-
-        {/* Hidden preload — fetches every day's photos up front so switching days is instant */}
-        <div style={{ display: 'none' }} aria-hidden="true">
-          {Object.values(POLAROIDS).map(({ src }) => (
-            <Image key={src} src={src} alt="" width={165} height={274} loading="eager" sizes="185px" />
-          ))}
-          {POD_PHOTOS.map(src => (
-            <Image key={src} src={src} alt="" width={90} height={70} loading="eager" sizes="90px" />
-          ))}
-        </div>
 
       </div>
     </section>
