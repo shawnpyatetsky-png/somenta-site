@@ -119,7 +119,7 @@ function LandingPadContent() {
             <div style={{ maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
               {/* The human line — spoken voice, not UI text */}
               <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: bodyText, lineHeight: 1.75, margin: 0 }}>
-                {empathy} That is exactly why we built Somenta.
+                {empathy} That is exactly why we built Somenta — an integration community opening its doors on August 3rd.
               </p>
 
               {/* The facts — chips, not a paragraph */}
@@ -134,14 +134,6 @@ function LandingPadContent() {
                   fontSize: '13px', fontWeight: 600, color: P.green,
                 }}>
                   Your pathway: {recommendedTier}
-                </span>
-                <span style={{
-                  display: 'inline-flex', alignItems: 'center',
-                  border: `1px solid ${P.div}`, background: P.light,
-                  borderRadius: 100, padding: '6px 14px',
-                  fontSize: '13px', fontWeight: 500, color: P.muted,
-                }}>
-                  Live cohorts open August 3rd
                 </span>
               </div>
             </div>
