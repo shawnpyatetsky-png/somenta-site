@@ -894,12 +894,12 @@ const POD_PHOTOS = [
 // Wednesday and Sunday get different photos than desktop (better crops at banner ratio).
 const MOBILE_BANNERS: Record<string, { src: string; pos: string }> = {
   Monday:    { src: '/assets/establishing_safety.jpg',      pos: 'center 20%' },
-  Tuesday:   { src: '/assets/body_scan.jpg',                pos: 'center 18%' },
+  Tuesday:   { src: '/assets/body_scan.jpg',                pos: 'center 23%' },
   Wednesday: { src: '/assets/meditation_class_indoors.jpg', pos: 'center 20%' },
   Thursday:  { src: '/assets/reflection_undoing.jpg',       pos: 'center 86%' },
   Friday:    { src: '/assets/pexels-solo-meadow.jpg',       pos: 'center 92%' },
   Saturday:  { src: '/assets/Integration_wild.jpg',         pos: '65% center' },
-  Sunday:    { src: '/assets/inviting_good.jpg',            pos: 'center 40%' },
+  Sunday:    { src: '/assets/inviting_good.jpg',            pos: 'center 52%' },
 }
 
 // Weekday polaroid photos, keyed by day name — Wednesday and Sunday have custom right columns
