@@ -678,7 +678,7 @@ function PhilosophySection() {
                     src={src} alt="" aria-hidden="true"
                     fill sizes="66px"
                     style={src.includes('shawn')
-                      ? { objectFit: 'cover', objectPosition: '19% 55%', filter: photoGrade, transform: 'scale(2.2)', transformOrigin: '0% 68%' }
+                      ? { objectFit: 'cover', objectPosition: '19% 55%', filter: photoGrade, transform: 'scale(1.8)', transformOrigin: '0% 68%' }
                       : { objectFit: 'cover', objectPosition: 'center 25%', filter: photoGrade }}
                   />
                 </div>
@@ -895,7 +895,7 @@ const POD_PHOTOS = [
 const MOBILE_BANNERS: Record<string, { src: string; pos: string }> = {
   Monday:    { src: '/assets/establishing_safety.jpg',      pos: 'center 20%' },
   Tuesday:   { src: '/assets/body_scan.jpg',                pos: 'center 23%' },
-  Wednesday: { src: '/assets/meditation_class_indoors.jpg', pos: 'center 20%' },
+  Wednesday: { src: '/assets/Laying_meditation_park.jpg',   pos: 'center 55%' },
   Thursday:  { src: '/assets/reflection_undoing.jpg',       pos: 'center 86%' },
   Friday:    { src: '/assets/pexels-solo-meadow.jpg',       pos: 'center 92%' },
   Saturday:  { src: '/assets/Integration_wild.jpg',         pos: '65% center' },
@@ -1209,7 +1209,7 @@ function ScheduleSection() {
                             { src: POD_PHOTOS[7], pos: 'center 20%', scale: false },
                           ].map(({ src, pos, scale }, i) => (
                             <div key={i} className="np-sched-img" style={{ position: 'relative', width: 90, height: 70, borderRadius: 6, overflow: 'hidden', flexShrink: 0 }}>
-                              <Image src={src} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: pos, filter: photoGrade, ...(scale ? { transform: 'scale(2)', transformOrigin: '-12% 71%' } : {}) }} />
+                              <Image src={src} alt="" fill sizes="90px" style={{ objectFit: 'cover', objectPosition: pos, filter: photoGrade, ...(scale ? { transform: 'scale(1.7)', transformOrigin: '-12% 71%' } : {}) }} />
                               <div style={{ position: 'absolute', inset: 0, background: 'rgba(247,243,236,0.28)' }} />
                             </div>
                           ))}
