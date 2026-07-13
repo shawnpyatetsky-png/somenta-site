@@ -1,4 +1,4 @@
-// SQL to run in Supabase dashboard (SQL Editor) before this route can save events:
+// One-time SQL (Supabase dashboard → SQL Editor) — table + permissions:
 //
 // create table cta_events (
 //   id uuid default gen_random_uuid() primary key,
@@ -6,10 +6,12 @@
 //   email text,
 //   cta text
 // );
-//
 // alter table cta_events enable row level security;
 // create policy "allow event inserts" on cta_events for insert with check (true);
-// -- Insert-only: no select policy, so the public key can write events but never read them.
+//
+// grant insert on table cta_events to anon, authenticated, service_role;
+// grant select on table cta_events to service_role;
+// grant select, update on table quiz_submissions to service_role;
 
 import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
@@ -20,15 +22,24 @@ export async function POST(req: Request) {
   const { email, cta } = await req.json()
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  // Server-side route — prefer the service role key (bypasses RLS), fall back to anon
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   if (supabaseUrl && supabaseKey) {
     const supabase = createClient(supabaseUrl, supabaseKey)
 
-    const { error } = await supabase.from('cta_events').insert({ email, cta })
-
-    if (error) console.error('[quiz/conversion] insert error:', error.message)
+    // Full click history — one row per event
+    const { error: eventError } = await supabase.from('cta_events').insert({ email, cta })
+    if (eventError) console.error('[quiz/conversion] event insert error:', eventError.message)
     else console.log('[quiz/conversion] event saved:', cta, 'for', email)
+
+    // Stamp the person's quiz row (first click wins; cta_events keeps the rest)
+    const { error: stampError } = await supabase
+      .from('quiz_submissions')
+      .update({ cta_clicked: cta, cta_clicked_at: new Date().toISOString() })
+      .eq('email', email)
+      .is('cta_clicked', null)
+    if (stampError) console.error('[quiz/conversion] submission stamp error:', stampError.message)
   }
 
   console.log('[quiz/conversion] Done')
