@@ -42,7 +42,7 @@ export async function POST(req: Request) {
   console.log('[quiz/route] POST received')
 
   const body = await req.json()
-  const { name, email, q1, q2, q3, q4, q5, q6, q7, q8, recommended_path } = body
+  const { name, email, q1, q2, q3, q4, q5, q6, q7, q8, recommended_path, source } = body
 
   // ── Save to Supabase ──────────────────────────────────────────────────────
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -55,8 +55,9 @@ export async function POST(req: Request) {
       email,
       q1, q2, q3, q4, q5, q6, q7, q8,
       recommended_path,
+      source: source || null,
       schema_version: 'v2',
-      answers: { name, email, q1, q2, q3, q4, q5, q6, q7, q8, recommended_path },
+      answers: { name, email, q1, q2, q3, q4, q5, q6, q7, q8, recommended_path, source },
     })
     if (error) console.error('[quiz/route] Supabase insert error:', error.message)
     else console.log('[quiz/route] Saved to Supabase')
@@ -90,6 +91,7 @@ export async function POST(req: Request) {
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q6 — Current routine</td><td style="padding:10px 14px">${label('q6', q6)}</td></tr>
             <tr><td style="padding:10px 14px;font-weight:600">Q7 — Support system</td><td style="padding:10px 14px">${label('q7', q7)}</td></tr>
             <tr style="background:#F0E9DC"><td style="padding:10px 14px;font-weight:600">Q8 — Commitment level</td><td style="padding:10px 14px">${label('q8', q8)}</td></tr>
+            <tr><td style="padding:10px 14px;font-weight:600">Source</td><td style="padding:10px 14px">${source || 'direct / unknown'}</td></tr>
           </table>
         </div>
       `,

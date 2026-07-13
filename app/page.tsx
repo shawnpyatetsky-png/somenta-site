@@ -1892,6 +1892,13 @@ const faqSchema = {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function NewPage() {
+  // Capture traffic source (?src=reddit etc.) so the quiz can attribute the
+  // submission even when the visitor lands here first
+  useEffect(() => {
+    const src = new URLSearchParams(window.location.search).get('src')
+    if (src) sessionStorage.setItem('somenta_src', src)
+  }, [])
+
   return (
     <div style={{
       background: P.bg, color: P.text,

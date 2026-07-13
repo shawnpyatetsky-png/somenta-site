@@ -264,6 +264,20 @@ export default function QuizPage() {
   const [q8, setQ8] = useState<string | null>(null)
   const router = useRouter()
   const [submitted, setSubmitted] = useState(false)
+  const [src, setSrc] = useState('')
+
+  // Traffic source (?src=reddit etc.) — read from the URL or from sessionStorage
+  // if it was captured on the landing page; survives reloads mid-quiz
+  useEffect(() => {
+    const fromUrl = new URLSearchParams(window.location.search).get('src')
+    if (fromUrl) {
+      setSrc(fromUrl)
+      sessionStorage.setItem('somenta_src', fromUrl)
+    } else {
+      const stored = sessionStorage.getItem('somenta_src')
+      if (stored) setSrc(stored)
+    }
+  }, [])
 
   const advance = () => setScreen(s => s + 1)
 
@@ -314,7 +328,7 @@ export default function QuizPage() {
       await fetch('/api/quiz', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, q1, q2, q3, q4, q5, q6, q7, q8, recommended_path: path }),
+        body: JSON.stringify({ name, email, q1, q2, q3, q4, q5, q6, q7, q8, recommended_path: path, source: src || null }),
       })
     } catch {
       // fire and forget — don't block UI
