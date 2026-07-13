@@ -42,9 +42,10 @@ export async function GET(req: Request) {
   console.log('[circle/check-joins] run started')
 
   const url = new URL(req.url)
-  if (!process.env.CIRCLE_WEBHOOK_SECRET || url.searchParams.get('token') !== process.env.CIRCLE_WEBHOOK_SECRET) {
+  const secret = (process.env.CIRCLE_WEBHOOK_SECRET || '').trim()
+  if (!secret || url.searchParams.get('token') !== secret) {
     console.warn('[circle/check-joins] rejected: bad or missing token')
-    return NextResponse.json({ ok: false }, { status: 401 })
+    return NextResponse.json({ ok: false, reason: secret ? 'token_mismatch' : 'secret_not_set' }, { status: 401 })
   }
 
   const circleToken = process.env.CIRCLE_API_TOKEN
