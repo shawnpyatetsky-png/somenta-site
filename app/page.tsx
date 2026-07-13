@@ -598,7 +598,7 @@ function WhoSection() {
             </Reveal>
           </div>
 
-          {/* Right: editorial numbered list */}
+          {/* Right: editorial list */}
           <div style={{ borderTop: `1px solid ${P.div}` }}>
             {WHO_ITEMS.map((item, i) => (
               <Reveal key={item.title} d={i + 1 as 1 | 2 | 3 | 4}>
@@ -611,14 +611,9 @@ function WhoSection() {
                     {WHO_ICONS[item.title]}
                   </div>
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.85rem', marginBottom: '0.55rem' }}>
-                      <span style={{ ...serif, fontStyle: 'italic', fontSize: '12px', color: 'rgba(45,90,64,0.7)' }}>
-                        0{i + 1}
-                      </span>
-                      <h3 style={{ ...serif, fontSize: 'clamp(18px, 1.5vw, 22px)', fontWeight: 500, color: P.text, margin: 0, lineHeight: 1.25 }}>
-                        {item.title}
-                      </h3>
-                    </div>
+                    <h3 style={{ ...serif, fontSize: 'clamp(18px, 1.5vw, 22px)', fontWeight: 500, color: P.text, margin: '0 0 0.55rem', lineHeight: 1.25 }}>
+                      {item.title}
+                    </h3>
                     <p style={{ fontSize: '0.9rem', color: P.text, opacity: 0.72, lineHeight: 1.85, margin: 0, maxWidth: '56ch' }}>
                       {item.body}
                     </p>
