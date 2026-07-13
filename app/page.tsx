@@ -306,7 +306,7 @@ const WEEK_DAYS = [
     ],
   },
   {
-    num: '03', day: 'Wednesday', tag: 'Live Class',
+    num: '03', day: 'Wednesday', tag: 'Live Online Class',
     theme: 'Live Somatic Regulation',
     sentences: [
       'A 60-minute session safely guided by a somatic facilitator.',
@@ -1012,7 +1012,7 @@ function ScheduleSection() {
           </h2>
           <p style={{ fontSize: '0.95rem', color: bodyText, lineHeight: 1.7, margin: '0 auto', maxWidth: '52ch', textAlign: 'center' }}>
             <span style={{ ...serif, fontStyle: 'italic', fontSize: '1.05rem', color: P.rust, fontWeight: 400 }}>Not another content library.</span>{' '}
-            Guided daily practices, live classes, and a community that shows up with you — day after day.
+            Guided daily practices, live classes, and a community that shows up with you — day after day, from wherever you are.
           </p>
         </Reveal>
 
