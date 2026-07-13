@@ -34,7 +34,7 @@ const WELCOME_HTML = (firstName: string) => `
     <p style="margin:0 0 4px">— Jake</p>
     <p style="margin:0 0 28px;color:#6B5A47;font-size:14px">Somenta</p>
 
-    <p style="margin:0;color:#6B5A47;font-size:13.5px;font-style:italic">P.S. If anything&rsquo;s on your mind, just hit reply. A real person reads these.</p>
+    <p style="margin:0;color:#6B5A47;font-size:13.5px;font-style:italic">P.S. If anything&rsquo;s on your mind, just hit reply, and I&rsquo;ll get back to you.</p>
   </div>
 `
 
@@ -110,7 +110,7 @@ export async function GET(req: Request) {
         from: 'Jake from Somenta <jake@joinsomenta.com>',
         replyTo: 'jake@joinsomenta.com',
         to: email,
-        subject: "You've landed.",
+        subject: `Welcome in, ${firstName} 💛`,
         html: WELCOME_HTML(firstName),
       })
       if (sendError) console.error('[circle/check-joins] Resend error for', email, sendError.message)
