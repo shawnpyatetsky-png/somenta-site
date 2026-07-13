@@ -45,7 +45,12 @@ export async function GET(req: Request) {
   const secret = (process.env.CIRCLE_WEBHOOK_SECRET || '').trim()
   if (!secret || url.searchParams.get('token') !== secret) {
     console.warn('[circle/check-joins] rejected: bad or missing token')
-    return NextResponse.json({ ok: false, reason: secret ? 'token_mismatch' : 'secret_not_set' }, { status: 401 })
+    return NextResponse.json({
+      ok: false,
+      reason: secret ? 'token_mismatch' : 'secret_not_set',
+      // Debug: env var NAMES containing CIRCLE (never values) — remove once wired up
+      circleKeys: Object.keys(process.env).filter(k => k.toUpperCase().includes('CIRCLE')),
+    }, { status: 401 })
   }
 
   const circleToken = process.env.CIRCLE_API_TOKEN
