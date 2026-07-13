@@ -55,8 +55,7 @@ export default function ExitPopup() {
         onClick={() => setVisible(false)}
         style={{
           position: 'fixed', inset: 0, zIndex: 9998,
-          background: 'rgba(26,17,8,0.55)',
-          backdropFilter: 'blur(4px)',
+          background: 'rgba(26,17,8,0.62)',
           animation: 'exit-fade-in .3s ease',
         }}
       />
