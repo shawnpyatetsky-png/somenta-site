@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Suspense } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { P, serif, bodyText, photoGrade } from '@/lib/theme'
@@ -289,7 +289,141 @@ function LandingPadContent() {
 
         </div>
       </main>
+
+      <SeatReservePopup email={email} />
     </div>
+  )
+}
+
+// ── Exit-intent seat reservation — shown once, desktop only, if they leave without joining ──
+const SEAT_POPUP_KEY = 'somenta_seat_popup_shown'
+
+function SeatReservePopup({ email }: { email: string }) {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    // Desktop only — touch devices have no exit signal
+    if ('ontouchstart' in window) return
+    if (sessionStorage.getItem(SEAT_POPUP_KEY)) return
+
+    // Require a little time on page so it never fires on an accidental mouse flick
+    let timeEnough = false
+    const timeTimer = setTimeout(() => { timeEnough = true }, 8000)
+
+    const onMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0 && timeEnough) {
+        setVisible(true)
+        sessionStorage.setItem(SEAT_POPUP_KEY, '1')
+        document.removeEventListener('mouseleave', onMouseLeave)
+      }
+    }
+    document.addEventListener('mouseleave', onMouseLeave)
+    return () => {
+      clearTimeout(timeTimer)
+      document.removeEventListener('mouseleave', onMouseLeave)
+    }
+  }, [])
+
+  if (!visible) return null
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        onClick={() => setVisible(false)}
+        style={{
+          position: 'fixed', inset: 0, zIndex: 9998,
+          background: 'rgba(26,17,8,0.62)',
+          animation: 'lp-in .3s ease',
+        }}
+      />
+
+      {/* Modal */}
+      <div style={{
+        position: 'fixed', zIndex: 9999,
+        top: '50%', left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 'min(480px, 92vw)',
+        background: P.bg,
+        borderRadius: 20,
+        overflow: 'hidden',
+        boxShadow: '0 32px 80px rgba(26,17,8,0.3)',
+        textAlign: 'center',
+      }}>
+        {/* Cover photo */}
+        <div style={{ position: 'relative', width: '100%', height: 'clamp(120px, 22vw, 160px)' }}>
+          <Image
+            src="/assets/Laying_meditation_park.jpg"
+            alt="" aria-hidden="true"
+            fill sizes="480px"
+            style={{ objectFit: 'cover', objectPosition: 'center 55%', filter: photoGrade }}
+          />
+        </div>
+
+        {/* Close */}
+        <button
+          onClick={() => setVisible(false)}
+          style={{
+            position: 'absolute', top: 14, right: 14,
+            background: 'rgba(247,243,236,0.85)', border: 'none', cursor: 'pointer',
+            color: P.text, fontSize: '18px', lineHeight: 1, padding: 0,
+            borderRadius: '50%', width: 28, height: 28,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            paddingBottom: '1px',
+          }}
+        >
+          ×
+        </button>
+
+        <div style={{ padding: 'clamp(1.75rem, 4.5vw, 2.5rem)' }}>
+          <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.85rem' }}>
+            Doors open August 3rd
+          </p>
+
+          <h2 style={{
+            ...serif, margin: '0 0 0.9rem',
+            fontSize: 'clamp(21px, 3vw, 26px)',
+            fontWeight: 400, lineHeight: 1.25, color: P.text, letterSpacing: '-0.015em',
+          }}>
+            Hold a seat at our first live class.
+          </h2>
+
+          <p style={{
+            fontSize: '14.5px', lineHeight: 1.75, color: P.muted,
+            margin: '0 0 1.75rem',
+            fontFamily: 'var(--font-inter), -apple-system, sans-serif',
+          }}>
+            Sign up and save your place in opening week&rsquo;s live somatic regulation class — free, live, and guided by our facilitators.
+          </p>
+
+          <a
+            href={CIRCLE_URL}
+            className="lp-btn"
+            onClick={() => {
+              navigator.sendBeacon(
+                '/api/quiz/conversion',
+                new Blob([JSON.stringify({ email, cta: 'landing_pad_seat_reserve' })], { type: 'application/json' })
+              )
+            }}
+          >
+            Reserve my seat →
+          </a>
+
+          <button
+            onClick={() => setVisible(false)}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              fontSize: '13px', color: P.muted, marginTop: '1rem',
+              textDecoration: 'underline', textUnderlineOffset: '3px',
+              textDecorationColor: P.div, padding: 0,
+              fontFamily: 'var(--font-inter), -apple-system, sans-serif',
+            }}
+          >
+            No thanks
+          </button>
+        </div>
+      </div>
+    </>
   )
 }
 
