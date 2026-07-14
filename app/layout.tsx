@@ -102,17 +102,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-        {/* Low-power mode: a ~5ms speed probe before first paint. Slow devices get
-            html.np-lite, which drops the most expensive paint layers (see globals.css).
-            Core-count checks miss slow-but-many-core chips, so we measure instead. */}
+        {/* Low-power mode: devices that jank hard while rendering (>1.2s of long
+            tasks in the first 4s) get html.np-lite — expensive paint layers drop
+            (see globals.css) — and the flag persists so every later visit starts
+            lite. Fast devices pay ~nothing. Synthetic benchmarks can't see paint
+            cost, so we observe the real visit instead. */}
         <script dangerouslySetInnerHTML={{ __html: `
           try {
-            var t = performance.now(), s = 0;
-            for (var i = 0; i < 2e6; i++) { s += i % 3 }
-            var slow = (performance.now() - t) > 18;
-            var n = navigator;
-            if (slow || (n.deviceMemory && n.deviceMemory <= 2) || (n.connection && n.connection.saveData)) {
-              document.documentElement.classList.add('np-lite');
+            var el = document.documentElement, n = navigator;
+            var save = n.connection && n.connection.saveData;
+            var lowMem = n.deviceMemory && n.deviceMemory <= 2;
+            if (localStorage.npLite === '1' || save || lowMem) { el.classList.add('np-lite'); }
+            else if (window.PerformanceObserver) {
+              var jank = 0;
+              var po = new PerformanceObserver(function (l) { l.getEntries().forEach(function (e) { jank += e.duration }) });
+              po.observe({ type: 'longtask', buffered: true });
+              setTimeout(function () {
+                po.disconnect();
+                if (jank > 1200) { el.classList.add('np-lite'); try { localStorage.npLite = '1' } catch (e) {} }
+              }, 4000);
             }
           } catch (e) {}
         `.replace(/\n\s*/g, ' ') }} />
