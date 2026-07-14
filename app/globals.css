@@ -58,3 +58,6 @@ html.np-lite .qz-grain::after,
 html.np-lite .lp-grain::after { display: none !important; }
 html.np-lite img { filter: none !important; }
 html.np-lite * { backdrop-filter: none !important; }
+/* Content is normally hidden until JS reveals it on scroll; on slow devices JS
+   can take many seconds, so show everything immediately instead. */
+html.np-lite .nf { opacity: 1 !important; transform: none !important; transition: none !important; }
