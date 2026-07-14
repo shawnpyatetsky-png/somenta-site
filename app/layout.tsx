@@ -102,6 +102,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+        {/* Low-power mode: a ~5ms speed probe before first paint. Slow devices get
+            html.np-lite, which drops the most expensive paint layers (see globals.css).
+            Core-count checks miss slow-but-many-core chips, so we measure instead. */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          try {
+            var t = performance.now(), s = 0;
+            for (var i = 0; i < 2e6; i++) { s += i % 3 }
+            var slow = (performance.now() - t) > 18;
+            var n = navigator;
+            if (slow || (n.deviceMemory && n.deviceMemory <= 2) || (n.connection && n.connection.saveData)) {
+              document.documentElement.classList.add('np-lite');
+            }
+          } catch (e) {}
+        `.replace(/\n\s*/g, ' ') }} />
       </head>
       <body data-theme="forest" className={`${fraunces.variable} ${inter.variable}`}>
         {children}

@@ -48,3 +48,13 @@ em { font-style: italic; font-weight: 300; }
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* ─── LOW-POWER MODE ───
+   html.np-lite is set by a speed probe in layout.tsx on devices too slow to paint
+   the full design smoothly. Content and layout stay identical; only the most
+   expensive paint layers are dropped. */
+html.np-lite .np-grain::after,
+html.np-lite .qz-grain::after,
+html.np-lite .lp-grain::after { display: none !important; }
+html.np-lite img { filter: none !important; }
+html.np-lite * { backdrop-filter: none !important; }
