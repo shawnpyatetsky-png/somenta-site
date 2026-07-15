@@ -458,8 +458,10 @@ function Hero() {
           quality={70}
           sizes="100vw"
           style={{
+            // Grade is baked into the source file (photoGrade + sepia(0.1) brightness(1.03),
+            // applied mathematically) — no runtime filter on the page's largest surface,
+            // and low-power mode keeps the same warm tone
             objectFit: 'cover', objectPosition: 'center 68%',
-            filter: `${photoGrade} sepia(0.1) brightness(1.03)`,
           }}
         />
 
