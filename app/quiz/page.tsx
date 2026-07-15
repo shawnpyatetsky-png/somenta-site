@@ -649,7 +649,8 @@ export default function QuizPage() {
         backdropFilter: 'blur(12px)',
       }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '9px', textDecoration: 'none' }}>
-          <Image src="/assets/Somenta_Logo_240x60_v4.png" alt="Somenta" width={148} height={37} style={{ objectFit: 'contain' }} />
+          <Image src="/assets/logo-mark-amber.png" alt="Somenta" width={24} height={24} style={{ objectFit: 'contain' }} />
+          <span style={{ ...serif, fontSize: '17px', color: P.text, fontWeight: 400 }}>Somenta</span>
         </a>
         {step && (
           <span style={{ fontSize: '12px', color: P.muted, letterSpacing: '0.08em' }}>

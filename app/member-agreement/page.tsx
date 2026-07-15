@@ -68,7 +68,8 @@ export default function MemberAgreementPage() {
         display: 'flex', alignItems: 'center',
       }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '9px', textDecoration: 'none' }}>
-          <Image src="/assets/Somenta_Logo_240x60_v4.png" alt="Somenta" width={148} height={37} style={{ objectFit: 'contain' }} />
+          <Image src="/assets/logo-mark-amber.png" alt="Somenta" width={26} height={26} style={{ objectFit: 'contain' }} />
+          <span style={{ ...serif, fontSize: '18px', color: P.text, fontWeight: 400 }}>Somenta</span>
         </a>
       </nav>
 
