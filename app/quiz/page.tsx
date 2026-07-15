@@ -649,7 +649,7 @@ export default function QuizPage() {
         backdropFilter: 'blur(12px)',
       }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '9px', textDecoration: 'none' }}>
-          <Image src="/assets/Somenta_Logo_240x60_v4.png" alt="Somenta" width={112} height={28} style={{ objectFit: 'contain' }} />
+          <Image src="/assets/Somenta_Logo_240x60_v4.png" alt="Somenta" width={148} height={37} style={{ objectFit: 'contain' }} />
         </a>
         {step && (
           <span style={{ fontSize: '12px', color: P.muted, letterSpacing: '0.08em' }}>

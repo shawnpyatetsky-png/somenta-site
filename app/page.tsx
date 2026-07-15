@@ -405,7 +405,7 @@ function Nav() {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/Somenta_Logo_240x60_v4.png" alt="Somenta" style={{ height: 30, width: 120, objectFit: 'contain' }} />
+        <img src="/assets/Somenta_Logo_240x60_v4.png" alt="Somenta" style={{ height: 40, width: 160, objectFit: 'contain' }} />
       </button>
       {/* Links center */}
       <div className="np-nav-links" style={{ display: 'flex', gap: '32px', justifyContent: 'center' }}>
