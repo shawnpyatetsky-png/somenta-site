@@ -58,9 +58,7 @@ export default function TermsPage() {
         display: 'flex', alignItems: 'center',
       }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '9px', textDecoration: 'none' }}>
-          <Image src="/assets/logo-mark.png" alt="Somenta" width={22} height={22}
-            style={{ objectFit: 'contain', filter: 'brightness(0) saturate(100%) invert(52%) sepia(48%) saturate(632%) hue-rotate(346deg) brightness(96%) contrast(92%)' }} />
-          <span style={{ ...serif, fontSize: '17px', color: P.text, fontWeight: 400 }}>Somenta</span>
+          <Image src="/assets/Somenta_Logo_240x60_v4.png" alt="Somenta" width={112} height={28} style={{ objectFit: 'contain' }} />
         </a>
       </nav>
 
