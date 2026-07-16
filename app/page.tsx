@@ -367,7 +367,7 @@ const STEPS = [
 
 // ── Hero quote data ───────────────────────────────────────────────────────────
 const HERO_QUOTES = [
-  { quote: '"I\'ve been craving a space like this for years."', name: 'Holly', role: 'Founding Member' },
+  { quote: '"I\'ve been craving a space like this for years."', name: 'Molly', role: 'Founding Member' },
   { quote: '"My habits have gotten better. I feel like I\'m on the right track."', name: 'Cam', role: 'Founding Member' },
   { quote: '"The practices ground you in your body and the present."', name: 'Evan', role: 'Founding Member' },
 ]
