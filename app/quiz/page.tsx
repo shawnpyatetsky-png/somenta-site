@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { P, serif, bodyText } from '@/lib/theme'
+import { P, serif, bodyText, photoGrade } from '@/lib/theme'
+import { Q4_EMPATHY } from '@/lib/results'
 
 // ── CSS ───────────────────────────────────────────────────────────────────────
 const CSS = `
@@ -288,7 +289,7 @@ export default function QuizPage() {
     6: 'q1_capacity', 7: 'q2_somatic_state', 8: 'q6_current_routine',
     9: 'q7_support_system', 10: 'break2_support_checkin',
     11: 'q8_commitment_level',
-    12: 'email_capture', 13: 'calculating',
+    12: 'email_capture', 13: 'calculating', 14: 'pathway_reveal',
   }
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -309,12 +310,10 @@ export default function QuizPage() {
     }
   }, [screen])
 
-  // After calculating screen, redirect to pre-launch landing pad
+  // After calculating screen, advance to the pathway reveal
   useEffect(() => {
     if (screen === 13) {
-      const t = setTimeout(() => {
-        router.push(`/landing-pad?name=${encodeURIComponent(name)}&q4=${q4 ?? 'A'}&q8=${q8 ?? 'B'}&email=${encodeURIComponent(email)}`)
-      }, 1500)
+      const t = setTimeout(advance, 2000)
       return () => clearTimeout(t)
     }
   }, [screen])
@@ -627,6 +626,71 @@ export default function QuizPage() {
           </div>
         </div>
       )
+
+      // ── Screen 14: Pathway reveal — the result, then step one of the pathway ──
+      case 14: {
+        const tierLabel = q8 === 'C' ? 'The Pod' : 'Foundation'
+        const tierShort = q8 === 'C' ? 'Pod' : 'Foundation'
+        const goToLandingPad = () =>
+          router.push(`/landing-pad?name=${encodeURIComponent(name)}&q4=${q4 ?? 'A'}&q8=${q8 ?? 'B'}&email=${encodeURIComponent(email)}`)
+        return (
+          <div className="qz-in" style={{ textAlign: 'center' }}>
+            <h1 style={{
+              ...serif, margin: '0 0 1rem',
+              fontSize: 'clamp(24px, 3.5vw, 32px)',
+              fontWeight: 400, lineHeight: 1.2, color: P.text, letterSpacing: '-0.015em',
+            }}>
+              Welcome, <em>{name}.</em> You&rsquo;ve found a safe place to land.
+            </h1>
+            <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: bodyText, lineHeight: 1.75, margin: '0 auto', maxWidth: '48ch' }}>
+              {Q4_EMPATHY[q4 ?? 'A']} That is exactly why we built Somenta — an integration community opening its doors on August 3rd.
+            </p>
+
+            <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: P.muted, margin: '1.75rem 0 0.6rem' }}>
+              Based on your answers
+            </p>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center',
+              border: '1px solid rgba(45,90,64,0.35)', background: 'rgba(45,90,64,0.07)',
+              borderRadius: 100, padding: '6px 14px',
+              fontSize: '13px', fontWeight: 600, color: P.green,
+            }}>
+              Your pathway: {tierLabel}
+            </span>
+
+            {/* Teaser card — the pathway's first step, not a separate offer */}
+            <div style={{ marginTop: '2rem', border: `2px solid ${P.div}`, borderRadius: 20, overflow: 'hidden', background: P.light, textAlign: 'left' }}>
+              <div style={{ position: 'relative', width: '100%', height: 'clamp(140px, 24vw, 190px)' }}>
+                <Image
+                  src="/assets/meditation_class_indoors.jpg"
+                  alt="" aria-hidden="true"
+                  fill sizes="560px"
+                  style={{ objectFit: 'cover', objectPosition: 'center 14%', filter: photoGrade }}
+                />
+                <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 55%, #FDFBF6 100%)' }} />
+              </div>
+              <div style={{ padding: '0.6rem 1.75rem 1.75rem' }}>
+                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.4rem' }}>
+                  Step one · Free
+                </p>
+                <h2 style={{
+                  ...serif, margin: '0 0 0.4rem',
+                  fontSize: 'clamp(22px, 2.8vw, 27px)',
+                  fontWeight: 400, color: P.text, lineHeight: 1.15, letterSpacing: '-0.015em',
+                }}>
+                  The Landing Pad
+                </h2>
+                <p style={{ fontSize: '14px', color: bodyText, margin: '0 0 1.25rem', lineHeight: 1.65 }}>
+                  A free, private space to settle in before doors open — your {tierShort} spot stays saved.
+                </p>
+                <button className="qz-btn" style={{ width: '100%' }} onClick={goToLandingPad}>
+                  See what&rsquo;s inside →
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      }
 
       default: return null
     }

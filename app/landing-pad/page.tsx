@@ -7,13 +7,6 @@ import { P, serif, bodyText, photoGrade } from '@/lib/theme'
 
 const CIRCLE_URL = 'https://community.joinsomenta.com/join?invitation_token=62db94618ed1ee9815bfd2323aa78bb89565f2ef-e4478c1a-4a2c-4dd5-b62b-e82e90cdbc7d'
 
-const Q4_EMPATHY: Record<string, string> = {
-  A: 'Breaking old routines is incredibly hard, even when you know what needs to change.',
-  B: 'Staying grounded and navigating intense emotions can be exhausting.',
-  C: 'Feeling disconnected from the people in your life is a heavy burden to carry.',
-  D: "Retreating into your head when your body doesn't feel safe makes complete sense.",
-}
-
 const Q4_TESTIMONIAL: Record<string, { quote: string; attribution: string; avatar: string }> = {
   A: {
     quote: '"My habits have gotten better, especially when it comes to getting my daily work done and staying off of social media... It\'s a group to help keep you on track and support you as you move through your life."',
@@ -70,14 +63,11 @@ function CheckIcon() {
 
 function LandingPadContent() {
   const params = useSearchParams()
-  const name = params.get('name') || ''
   const q4 = params.get('q4') || 'A'
   const q8 = params.get('q8') || 'B'
   const email = params.get('email') || ''
 
   const isPod = q8 === 'C'
-  const recommendedTier = isPod ? 'The Pod' : 'Foundation'
-  const empathy = Q4_EMPATHY[q4] ?? Q4_EMPATHY.A
   const testimonial = Q4_TESTIMONIAL[q4] ?? Q4_TESTIMONIAL.A
 
   return (
@@ -105,38 +95,6 @@ function LandingPadContent() {
         padding: '100px clamp(20px,4vw,48px) 80px',
       }}>
         <div className="lp-in" style={{ width: '100%', maxWidth: 600 }}>
-
-          {/* Headline */}
-          <div style={{ marginBottom: '2.5rem', textAlign: 'center' }}>
-            <h1 style={{
-              ...serif, margin: '0 0 1rem',
-              fontSize: 'clamp(22px,3.5vw,30px)',
-              fontWeight: 400, lineHeight: 1.2, color: P.text, letterSpacing: '-0.015em',
-            }}>
-              Welcome, <em>{name}.</em>{' '}You&rsquo;ve found a safe place to land.
-            </h1>
-            <div style={{ maxWidth: '52ch', marginLeft: 'auto', marginRight: 'auto' }}>
-              {/* The human line — spoken voice, not UI text */}
-              <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: bodyText, lineHeight: 1.75, margin: 0 }}>
-                {empathy} That is exactly why we built Somenta — an integration community opening its doors on August 3rd.
-              </p>
-
-              {/* The facts — chips, not a paragraph */}
-              <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: P.muted, margin: '1.5rem 0 0.6rem' }}>
-                Based on your answers
-              </p>
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                <span style={{
-                  display: 'inline-flex', alignItems: 'center',
-                  border: '1px solid rgba(45,90,64,0.35)', background: 'rgba(45,90,64,0.07)',
-                  borderRadius: 100, padding: '6px 14px',
-                  fontSize: '13px', fontWeight: 600, color: P.green,
-                }}>
-                  Your pathway: {recommendedTier}
-                </span>
-              </div>
-            </div>
-          </div>
 
           {/* Card wrapper — badge sits outside overflow:hidden card */}
           <div style={{ position: 'relative' }}>
@@ -207,7 +165,7 @@ function LandingPadContent() {
                     padding: '2px 8px', marginRight: '0.4rem',
                     fontSize: '10px', fontWeight: 700, color: P.rust, letterSpacing: '0.08em',
                   }}>★ Founding Status</span>
-                  Your spot saved for when the community opens
+                  Your {isPod ? 'Pod' : 'Foundation'} spot saved for when the community opens
                 </span>
               </div>
 
