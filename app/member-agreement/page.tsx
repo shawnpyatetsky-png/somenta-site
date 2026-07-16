@@ -92,7 +92,7 @@ export default function MemberAgreementPage() {
           <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: P.rust, margin: '0 0 1.5rem', lineHeight: 1.7 }}>
             This is not fine print. This is what we are building together.
           </p>
-          <P_>Somenta exists because transformation is not the hard part. What comes after is. The quiet stretch where the insight is still fresh but your life has not caught up yet. The moment you realize the people around you cannot quite meet you where you are now.</P_>
+          <P_>Somenta exists because transformation is not the only hard part. What comes after is, too. The quiet stretch where the insight is still fresh but your life has not caught up yet. The moment you realize the people around you cannot quite meet you where you are now.</P_>
           <P_>This community is the container for that stretch. And a container only works if everyone inside it agrees on what it is and how we show up within it.</P_>
           <P_>This Member Agreement is the shared commitment that makes Somenta what it is. It is not enforced by legal consequence. It is held by mutual respect, by the understanding that what we build here depends on how each of us chooses to be here.</P_>
           <P_>Please read this carefully. It is not long. Everything in it matters.</P_>
