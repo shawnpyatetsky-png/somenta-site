@@ -124,9 +124,11 @@ function LandingPadContent() {
                 src="/assets/pexels-solo-meadow.jpg"
                 alt="" aria-hidden="true"
                 fill sizes="600px"
-                style={{ objectFit: 'cover', objectPosition: 'center 100%', filter: photoGrade }}
+                style={{ objectFit: 'cover', objectPosition: 'center 84%', filter: photoGrade }}
               />
-              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 72%, #F0E9DC 100%)' }} />
+              {/* Thin ivory tone — keeps the bright sky from competing with the card */}
+              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'rgba(247,243,236,0.16)' }} />
+              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 80%, #F0E9DC 100%)' }} />
             </div>
 
             {/* Slim identity row — context for anyone arriving outside the quiz flow */}
