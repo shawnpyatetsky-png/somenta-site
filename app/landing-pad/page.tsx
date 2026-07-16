@@ -123,7 +123,7 @@ function LandingPadContent() {
                 src="/assets/Integration_wild.jpg"
                 alt="" aria-hidden="true"
                 fill sizes="600px"
-                style={{ objectFit: 'cover', objectPosition: '60% 68%', filter: photoGrade }}
+                style={{ objectFit: 'cover', objectPosition: '60% 68%', filter: `${photoGrade} brightness(1.16)` }}
               />
               <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 55%, #F0E9DC 100%)' }} />
             </div>
@@ -191,6 +191,29 @@ function LandingPadContent() {
               {/* Divider */}
               <div style={{ height: 1, background: P.div, margin: '1.4rem 0 1.25rem' }} />
 
+              {/* Testimonial — proof right where the hesitant scroll to */}
+              <div style={{ background: P.bgWarm, borderRadius: 14, padding: '1.5rem 1.5rem 1.25rem' }}>
+                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.75rem' }}>
+                  What members like you are saying
+                </p>
+                <p style={{ ...serif, fontSize: '2.5rem', color: P.accent, lineHeight: 1, margin: '0 0 0.25rem', fontStyle: 'normal' }}>
+                  &ldquo;
+                </p>
+                <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: P.text, lineHeight: 1.75, margin: '0 0 1rem' }}>
+                  {testimonial.quote.replace(/^"|"$/g, '')}
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <Image src={testimonial.avatar} alt={testimonial.attribution} width={32} height={32}
+                    style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
+                  <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.06em', fontWeight: 500 }}>
+                    {testimonial.attribution}
+                  </p>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div style={{ height: 1, background: P.div, margin: '1.4rem 0 1.25rem' }} />
+
               {/* Section 2: At launch */}
               <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
                 🗓️ When we open, you&rsquo;ll get:
@@ -214,29 +237,6 @@ function LandingPadContent() {
                   ? 'Pod starts at $40/mo for your first 3 months, then $60 after.'
                   : '$10/mo for your first 3 months, then $25. Pause or cancel anytime.'}
               </p>
-
-              {/* Divider */}
-              <div style={{ height: 1, background: P.div, margin: '1.5rem 0' }} />
-
-              {/* Testimonial */}
-              <div style={{ background: P.bgWarm, borderRadius: 14, padding: '1.5rem 1.5rem 1.25rem' }}>
-                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.75rem' }}>
-                  What members like you are saying
-                </p>
-                <p style={{ ...serif, fontSize: '2.5rem', color: P.accent, lineHeight: 1, margin: '0 0 0.25rem', fontStyle: 'normal' }}>
-                  &ldquo;
-                </p>
-                <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: P.text, lineHeight: 1.75, margin: '0 0 1rem' }}>
-                  {testimonial.quote.replace(/^"|"$/g, '')}
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                  <Image src={testimonial.avatar} alt={testimonial.attribution} width={32} height={32}
-                    style={{ borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
-                  <p style={{ fontSize: '11px', color: P.muted, margin: 0, letterSpacing: '0.06em', fontWeight: 500 }}>
-                    {testimonial.attribution}
-                  </p>
-                </div>
-              </div>
 
             </div>
           </div>
