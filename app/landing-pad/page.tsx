@@ -113,17 +113,27 @@ function LandingPadContent() {
               </span>
             </div>
 
-          {/* Card — the reveal's teaser card already introduced the Landing Pad
-              (title, photo, subtitle), so inside we go straight to the contents */}
+          {/* Card — the reveal's teaser introduced the Landing Pad (indoor class photo
+              + subtitle), so inside we show a different scene: members out in life */}
           <div className="lp-plan">
 
+            {/* Cover — community in the wild, melting into the card */}
+            <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 26vw, 215px)' }}>
+              <Image
+                src="/assets/Integration_wild.jpg"
+                alt="" aria-hidden="true"
+                fill sizes="600px"
+                style={{ objectFit: 'cover', objectPosition: '60% 68%', filter: photoGrade }}
+              />
+              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 55%, #F0E9DC 100%)' }} />
+            </div>
+
             {/* Slim identity row — context for anyone arriving outside the quiz flow */}
-            <div style={{ padding: '1.5rem 2rem 0.9rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm, textAlign: 'center' }}>
+            <div style={{ padding: '0.4rem 2rem 0.9rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm, textAlign: 'center' }}>
               <h2 style={{
                 ...serif, margin: 0,
                 fontSize: 'clamp(20px,2.5vw,24px)',
                 fontWeight: 400, color: P.text, lineHeight: 1.1, letterSpacing: '-0.015em',
-                paddingBottom: '0.9rem',
               }}>
                 The Landing Pad
               </h2>
