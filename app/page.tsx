@@ -1223,7 +1223,10 @@ function ScheduleSection() {
                   {/* Right: photo */}
                   <div className="np-sched-photo" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem 1rem 0' }}>
                     <div className="np-sched-img" style={PHOTO_CARD_STYLE}>
-                      <Image src={polaroid.src} alt="" fill loading="eager" sizes="185px" style={{ objectFit: 'cover', objectPosition: polaroid.pos, filter: photoGrade }} />
+                      {/* sizes is intentionally large: these are portrait crops of mostly
+                          landscape photos, so the variant needs generous HEIGHT or it
+                          upscales and blurs */}
+                      <Image src={polaroid.src} alt="" fill loading="eager" sizes="420px" style={{ objectFit: 'cover', objectPosition: polaroid.pos, filter: photoGrade }} />
                     </div>
                   </div>
                 </DayPanel>

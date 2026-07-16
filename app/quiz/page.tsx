@@ -125,33 +125,28 @@ const Q8_OPTS = [
   { key: 'C', label: <><strong style={{ fontWeight: 600 }}>Going deep:</strong> About 2 hours a week to include the live class plus an intimate, facilitated small group where we actively share together</> },
 ]
 
-// Rust-italic emphasis — the one phrase per break screen a skimmer's eye should land on
-const Hi = ({ children }: { children: React.ReactNode }) => (
-  <em style={{ ...serif, fontStyle: 'italic', color: P.rust, fontWeight: 500 }}>{children}</em>
-)
-
-const Q4_BREAK: Record<string, { heading: string; body: React.ReactNode; quote: string; attribution: string }> = {
+const Q4_BREAK: Record<string, { heading: string; body: string; quote: string; attribution: string }> = {
   A: {
     heading: 'Willpower alone rarely wins against deeply ingrained routines.',
-    body: <>It&rsquo;s completely normal for your everyday environment to pull you right back into familiar ruts. Instead, combining <Hi>a gentle, consistent structure with reliable support</Hi> creates the ideal foundation to break through and stay on track.</>,
+    body: "It's completely normal for your everyday environment to pull you right back into familiar ruts. Instead, combining a gentle, consistent structure with reliable support creates the ideal foundation to break through and stay on track.",
     quote: '"I feel like I\'m falling right back into my standard route as a result of not having [support]... It\'s almost as if I\'m trapped in a world that I don\'t want to live in, but I\'m in."',
     attribution: '— Damon, 52 · Plant Medicine Retreat',
   },
   B: {
     heading: 'When you go through a profound shift, feeling overwhelmed is completely natural.',
-    body: <><Hi>You don&rsquo;t need to fix everything at once.</Hi> The most effective integration happens when you have a safe place to land, a guided rhythm and a supportive community to help you gently manage those emotions.</>,
+    body: "You don't need to fix everything at once. The most effective integration happens when you have a safe place to land, a guided rhythm and a supportive community to help you gently manage those emotions.",
     quote: '"I came back with a ton of anger... there\'s this sense of healing and this sense of anger that I don\'t have anywhere to put at all. It makes integration for me very clouded."',
     attribution: '— Damon, 52 · Plant Medicine Retreat',
   },
   C: {
     heading: "After a profound insight, it's incredibly common to feel like you're suddenly speaking a different language than the people in your life.",
-    body: <>When your old relationships no longer align with who you are becoming, that gap can leave you feeling deeply unseen. The most effective way to bridge that gap is finding a safe container of peers who actually get it, so <Hi>you never have to translate, hide, or defend your journey.</Hi></>,
+    body: "When your old relationships no longer align with who you are becoming, that gap can leave you feeling deeply unseen. The most effective way to bridge that gap is finding a safe container of peers who actually get it, so you never have to translate, hide, or defend your journey.",
     quote: '"There are things in life that people just don\'t understand. You can\'t explain this to people and you can talk to people about it to an extent, but they don\'t really get it."',
     attribution: '— Steve, 45 · Plant Medicine Retreat',
   },
   D: {
     heading: 'Mental insight is only half of the experience.',
-    body: <>It&rsquo;s common to try and make sense of profound experiences purely through thought, leaving the physical self behind. But while the mind understands the shift, a safe, guided rhythm with somatic-based practices can <Hi>bridge the gap between your mind and body.</Hi></>,
+    body: "It's common to try and make sense of profound experiences purely through thought, leaving the physical self behind. But while the mind understands the shift, a safe, guided rhythm with somatic-based practices can bridge the gap between your mind and body.",
     quote: '"My brain goes at a million miles an hour. It\'s just f****** going non-stop though. So, I really struggle with that being present... I\'m trying to shut out that external noise."',
     attribution: '— Steve, 45 · Plant Medicine Retreat',
   },
@@ -161,22 +156,22 @@ const Q7_BREAK: Record<string, { heading: string; body1: string; body2: React.Re
   A: {
     heading: 'Professional help is a powerful starting point, but peer connection adds a completely new layer.',
     body1: 'Having a therapist is incredibly valuable, but it is not the same as being seen and heard by a community of people who are walking a similar path.',
-    body2: <>You need a space to <Hi>actually put that therapy into practice</Hi> — a place where your experience is a shared reality.</>,
+    body2: <>You need a space to actually put that therapy into practice — a place where your experience is a shared reality.</>,
   },
   B: {
     heading: "Having friends who care is amazing, but it isn't their fault if they can't understand everything you're going through.",
     body1: "It can be exhausting to constantly explain, filter, or translate your inner shifts to people who haven't been in a similar mental space.",
-    body2: <>The process of integration requires an emotionally safe space where you can <Hi>share vulnerable, unfiltered thoughts</Hi> with a community that immediately understands the depth of your journey.</>,
+    body2: <>The process of integration requires an emotionally safe space where you can share vulnerable, unfiltered thoughts with a community that immediately understands the depth of your journey.</>,
   },
   C: {
     heading: "You don't have to do this alone.",
     body1: "Navigating a profound shift by yourself can feel incredibly isolating, almost like you're speaking a language no one else understands.",
-    body2: <>But there is a profound, immediate relief that happens the moment you share your experience and hear someone else say, <Hi>"I know exactly how that feels."</Hi> We're built to be that space for you.</>,
+    body2: <>But there is a profound, immediate relief that happens the moment you share your experience and hear someone else say, "I know exactly how that feels." We're built to be that space for you.</>,
   },
   D: {
     heading: 'A dedicated community changes everything.',
     body1: "Sounds like you've laid a great foundation, but patching together scattered resources can quickly become exhausting. Craving a consistent, dedicated space to share and connect is completely natural right now.",
-    body2: <>Stepping into a reliable community <Hi>eases your emotional load</Hi> and provides the exact foundation to anchor your growth to.</>,
+    body2: <>Stepping into a reliable community eases your emotional load and provides the exact foundation to anchor your growth to.</>,
   },
 }
 
@@ -400,7 +395,7 @@ export default function QuizPage() {
             fontSize: 'clamp(22px, 3.5vw, 32px)',
             fontWeight: 400, lineHeight: 1.3, color: P.text, letterSpacing: '-0.015em',
           }}>
-            Nice to meet you, <em>{name}.</em><br />
+            Nice to meet you, {name}.<br />
             Let&rsquo;s map out your integration journey.
           </h2>
         </div>
@@ -645,7 +640,7 @@ export default function QuizPage() {
               fontSize: 'clamp(24px, 3.5vw, 32px)',
               fontWeight: 400, lineHeight: 1.2, color: P.text, letterSpacing: '-0.015em',
             }}>
-              Welcome, <em>{name}.</em> You&rsquo;ve found a safe place to land.
+              Welcome, {name}. You&rsquo;ve found a safe place to land.
             </h1>
             <p style={{ ...serif, fontStyle: 'italic', fontSize: '16px', color: bodyText, lineHeight: 1.75, margin: '0 auto', maxWidth: '48ch' }}>
               {Q4_EMPATHY[q4 ?? 'A']} That is exactly why we built Somenta — an integration community opening its doors on August 3rd.
