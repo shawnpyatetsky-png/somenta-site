@@ -3,7 +3,7 @@
 import React, { Suspense, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { P, serif, bodyText, photoGrade } from '@/lib/theme'
+import { P, serif, photoGrade } from '@/lib/theme'
 
 const CIRCLE_URL = 'https://community.joinsomenta.com/join?invitation_token=62db94618ed1ee9815bfd2323aa78bb89565f2ef-e4478c1a-4a2c-4dd5-b62b-e82e90cdbc7d'
 
@@ -113,32 +113,20 @@ function LandingPadContent() {
               </span>
             </div>
 
-          {/* Card */}
+          {/* Card — the reveal's teaser card already introduced the Landing Pad
+              (title, photo, subtitle), so inside we go straight to the contents */}
           <div className="lp-plan">
 
-            {/* Cover — the circle they're joining, melting into the card */}
-            <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 26vw, 215px)' }}>
-              <Image
-                src="/assets/meditation_class_indoors.jpg"
-                alt="" aria-hidden="true"
-                fill sizes="600px"
-                style={{ objectFit: 'cover', objectPosition: 'center 14%', filter: photoGrade }}
-              />
-              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 55%, #F0E9DC 100%)' }} />
-            </div>
-
-            {/* Card header */}
-            <div style={{ padding: '0.9rem 2rem 1.5rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm }}>
+            {/* Slim identity row — context for anyone arriving outside the quiz flow */}
+            <div style={{ padding: '1.5rem 2rem 0.9rem', borderBottom: `1px solid ${P.div}`, background: P.bgWarm, textAlign: 'center' }}>
               <h2 style={{
-                ...serif, margin: '0 0 0.35rem',
-                fontSize: 'clamp(24px,3vw,30px)',
+                ...serif, margin: 0,
+                fontSize: 'clamp(20px,2.5vw,24px)',
                 fontWeight: 400, color: P.text, lineHeight: 1.1, letterSpacing: '-0.015em',
+                paddingBottom: '0.9rem',
               }}>
                 The Landing Pad
               </h2>
-              <p style={{ fontSize: '14px', color: bodyText, margin: 0, lineHeight: 1.6 }}>
-                Holding a free private space to see what Somenta is all about before the community officially kicks off.
-              </p>
             </div>
 
             {/* Card body */}
