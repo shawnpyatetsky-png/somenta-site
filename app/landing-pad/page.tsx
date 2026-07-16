@@ -117,15 +117,16 @@ function LandingPadContent() {
               + subtitle), so inside we show a different scene: members out in life */}
           <div className="lp-plan">
 
-            {/* Cover — community in the wild, melting into the card */}
+            {/* Cover — one person at rest in the meadow: the Landing Pad's actual promise.
+                Community imagery lives on the teaser and at launch */}
             <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 26vw, 215px)' }}>
               <Image
-                src="/assets/Integration_wild.jpg"
+                src="/assets/pexels-solo-meadow.jpg"
                 alt="" aria-hidden="true"
                 fill sizes="600px"
-                style={{ objectFit: 'cover', objectPosition: '60% 68%', filter: `${photoGrade} brightness(1.16)` }}
+                style={{ objectFit: 'cover', objectPosition: 'center 100%', filter: photoGrade }}
               />
-              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 55%, #F0E9DC 100%)' }} />
+              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(180deg, transparent 72%, #F0E9DC 100%)' }} />
             </div>
 
             {/* Slim identity row — context for anyone arriving outside the quiz flow */}
