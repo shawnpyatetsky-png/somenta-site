@@ -355,7 +355,7 @@ const WEEK_DAYS = [
 const TESTIMONIALS = [
   { outcome: 'Making insights stick, not fade', quote: "The reflection and constant reminder of my experience and how to land it best in my daily life. Having that is extremely valuable and allows it not to fall by the wayside.", name: 'Damon, Founding Member', photo: '/assets/damon.jpg' },
   { outcome: 'Taking clear action, not overthinking', quote: "My habits have gotten better, especially when it comes to getting my daily work done and staying off of social media. I feel like I'm on the right track.", name: 'Cam, Founding Member', photo: '/assets/cam.jpg' },
-  { outcome: 'Staying grounded, not scattered', quote: "It is an active group with great leaders/coaches and good interactive workshops… that really help ground and bring yourself into your body and the present.", name: 'Evan, Founding Member', photo: '/assets/evan.jpg' },
+  { outcome: 'Staying grounded, not scattered', quote: "It's an active group with great leaders/coaches and good interactive workshops… that really help ground and bring yourself into your body and the present.", name: 'Evan, Founding Member', photo: '/assets/evan.jpg' },
 ]
 
 const STEPS = [

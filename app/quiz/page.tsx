@@ -141,7 +141,7 @@ const Q4_BREAK: Record<string, { heading: string; body: string; quote: string; a
   C: {
     heading: "After a profound insight, it's incredibly common to feel like you're suddenly speaking a different language than the people in your life.",
     body: "When your old relationships no longer align with who you are becoming, that gap can leave you feeling deeply unseen. The most effective way to bridge that gap is finding a safe container of peers who actually get it, so you never have to translate, hide, or defend your journey.",
-    quote: '"There are things in life that people just don\'t understand. You cannot explain this to people and you can talk to people about it to an extent, but they don\'t really get it."',
+    quote: '"There are things in life that people just don\'t understand. You can\'t explain this to people and you can talk to people about it to an extent, but they don\'t really get it."',
     attribution: '— Steve, 45 · Plant Medicine Retreat',
   },
   D: {

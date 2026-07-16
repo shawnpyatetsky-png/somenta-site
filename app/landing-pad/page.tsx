@@ -24,7 +24,7 @@ const Q4_TESTIMONIAL: Record<string, { quote: string; attribution: string; avata
     avatar: '/assets/britt_breathing.jpg',
   },
   D: {
-    quote: '"It is an active group with great leaders and coaches, and good interactive workshops that really help ground and bring yourself into your body and the present."',
+    quote: '"It\'s an active group with great leaders and coaches, and good interactive workshops that really help ground and bring yourself into your body and the present."',
     attribution: 'Evan, 28 · Plant Medicine Retreat',
     avatar: '/assets/evan.jpg',
   },
