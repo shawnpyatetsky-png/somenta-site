@@ -237,7 +237,7 @@ function LandingPadContent() {
               {/* Price-as-info */}
               <p style={{ fontSize: '13px', color: P.muted, lineHeight: 1.8, margin: '0.9rem 0 0' }}>
                 {isPod
-                  ? 'Pod starts at $40/mo for your first 3 months, then $60 after.'
+                  ? 'Pod starts at $40/mo for your first 3 months, then $60 after. Prefer to start lighter? Foundation begins at $10/mo.'
                   : '$10/mo for your first 3 months, then $25. Pause or cancel anytime.'}
               </p>
 
