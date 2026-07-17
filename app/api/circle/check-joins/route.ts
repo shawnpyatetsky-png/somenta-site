@@ -11,13 +11,16 @@
 
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 import { NextResponse } from 'next/server'
 
 const COMMUNITY_ID = 465458
 
 const WELCOME_HTML = (firstName: string) => `
   <div style="font-family:Georgia,serif;max-width:540px;margin:0 auto;color:#281B0D;line-height:1.75;font-size:16px;padding:8px 4px">
-    <p style="margin:0 0 20px">Hi ${firstName},</p>
+    <p style="margin:0 0 20px">Hey ${firstName},</p>
+
+    <p style="margin:0 0 20px">My name is Jake and I&rsquo;m one of the creators of Somenta. Super happy to have you here, and I&rsquo;m around for any questions you may have.</p>
 
     <p style="margin:0 0 20px">Welcome to the Landing Pad — and thank you for trusting us with this stretch of your journey.</p>
 
@@ -104,19 +107,47 @@ export async function GET(req: Request) {
 
     // Only welcome genuinely new members — older ones are seeded silently
     const joinedAt = Date.parse(m.created_at || '') || 0
-    if (resend && joinedAt > cutoff) {
+    if (joinedAt > cutoff) {
       const firstName = String(m.first_name || m.name || '').trim().split(/\s+/)[0] || 'there'
-      const { error: sendError } = await resend.emails.send({
-        from: 'Jake from Somenta <jake@joinsomenta.com>',
-        replyTo: 'jake@joinsomenta.com',
-        to: email,
-        subject: `Welcome in, ${firstName} 💛`,
-        html: WELCOME_HTML(firstName),
-      })
-      if (sendError) console.error('[circle/check-joins] Resend error for', email, sendError.message)
-      else {
-        welcomed++
-        console.log('[circle/check-joins] welcomed', email)
+      const subject = `Welcome in, ${firstName} 💛`
+      const html = WELCOME_HTML(firstName)
+
+      // Prefer sending through Jake's real mailbox (personal-mail infrastructure
+      // lands in Primary, not Promotions); fall back to Resend if SMTP isn't configured
+      const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env
+      try {
+        if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
+          const transporter = nodemailer.createTransport({
+            host: SMTP_HOST,
+            port: Number(process.env.SMTP_PORT || 587),
+            secure: false,
+            auth: { user: SMTP_USER, pass: SMTP_PASS },
+          })
+          await transporter.sendMail({
+            from: `"Jake from Somenta" <${SMTP_USER}>`,
+            replyTo: SMTP_USER,
+            to: email,
+            subject,
+            html,
+          })
+          welcomed++
+          console.log('[circle/check-joins] welcomed via mailbox SMTP:', email)
+        } else if (resend) {
+          const { error: sendError } = await resend.emails.send({
+            from: 'Jake from Somenta <jake@joinsomenta.com>',
+            replyTo: 'jake@joinsomenta.com',
+            to: email,
+            subject,
+            html,
+          })
+          if (sendError) console.error('[circle/check-joins] Resend error for', email, sendError.message)
+          else {
+            welcomed++
+            console.log('[circle/check-joins] welcomed via Resend:', email)
+          }
+        }
+      } catch (e) {
+        console.error('[circle/check-joins] send failed for', email, e instanceof Error ? e.message : e)
       }
     }
   }
