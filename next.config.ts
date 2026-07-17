@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
       // Cold links (bios, profiles) — homepage first; the tag carries into the quiz
       { source: '/jake-site', destination: '/?src=fb-jake', permanent: false },
       { source: '/coach-site', destination: '/?src=coaches', permanent: false },
+      { source: '/reddit-site', destination: '/?src=reddit-profile', permanent: false },
     ]
   },
   images: {
