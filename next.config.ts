@@ -5,9 +5,13 @@ const nextConfig: NextConfig = {
   // so DMs and bios carry joinsomenta.com/jake instead of ?src=... clutter
   async redirects() {
     return [
+      // Warm links (after a conversation) — straight to the quiz
       { source: '/jake', destination: '/quiz?src=fb-jake', permanent: false },
       { source: '/reddit', destination: '/quiz?src=reddit-shawn', permanent: false },
       { source: '/coach', destination: '/quiz?src=coaches', permanent: false },
+      // Cold links (bios, profiles) — homepage first; the tag carries into the quiz
+      { source: '/jake-site', destination: '/?src=fb-jake', permanent: false },
+      { source: '/coach-site', destination: '/?src=coaches', permanent: false },
     ]
   },
   images: {
