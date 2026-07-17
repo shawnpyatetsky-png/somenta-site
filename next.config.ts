@@ -1,6 +1,15 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // Clean shareable links — each forwards to the quiz with its source tag,
+  // so DMs and bios carry joinsomenta.com/jake instead of ?src=... clutter
+  async redirects() {
+    return [
+      { source: '/jake', destination: '/quiz?src=fb-jake', permanent: false },
+      { source: '/reddit', destination: '/quiz?src=reddit-shawn', permanent: false },
+      { source: '/coach', destination: '/quiz?src=coaches', permanent: false },
+    ]
+  },
   images: {
     // Serve modern compressed formats, sized to the visitor's screen.
     // AVIF first (smallest), WebP fallback.
