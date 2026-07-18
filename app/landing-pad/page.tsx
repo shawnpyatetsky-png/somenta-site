@@ -182,6 +182,9 @@ function LandingPadContent() {
                       '/api/quiz/conversion',
                       new Blob([JSON.stringify({ email, cta: 'landing_pad_join' })], { type: 'application/json' })
                     )
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const gtag = (window as any).gtag
+                    if (typeof gtag === 'function') gtag('event', 'landing_pad_join')
                   }}
                 >
                   Enter The Landing Pad (Free) →
@@ -367,6 +370,9 @@ function SeatReservePopup({ email }: { email: string }) {
                 '/api/quiz/conversion',
                 new Blob([JSON.stringify({ email, cta: 'landing_pad_seat_reserve' })], { type: 'application/json' })
               )
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const gtag = (window as any).gtag
+              if (typeof gtag === 'function') gtag('event', 'landing_pad_seat_reserve')
             }}
           >
             Reserve my seat →
