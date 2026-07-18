@@ -11,8 +11,8 @@ export default async function Image() {
 
   const fontData       = readFileSync(join(root, 'fonts/Fraunces.ttf'))
   const fontItalicData = readFileSync(join(root, 'fonts/Fraunces-Italic-Light.ttf'))
-  const mountainBuf = readFileSync(join(root, 'assets/mountain_hero_wider.jpg'))
-  const logoBuf     = readFileSync(join(root, 'assets/logo-mark.png'))
+  const mountainBuf = readFileSync(join(root, 'assets/pexels-natalka-17844889.jpg'))
+  const logoBuf     = readFileSync(join(root, 'assets/logo-mark-amber.png'))
 
   const mountainSrc = `data:image/jpeg;base64,${mountainBuf.toString('base64')}`
   const logoSrc     = `data:image/png;base64,${logoBuf.toString('base64')}`
@@ -22,12 +22,12 @@ export default async function Image() {
       <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#1A1108' }}>
 
         {/* Mountain */}
-        <img src={mountainSrc} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 22%' }} />
+        <img src={mountainSrc} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
 
-        {/* Overlay — light at top so dark text reads, dark at bottom */}
+        {/* Overlay — ivory fog at top so dark text reads, dark at bottom */}
         <div style={{
           position: 'absolute', inset: 0, display: 'flex',
-          background: 'linear-gradient(180deg, rgba(247,243,236,0.10) 0%, rgba(26,17,8,0.28) 50%, rgba(26,17,8,0.92) 100%)',
+          background: 'linear-gradient(180deg, rgba(247,243,236,0.78) 0%, rgba(247,243,236,0.30) 42%, rgba(26,17,8,0.30) 70%, rgba(26,17,8,0.90) 100%)',
         }} />
 
         {/* Headline */}

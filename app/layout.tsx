@@ -10,7 +10,7 @@ const organizationSchema = {
   name: 'Somenta',
   url: 'https://www.joinsomenta.com',
   logo: 'https://www.joinsomenta.com/assets/logo-mark.png',
-  description: 'Somenta is an online membership community for psychedelic integration, plant medicine integration, and post-retreat support. We provide structured daily somatic practices, weekly live breathwork and meditation classes, and intimate peer share pods to help people translate profound retreat insights into lasting everyday change.',
+  description: 'Somenta is an online membership community for psychedelic integration and plant medicine integration, built for life after a retreat. We provide structured daily somatic practices, weekly live breathwork and meditation classes, and intimate peer share pods to help people translate profound retreat insights into lasting everyday change.',
   email: 'hello@joinsomenta.com',
   sameAs: [],
 }
@@ -20,12 +20,12 @@ const serviceSchema = {
   '@type': 'Service',
   name: 'Somenta Membership',
   provider: { '@type': 'Organization', name: 'Somenta', url: 'https://www.joinsomenta.com' },
-  description: 'A peer-supported online community for psychedelic integration, plant medicine integration, and post-retreat support. Offers daily breathwork and somatic audio drops, weekly live meditation and regulation classes, intimate 12-week facilitated share pods, and silent co-working practice rooms for individuals navigating life after ayahuasca, psilocybin, breathwork intensives, silent retreats, or other transformative experiences.',
+  description: 'A peer-supported online community for psychedelic integration, plant medicine integration, and life integration after a retreat. Offers daily breathwork and somatic audio drops, weekly live meditation and regulation classes, intimate 12-week facilitated share pods, and silent co-working practice rooms for individuals navigating life after ayahuasca, psilocybin, breathwork intensives, silent retreats, or other transformative experiences.',
   url: 'https://www.joinsomenta.com',
   serviceType: 'Integration Support Community',
   audience: {
     '@type': 'Audience',
-    audienceType: 'Adults seeking psychedelic integration support, plant medicine integration, post-retreat support, or breathwork integration after ayahuasca, psilocybin, DMT, ketamine, MDMA, silent meditation retreats, or somatic intensives.',
+    audienceType: 'Adults seeking psychedelic integration, plant medicine integration, life integration after a retreat, or breathwork integration after ayahuasca, psilocybin, DMT, ketamine, MDMA, silent meditation retreats, or somatic intensives.',
   },
   offers: [
     {
@@ -91,7 +91,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Somenta — A membership community for life integration',
-  description: 'Somenta is a membership community for psychedelic integration and post-retreat support. Daily somatic practices, live breathwork and meditation classes, and intimate peer pods to help you translate plant medicine, ayahuasca, psilocybin, or retreat insights into lasting change.',
+  description: 'Somenta is a membership community for psychedelic integration, focused on turning insights into daily life. Somatic practices, live breathwork and meditation classes, and intimate peer pods to help you translate plant medicine, ayahuasca, psilocybin, or retreat insights into lasting change.',
   icons: { icon: '/assets/Somenta_Icon_32x32_Amber.png' },
 }
 
