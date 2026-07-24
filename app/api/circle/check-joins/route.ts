@@ -89,6 +89,10 @@ export async function GET(req: Request) {
   const seenSet = new Set((seen ?? []).map(r => (r.email || '').toLowerCase()))
 
   const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
+  // Welcome emails are PAUSED — flip to true to resume sending Jake's welcome email.
+  // Joins are still tracked in cta_events; only the email send is skipped.
+  const SEND_WELCOME_EMAILS = false
+
   const cutoff = Date.now() - 48 * 60 * 60 * 1000
   let logged = 0
   let welcomed = 0
@@ -107,7 +111,7 @@ export async function GET(req: Request) {
 
     // Only welcome genuinely new members — older ones are seeded silently
     const joinedAt = Date.parse(m.created_at || '') || 0
-    if (joinedAt > cutoff) {
+    if (joinedAt > cutoff && SEND_WELCOME_EMAILS) {
       const firstName = String(m.first_name || m.name || '').trim().split(/\s+/)[0] || 'there'
       const subject = `Welcome in, ${firstName} 💛`
       const html = WELCOME_HTML(firstName)
