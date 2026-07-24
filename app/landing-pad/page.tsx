@@ -217,38 +217,6 @@ function LandingPadContent() {
                 </div>
               </div>
 
-              {/* Divider */}
-              <div style={{ height: 1, background: P.div, margin: '1.4rem 0 1.25rem' }} />
-
-              {/* Section 2: At launch */}
-              <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.5rem' }}>
-                🗓️ When we open, you&rsquo;ll get:
-              </p>
-              {[
-                'Rotating weekly live classes from our experienced facilitators',
-                ...(isPod ? ['Small, intimate weekly share circles led by our facilitators'] : []),
-                'Short, daily practices & prompts that fit into your busy day',
-                'Live, weekly practice room to journal, meditate, or simply be next to other members',
-                'Full access to an incredible community of people all around the world who are going through something similar',
-              ].map((line, i) => (
-                <div key={i} className="lp-feat-row">
-                  <CheckIcon />
-                  <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
-                </div>
-              ))}
-
-              {/* Price-as-info */}
-              <p style={{ fontSize: '13px', color: P.muted, lineHeight: 1.8, margin: '0.9rem 0 0' }}>
-                {isPod
-                  ? 'Pod starts at $40/mo for your first 3 months, then $60 after.'
-                  : '$10/mo for your first 3 months, then $25. Pause or cancel anytime.'}
-              </p>
-              {isPod && (
-                <p style={{ fontSize: '13px', color: P.muted, lineHeight: 1.8, margin: '0.35rem 0 0' }}>
-                  Prefer to start lighter? Foundation begins at $10/mo.
-                </p>
-              )}
-
             </div>
           </div>
           </div>{/* end card wrapper */}
