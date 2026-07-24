@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
       { source: '/jake-site', destination: '/?src=fb-jake', permanent: false },
       { source: '/coach-site', destination: '/?src=coaches', permanent: false },
       { source: '/reddit-site', destination: '/?src=reddit-profile', permanent: false },
+      // Warm-lead links — straight to the Landing Pad, tagged by who shared it
+      { source: '/pad-shawn', destination: '/landing-pad?src=lp-shawn', permanent: false },
+      { source: '/pad-jake', destination: '/landing-pad?src=lp-jake', permanent: false },
+      { source: '/pad-coach', destination: '/landing-pad?src=lp-coach', permanent: false },
     ]
   },
   images: {
