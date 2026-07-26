@@ -434,7 +434,7 @@ function Nav() {
             fontSize: '13.5px', letterSpacing: '0.01em', whiteSpace: 'nowrap',
           }}
         >
-          Log in
+          Member Login
         </a>
         <a href="/quiz" style={{ textDecoration: 'none' }}>
           <button className="np-btn-outline np-nav-cta" style={{
