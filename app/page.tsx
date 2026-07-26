@@ -425,7 +425,7 @@ function Nav() {
       {/* Right cluster: log in (existing members) + primary CTA */}
       <div style={{ justifySelf: 'end', display: 'flex', alignItems: 'center', gap: 'clamp(12px, 2vw, 22px)' }}>
         <a
-          href="https://login.circle.so/sign_in?request_host=community.joinsomenta.com#email"
+          href="https://login.circle.so/sign_in"
           target="_blank"
           rel="noopener noreferrer"
           className="np-nav-login np-nav-link"
