@@ -422,8 +422,20 @@ function Nav() {
           </button>
         ))}
       </div>
-      {/* CTA right */}
-      <div style={{ justifySelf: 'end' }}>
+      {/* Right cluster: log in (existing members) + primary CTA */}
+      <div style={{ justifySelf: 'end', display: 'flex', alignItems: 'center', gap: 'clamp(12px, 2vw, 22px)' }}>
+        <a
+          href="https://login.circle.so/sign_in?request_host=community.joinsomenta.com#email"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="np-nav-login np-nav-link"
+          style={{
+            textDecoration: 'none', color: P.text,
+            fontSize: '13.5px', letterSpacing: '0.01em', whiteSpace: 'nowrap',
+          }}
+        >
+          Log in
+        </a>
         <a href="/quiz" style={{ textDecoration: 'none' }}>
           <button className="np-btn-outline np-nav-cta" style={{
             background: 'transparent', color: P.accent, border: `1.5px solid ${P.accent}`,
