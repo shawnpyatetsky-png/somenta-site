@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 
-export const alt = 'The Landing Pad — a free space to land.'
+export const alt = 'The Landing Pad — a space to land.'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -38,7 +38,7 @@ export default async function Image() {
           padding: '0 80px',
         }}>
           <span style={{ fontFamily: 'Fraunces', fontSize: 76, fontWeight: 400, fontStyle: 'normal', color: '#281B0D', lineHeight: 1.1, letterSpacing: '-0.022em' }}>
-            A free space
+            A space
           </span>
           <span style={{ fontFamily: 'Fraunces', fontSize: 76, fontWeight: 300, fontStyle: 'italic', color: '#281B0D', lineHeight: 1.1, letterSpacing: '-0.022em' }}>
             to land.
