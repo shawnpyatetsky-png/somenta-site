@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
       { source: '/pad-shawn', destination: '/landing-pad?src=lp-shawn', permanent: false },
       { source: '/pad-jake', destination: '/landing-pad?src=lp-jake', permanent: false },
       { source: '/pad-coach', destination: '/landing-pad?src=lp-coach', permanent: false },
+      // Partner link — Sacred Vine Tribe (sacredvinetribe.org) → homepage, tagged
+      { source: '/vine', destination: '/?src=sacredvine', permanent: false },
     ]
   },
   images: {
