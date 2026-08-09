@@ -109,7 +109,7 @@ function LandingPadContent() {
               zIndex: 10,
             }}>
               <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: P.rust }}>
-                ★ Your Pre-Launch Invitation
+                ★ Founding Member Invitation
               </span>
             </div>
 
@@ -145,18 +145,23 @@ function LandingPadContent() {
             {/* Card body */}
             <div className="lp-inner" style={{ padding: '1.75rem 2rem' }}>
 
-              {/* Section 1: Free now */}
+              {/* What you get — community is open, everything present tense */}
               <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: P.accent, margin: '0 0 0.5rem' }}>
-                🌤️ What you get right now:
+                🌤️ What you get:
               </p>
-              <div className="lp-feat-row">
-                <CheckIcon />
-                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Your first 5-minute somatic practice</span>
-              </div>
-              <div className="lp-feat-row">
-                <CheckIcon />
-                <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>Early practices, updates, and intros to the facilitators</span>
-              </div>
+              {[
+                'Your first 5-minute somatic practice, today',
+                'Rotating weekly live classes with our facilitators',
+                ...(isPod ? ['Small, intimate weekly share circles'] : []),
+                'Short daily practices that fit into your day',
+                'A live weekly practice room to journal, meditate, or just be near other members',
+                'Full access to a community of people all over the world going through something similar',
+              ].map((line, i) => (
+                <div key={i} className="lp-feat-row">
+                  <CheckIcon />
+                  <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>{line}</span>
+                </div>
+              ))}
               <div className="lp-feat-row">
                 <CheckIcon />
                 <span style={{ fontSize: '14px', color: P.text, lineHeight: 1.6, fontWeight: 500 }}>
@@ -165,8 +170,8 @@ function LandingPadContent() {
                     background: 'rgba(184,80,48,0.12)', borderRadius: 4,
                     padding: '2px 8px', marginRight: '0.4rem',
                     fontSize: '10px', fontWeight: 700, color: P.rust, letterSpacing: '0.08em',
-                  }}>★ Founding Status</span>
-                  Your {isPod ? 'Pod' : 'Foundation'} spot saved for when the community opens
+                  }}>★ Founding Member</span>
+                  You&rsquo;re one of the very first through the doors
                 </span>
               </div>
 
@@ -187,10 +192,10 @@ function LandingPadContent() {
                     if (typeof gtag === 'function') gtag('event', 'landing_pad_join')
                   }}
                 >
-                  Enter The Landing Pad (Free) →
+                  Join the Founding Cohort (Free) →
                 </a>
                 <p style={{ textAlign: 'center', fontSize: '12px', color: P.muted, margin: '0.7rem 0 0', letterSpacing: '0.04em' }}>
-                  Limited spaces available
+                  Founding cohort enrollment closes August 24
                 </p>
               </div>
 
@@ -311,7 +316,7 @@ function SeatReservePopup({ email }: { email: string }) {
 
         <div style={{ padding: 'clamp(1.75rem, 4.5vw, 2.5rem)' }}>
           <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.85rem' }}>
-            Doors open August 3rd
+            Enrollment closes August 24
           </p>
 
           <h2 style={{
@@ -319,7 +324,7 @@ function SeatReservePopup({ email }: { email: string }) {
             fontSize: 'clamp(21px, 3vw, 26px)',
             fontWeight: 400, lineHeight: 1.25, color: P.text, letterSpacing: '-0.015em',
           }}>
-            Hold a seat at our first live class.
+            Join the founding cohort before doors close.
           </h2>
 
           <p style={{
@@ -327,7 +332,7 @@ function SeatReservePopup({ email }: { email: string }) {
             margin: '0 0 1.75rem',
             fontFamily: 'var(--font-inter), -apple-system, sans-serif',
           }}>
-            Sign up and save your place in opening week&rsquo;s live somatic regulation class — free, live, and guided by our facilitators.
+            Be one of the first. Live classes, daily practices, and a small peer pod, free to start. Enrollment for the founding group closes August 24.
           </p>
 
           <a
@@ -343,7 +348,7 @@ function SeatReservePopup({ email }: { email: string }) {
               if (typeof gtag === 'function') gtag('event', 'landing_pad_seat_reserve')
             }}
           >
-            Reserve my seat →
+            Join now →
           </a>
 
           <button
