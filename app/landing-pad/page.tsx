@@ -150,7 +150,6 @@ function LandingPadContent() {
                 🌤️ What you get:
               </p>
               {[
-                'Your first 5-minute somatic practice, today',
                 'Rotating weekly live classes with our facilitators',
                 ...(isPod ? ['Small, intimate weekly share circles'] : []),
                 'Short daily practices that fit into your day',
