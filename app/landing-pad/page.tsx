@@ -331,7 +331,7 @@ function SeatReservePopup({ email }: { email: string }) {
             margin: '0 0 1.75rem',
             fontFamily: 'var(--font-inter), -apple-system, sans-serif',
           }}>
-            Be one of the first. Live classes, daily practices, and a small peer pod, free to start. Enrollment for the founding group closes August 31.
+            Your people are here. Live classes, daily practices, and a small pod walking the same path as you, free to start. Founding enrollment closes August 31.
           </p>
 
           <a
