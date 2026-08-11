@@ -194,7 +194,7 @@ function LandingPadContent() {
                   Join the Founding Cohort (Free) →
                 </a>
                 <p style={{ textAlign: 'center', fontSize: '12px', color: P.muted, margin: '0.7rem 0 0', letterSpacing: '0.04em' }}>
-                  Founding cohort enrollment closes August 24
+                  Founding cohort enrollment closes August 31
                 </p>
               </div>
 
@@ -315,7 +315,7 @@ function SeatReservePopup({ email }: { email: string }) {
 
         <div style={{ padding: 'clamp(1.75rem, 4.5vw, 2.5rem)' }}>
           <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.85rem' }}>
-            Enrollment closes August 24
+            Enrollment closes August 31
           </p>
 
           <h2 style={{
@@ -331,7 +331,7 @@ function SeatReservePopup({ email }: { email: string }) {
             margin: '0 0 1.75rem',
             fontFamily: 'var(--font-inter), -apple-system, sans-serif',
           }}>
-            Be one of the first. Live classes, daily practices, and a small peer pod, free to start. Enrollment for the founding group closes August 24.
+            Be one of the first. Live classes, daily practices, and a small peer pod, free to start. Enrollment for the founding group closes August 31.
           </p>
 
           <a
