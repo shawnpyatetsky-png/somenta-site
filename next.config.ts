@@ -17,8 +17,12 @@ const nextConfig: NextConfig = {
       { source: '/pad-shawn', destination: '/landing-pad?src=lp-shawn', permanent: false },
       { source: '/pad-jake', destination: '/landing-pad?src=lp-jake', permanent: false },
       { source: '/pad-coach', destination: '/landing-pad?src=lp-coach', permanent: false },
+      { source: '/pad-l', destination: '/landing-pad?src=lp-l', permanent: false },
       // Partner link — Sacred Vine Tribe (sacredvinetribe.org) → homepage, tagged
       { source: '/vine', destination: '/?src=sacredvine', permanent: false },
+      // Join link — short, typeable alias for the long Circle invite URL.
+      // Forwards straight to the community sign-up so new people create an account.
+      { source: '/join', destination: 'https://community.joinsomenta.com/join?invitation_token=62db94618ed1ee9815bfd2323aa78bb89565f2ef-e4478c1a-4a2c-4dd5-b62b-e82e90cdbc7d', permanent: false },
     ]
   },
   images: {
