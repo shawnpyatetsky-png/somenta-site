@@ -312,7 +312,7 @@ function SeatReservePopup({ email }: { email: string }) {
 
         <div style={{ padding: 'clamp(1.75rem, 4.5vw, 2.5rem)' }}>
           <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: P.rust, margin: '0 0 0.85rem' }}>
-            Enrollment closes August 31
+            Before you go
           </p>
 
           <h2 style={{
@@ -320,7 +320,7 @@ function SeatReservePopup({ email }: { email: string }) {
             fontSize: 'clamp(21px, 3vw, 26px)',
             fontWeight: 400, lineHeight: 1.25, color: P.text, letterSpacing: '-0.015em',
           }}>
-            Join the founding cohort before doors close.
+            Join the founding cohort.
           </h2>
 
           <p style={{
@@ -328,7 +328,7 @@ function SeatReservePopup({ email }: { email: string }) {
             margin: '0 0 1.75rem',
             fontFamily: 'var(--font-inter), -apple-system, sans-serif',
           }}>
-            Your people are here. Live classes, daily practices, and a small pod walking the same path as you, free to start. Founding enrollment closes August 31.
+            Your people are here. Live classes, daily practices, and a small pod walking the same path as you, free to start.
           </p>
 
           <a
