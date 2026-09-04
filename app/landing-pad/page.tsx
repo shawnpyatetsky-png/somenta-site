@@ -193,9 +193,6 @@ function LandingPadContent() {
                 >
                   Join the Founding Cohort (Free) →
                 </a>
-                <p style={{ textAlign: 'center', fontSize: '12px', color: P.muted, margin: '0.7rem 0 0', letterSpacing: '0.04em' }}>
-                  Founding cohort enrollment closes August 31
-                </p>
               </div>
 
               {/* Divider */}
