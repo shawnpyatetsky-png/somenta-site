@@ -232,6 +232,17 @@ function IntakeContent() {
                 Glad you&rsquo;re here.
               </h1>
 
+              {/* Photo sits at a natural 3:2 so people actually fit the frame —
+                  a short letterbox band slices heads off and reads as a banner */}
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '3 / 2', borderRadius: 16, overflow: 'hidden', marginBottom: '2.5rem' }}>
+                <Image
+                  src="/assets/inviting_good.jpg"
+                  alt="" aria-hidden="true"
+                  fill sizes="(max-width: 640px) 100vw, 620px" priority
+                  style={{ objectFit: 'cover', objectPosition: 'center 45%', filter: photoGrade }}
+                />
+              </div>
+
               <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 470 }}>
                 A few quick questions. Then pick a time to chat about where you&rsquo;re at and how this community could help.
               </p>
