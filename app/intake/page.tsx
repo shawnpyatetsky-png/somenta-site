@@ -228,8 +228,18 @@ function IntakeContent() {
           {/* 0 — Welcome */}
           {screen === 0 && (
             <div style={{ textAlign: 'center' }}>
-              {/* Headline and its supporting line sit together as one unit,
-                  then the photo, then the action */}
+              {/* Photo leads so it sets the tone, then an uninterrupted chain of
+                  greeting → explanation → action. Capped narrower than the column
+                  so it stays a warm anchor instead of out-weighing the CTA. */}
+              <div style={{ position: 'relative', width: '100%', maxWidth: 420, margin: '0 auto 2.5rem', aspectRatio: '3 / 2', borderRadius: 16, overflow: 'hidden' }}>
+                <Image
+                  src="/assets/establishing_safety.jpg"
+                  alt="" aria-hidden="true"
+                  fill sizes="(max-width: 640px) 100vw, 420px" priority
+                  style={{ objectFit: 'cover', objectPosition: 'center 40%', filter: photoGrade }}
+                />
+              </div>
+
               <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 1.25rem' }}>
                 Glad you&rsquo;re here.
               </h1>
@@ -237,17 +247,6 @@ function IntakeContent() {
               <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 470 }}>
                 A few quick questions. Then pick a time to chat about where you&rsquo;re at and how this community could help.
               </p>
-
-              {/* Photo sits at a natural 3:2 so people actually fit the frame —
-                  a short letterbox band slices heads off and reads as a banner */}
-              <div style={{ position: 'relative', width: '100%', aspectRatio: '3 / 2', borderRadius: 16, overflow: 'hidden', marginBottom: '2.5rem' }}>
-                <Image
-                  src="/assets/establishing_safety.jpg"
-                  alt="" aria-hidden="true"
-                  fill sizes="(max-width: 640px) 100vw, 620px" priority
-                  style={{ objectFit: 'cover', objectPosition: 'center 40%', filter: photoGrade }}
-                />
-              </div>
 
               <button className="in-btn" onClick={advance}>Get started →</button>
 
