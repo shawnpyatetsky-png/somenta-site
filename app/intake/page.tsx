@@ -228,9 +228,15 @@ function IntakeContent() {
           {/* 0 — Welcome */}
           {screen === 0 && (
             <div style={{ textAlign: 'center' }}>
-              <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 2rem' }}>
+              {/* Headline and its supporting line sit together as one unit,
+                  then the photo, then the action */}
+              <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 1.25rem' }}>
                 Glad you&rsquo;re here.
               </h1>
+
+              <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 470 }}>
+                A few quick questions. Then pick a time to chat about where you&rsquo;re at and how this community could help.
+              </p>
 
               {/* Photo sits at a natural 3:2 so people actually fit the frame —
                   a short letterbox band slices heads off and reads as a banner */}
@@ -242,10 +248,6 @@ function IntakeContent() {
                   style={{ objectFit: 'cover', objectPosition: 'center 40%', filter: photoGrade }}
                 />
               </div>
-
-              <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 470 }}>
-                A few quick questions. Then pick a time to chat about where you&rsquo;re at and how this community could help.
-              </p>
 
               <button className="in-btn" onClick={advance}>Get started →</button>
 
