@@ -228,17 +228,16 @@ function IntakeContent() {
           {/* 0 — Welcome */}
           {screen === 0 && (
             <div style={{ textAlign: 'center' }}>
-              {/* Warm band — a real group sitting together, graded to match the
-                  rest of the site and faded into the background so it reads as
-                  part of the page rather than a pasted-in rectangle */}
-              <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 24vw, 210px)', borderRadius: 16, overflow: 'hidden', marginBottom: '2.25rem' }}>
+              {/* Warm band — real people mid-conversation, graded to match the
+                  rest of the site. Kept as a clean, self-contained image with
+                  clear space beneath it so it doesn't crowd the headline */}
+              <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 24vw, 210px)', borderRadius: 16, overflow: 'hidden', marginBottom: '3.25rem' }}>
                 <Image
-                  src="/assets/group_backyard_v2.png"
+                  src="/assets/inviting_good.jpg"
                   alt="" aria-hidden="true"
                   fill sizes="620px" priority
-                  style={{ objectFit: 'cover', objectPosition: 'center 42%', filter: photoGrade }}
+                  style={{ objectFit: 'cover', objectPosition: 'center 38%', filter: photoGrade }}
                 />
-                <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: `linear-gradient(180deg, transparent 55%, ${P.bg} 100%)` }} />
               </div>
 
               <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 1.25rem' }}>
