@@ -366,10 +366,10 @@ function IntakeContent() {
             <div>
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <h2 style={{ ...serif, fontSize: 'clamp(24px,3.5vw,32px)', fontWeight: 400, lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 0.85rem' }}>
-                  Thanks{name ? `, ${name.trim().split(' ')[0]}` : ''}. Now pick a time.
+                  Thanks{name ? `, ${name.trim().split(' ')[0]}` : ''}. Let&rsquo;s find a time.
                 </h2>
                 <p style={{ fontSize: '15px', lineHeight: 1.7, color: bodyText, margin: 0 }}>
-                  Grab whichever slot works best and we&rsquo;ll talk soon.
+                  Grab a slot that works best and we&rsquo;ll talk soon.
                 </p>
               </div>
 
