@@ -229,12 +229,23 @@ function IntakeContent() {
           {screen === 0 && (
             <div style={{ textAlign: 'center' }}>
               <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 1.25rem' }}>
-                Before we talk.
+                Glad you&rsquo;re here.
               </h1>
               <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 0 2.5rem' }}>
-                A few quick questions so we can match you with the right group. Takes about a minute, then you&rsquo;ll pick a time that works for you.
+                A few quick questions, about a minute. Then pick a time to chat about where you&rsquo;re at and how this community could help.
               </p>
-              <button className="in-btn" onClick={advance}>Let&rsquo;s begin →</button>
+              <button className="in-btn" onClick={advance}>Get started →</button>
+
+              {/* Quiet reassurance — privacy first, since they're about to answer
+                  personal questions; social proof second */}
+              <div style={{ marginTop: '2.5rem' }}>
+                <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: 0 }}>
+                  Your answers stay between us. No pressure, just a conversation.
+                </p>
+                <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: '0.35rem 0 0' }}>
+                  We&rsquo;re a community of 100+ people integrating together.
+                </p>
+              </div>
             </div>
           )}
 
