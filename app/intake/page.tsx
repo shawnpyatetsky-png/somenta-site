@@ -232,16 +232,6 @@ function IntakeContent() {
                 Glad you&rsquo;re here.
               </h1>
 
-              {/* Warm band — real people mid-conversation, graded to match the site */}
-              <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 24vw, 210px)', borderRadius: 16, overflow: 'hidden', marginBottom: '2.5rem' }}>
-                <Image
-                  src="/assets/inviting_good.jpg"
-                  alt="" aria-hidden="true"
-                  fill sizes="620px" priority
-                  style={{ objectFit: 'cover', objectPosition: 'center 38%', filter: photoGrade }}
-                />
-              </div>
-
               <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 470 }}>
                 A few quick questions. Then pick a time to chat about where you&rsquo;re at and how this community could help.
               </p>
@@ -249,7 +239,7 @@ function IntakeContent() {
               <button className="in-btn" onClick={advance}>Get started →</button>
 
               <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: '2rem 0 0' }}>
-                Join 100+ people integrating together.
+                Your answers stay between us. Join 100+ people integrating together.
               </p>
             </div>
           )}
