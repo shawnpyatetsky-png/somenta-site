@@ -219,7 +219,10 @@ function IntakeContent() {
         </div>
       )}
 
-      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '120px clamp(20px,4vw,48px) 80px' }}>
+      {/* Content sits vertically centred in the viewport — the standard for
+          one-question-at-a-time forms. Padding is the safe minimum so tall
+          screens (the calendar) clear the fixed nav instead of tucking under it. */}
+      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '112px clamp(20px,4vw,48px) 72px' }}>
         <div key={screen} className="in-up" style={{ width: '100%', maxWidth: screen === 7 ? 820 : 620 }}>
 
           {/* 0 — Welcome */}
@@ -229,7 +232,7 @@ function IntakeContent() {
                 Before we talk.
               </h1>
               <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 0 2.5rem' }}>
-                A few quick questions so we can match you with the right group. Takes about two minutes, then you&rsquo;ll pick a time that works for you.
+                A few quick questions so we can match you with the right group. Takes about a minute, then you&rsquo;ll pick a time that works for you.
               </p>
               <button className="in-btn" onClick={advance}>Let&rsquo;s begin →</button>
             </div>
