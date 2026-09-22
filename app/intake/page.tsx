@@ -3,7 +3,7 @@
 import React, { Suspense, useState } from 'react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { P, serif, bodyText } from '@/lib/theme'
+import { P, serif, bodyText, photoGrade } from '@/lib/theme'
 
 // ── Booking calendars ─────────────────────────────────────────────────────────
 // Paste each Google Calendar appointment-schedule embed URL here.
@@ -228,24 +228,32 @@ function IntakeContent() {
           {/* 0 — Welcome */}
           {screen === 0 && (
             <div style={{ textAlign: 'center' }}>
+              {/* Warm band — a real group sitting together, graded to match the
+                  rest of the site and faded into the background so it reads as
+                  part of the page rather than a pasted-in rectangle */}
+              <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 24vw, 210px)', borderRadius: 16, overflow: 'hidden', marginBottom: '2.25rem' }}>
+                <Image
+                  src="/assets/group_backyard_v2.png"
+                  alt="" aria-hidden="true"
+                  fill sizes="620px" priority
+                  style={{ objectFit: 'cover', objectPosition: 'center 42%', filter: photoGrade }}
+                />
+                <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: `linear-gradient(180deg, transparent 55%, ${P.bg} 100%)` }} />
+              </div>
+
               <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 1.25rem' }}>
                 Glad you&rsquo;re here.
               </h1>
-              <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 0 2.5rem' }}>
-                A few quick questions, about a minute. Then pick a time to chat about where you&rsquo;re at and how this community could help.
+              {/* Narrow measure keeps the line length comfortable so this reads
+                  as one calm sentence rather than a block of copy */}
+              <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 430 }}>
+                A few quick questions, about a minute. Then you&rsquo;ll pick a time to talk.
               </p>
               <button className="in-btn" onClick={advance}>Get started →</button>
 
-              {/* Quiet reassurance — privacy first, since they're about to answer
-                  personal questions; social proof second */}
-              <div style={{ marginTop: '2.5rem' }}>
-                <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: 0 }}>
-                  Your answers stay between us. No pressure, just a conversation.
-                </p>
-                <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: '0.35rem 0 0' }}>
-                  We&rsquo;re a community of 100+ people integrating together.
-                </p>
-              </div>
+              <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: '2.25rem 0 0' }}>
+                No pressure, just a conversation. Your answers stay between us.
+              </p>
             </div>
           )}
 
