@@ -236,10 +236,10 @@ function IntakeContent() {
                   a short letterbox band slices heads off and reads as a banner */}
               <div style={{ position: 'relative', width: '100%', aspectRatio: '3 / 2', borderRadius: 16, overflow: 'hidden', marginBottom: '2.5rem' }}>
                 <Image
-                  src="/assets/inviting_good.jpg"
+                  src="/assets/establishing_safety.jpg"
                   alt="" aria-hidden="true"
                   fill sizes="(max-width: 640px) 100vw, 620px" priority
-                  style={{ objectFit: 'cover', objectPosition: 'center 45%', filter: photoGrade }}
+                  style={{ objectFit: 'cover', objectPosition: 'center 40%', filter: photoGrade }}
                 />
               </div>
 
