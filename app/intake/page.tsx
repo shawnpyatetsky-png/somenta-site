@@ -44,7 +44,7 @@ const Q2_OPTS = [
 
 const Q3_OPTS = [
   'No one',
-  "One or two, but they don't really get it",
+  "A few, but they don't really get it",
   'Yes, people who really get it',
 ]
 
