@@ -228,10 +228,12 @@ function IntakeContent() {
           {/* 0 — Welcome */}
           {screen === 0 && (
             <div style={{ textAlign: 'center' }}>
-              {/* Warm band — real people mid-conversation, graded to match the
-                  rest of the site. Kept as a clean, self-contained image with
-                  clear space beneath it so it doesn't crowd the headline */}
-              <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 24vw, 210px)', borderRadius: 16, overflow: 'hidden', marginBottom: '3.25rem' }}>
+              <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 2rem' }}>
+                Glad you&rsquo;re here.
+              </h1>
+
+              {/* Warm band — real people mid-conversation, graded to match the site */}
+              <div style={{ position: 'relative', width: '100%', height: 'clamp(150px, 24vw, 210px)', borderRadius: 16, overflow: 'hidden', marginBottom: '2.5rem' }}>
                 <Image
                   src="/assets/inviting_good.jpg"
                   alt="" aria-hidden="true"
@@ -240,18 +242,14 @@ function IntakeContent() {
                 />
               </div>
 
-              <h1 style={{ ...serif, fontSize: 'clamp(28px,4.5vw,40px)', fontWeight: 400, lineHeight: 1.15, letterSpacing: '-0.02em', margin: '0 0 1.25rem' }}>
-                Glad you&rsquo;re here.
-              </h1>
-              {/* Narrow measure keeps the line length comfortable so this reads
-                  as one calm sentence rather than a block of copy */}
-              <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 430 }}>
-                A few quick questions, about a minute. Then you&rsquo;ll pick a time to talk.
+              <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 470 }}>
+                A few quick questions. Then pick a time to chat about where you&rsquo;re at and how this community could help.
               </p>
+
               <button className="in-btn" onClick={advance}>Get started →</button>
 
-              <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: '2.25rem 0 0' }}>
-                No pressure, just a conversation. Your answers stay between us.
+              <p style={{ fontSize: '13.5px', lineHeight: 1.7, color: P.muted, margin: '2rem 0 0' }}>
+                Join 100+ people integrating together.
               </p>
             </div>
           )}
