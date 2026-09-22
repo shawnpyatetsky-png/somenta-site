@@ -229,7 +229,7 @@ function IntakeContent() {
                 Before we talk.
               </h1>
               <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 0 2.5rem' }}>
-                A few quick questions so we can make our conversation actually useful. Takes about two minutes, then you&rsquo;ll pick a time that works for you.
+                A few quick questions so we can match you with the right group. Takes about two minutes, then you&rsquo;ll pick a time that works for you.
               </p>
               <button className="in-btn" onClick={advance}>Let&rsquo;s begin →</button>
             </div>
