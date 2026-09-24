@@ -49,10 +49,14 @@ const Q3_OPTS = [
 ]
 
 const Q4_OPTS = [
-  'Talk circles: share and be heard by people who get it',
-  'Guided practices: breathwork, movement, or meditation together',
-  'Creative practices: journaling, art, or music together',
-  'Learning: book club, expert talks, workshops',
+  'Sharing and being heard in a circle',
+  'Breathwork',
+  'Meditation',
+  'Movement and somatic practice',
+  'Cacao ceremony',
+  'Journaling or creative practice',
+  'Books, talks, and workshops',
+  'Staying accountable to a daily practice',
   'Not sure yet',
 ]
 
