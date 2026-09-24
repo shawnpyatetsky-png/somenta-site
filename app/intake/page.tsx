@@ -302,7 +302,7 @@ function IntakeContent() {
           {/* 4 — What they want (multi) */}
           {screen === 4 && (
             <div>
-              <QuestionHeader step={4} question="What would you most like to do together in an online group?" hint="Select all that apply." />
+              <QuestionHeader step={4} question="What would you most like to do together?" hint="Select all that apply." />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
                 {Q4_OPTS.map(o => (
                   <OptionCard key={o} label={o} multi selected={q4.includes(o)} onSelect={() => toggle(q4, setQ4, o)} />
