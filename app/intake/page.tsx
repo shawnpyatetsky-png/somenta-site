@@ -286,16 +286,17 @@ function IntakeContent() {
             </div>
           )}
 
-          {/* 4 — What's missing (open, optional) */}
+          {/* 4 — Open field (optional). The question stays wide so nobody feels
+              excluded; the placeholder carries the steering. */}
           {screen === 4 && (
             <div>
-              <QuestionHeader step={4} question="What do you wish you had around you right now?" hint="Optional, and there's no wrong answer." />
+              <QuestionHeader step={4} question="Anything else you want us to know?" hint="Optional." />
               <textarea
                 className="in-input"
                 rows={5}
                 value={q4}
                 onChange={e => setQ4(e.target.value)}
-                placeholder="Even a few words helps."
+                placeholder="What you're looking for, where you're at, anything at all."
                 style={{ resize: 'vertical', lineHeight: 1.6 }}
               />
               <div style={{ marginTop: '2rem' }}>

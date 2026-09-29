@@ -9,7 +9,7 @@
 //   q1_timeframe text,
 //   q2_hardest_part text,    -- comma-joined (multi-select)
 //   q3_support text,
-//   q4_wants text,           -- comma-joined (multi-select)
+//   q4_wants text,           -- free text (open question)
 //   q5_anything_else text,
 //   answers jsonb
 // );
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
             ${row('Time since experience', q1 ?? '', false)}
             ${row('Hardest part', q2Text, true)}
             ${row('Support system', q3 ?? '', false)}
-            ${row('Wishes they had', q4 ?? '', true)}
+            ${row('Anything else', q4 ?? '', true)}
           </table>
         </div>
       `,
