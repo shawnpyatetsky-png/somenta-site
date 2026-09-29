@@ -28,12 +28,11 @@ export async function POST(req: Request) {
   console.log('[intake/route] POST received')
 
   const body = await req.json()
-  const { name, email, owner, q1, q2, q3, q4, q5 } = body
+  const { name, email, owner, q1, q2, q3, q4 } = body
 
-  // Multi-selects arrive as arrays — store readable, comma-joined text so the
-  // Supabase table is scannable at a glance before a call
+  // Q2 is a multi-select — store readable, comma-joined text so the Supabase
+  // table is scannable at a glance before a call
   const q2Text = Array.isArray(q2) ? q2.join(', ') : (q2 ?? '')
-  const q4Text = Array.isArray(q4) ? q4.join(', ') : (q4 ?? '')
 
   // ── Save to Supabase ──────────────────────────────────────────────────────
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -49,9 +48,8 @@ export async function POST(req: Request) {
       q1_timeframe: q1 ?? '',
       q2_hardest_part: q2Text,
       q3_support: q3 ?? '',
-      q4_wants: q4Text,
-      q5_anything_else: q5 ?? '',
-      answers: { name, email, owner, q1, q2, q3, q4, q5 },
+      q4_wants: q4 ?? '',
+      answers: { name, email, owner, q1, q2, q3, q4 },
     })
     if (error) console.error('[intake/route] Supabase insert error:', error.message)
     else console.log('[intake/route] Saved to Supabase')
@@ -84,8 +82,7 @@ export async function POST(req: Request) {
             ${row('Time since experience', q1 ?? '', false)}
             ${row('Hardest part', q2Text, true)}
             ${row('Support system', q3 ?? '', false)}
-            ${row('Wants from a group', q4Text, true)}
-            ${row('Anything else', q5 ?? '', false)}
+            ${row('Wishes they had', q4 ?? '', true)}
           </table>
         </div>
       `,

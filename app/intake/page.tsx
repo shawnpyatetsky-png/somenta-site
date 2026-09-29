@@ -48,19 +48,7 @@ const Q3_OPTS = [
   'Yes, people who really get it',
 ]
 
-const Q4_OPTS = [
-  'Sharing and being heard in a circle',
-  'Breathwork',
-  'Meditation',
-  'Gentle movement and stretching',
-  'Cacao ceremony',
-  'Journaling, art, or music',
-  'Books, talks, and workshops',
-  'Staying accountable to a daily practice',
-  'Not sure yet',
-]
-
-const TOTAL_STEPS = 6
+const TOTAL_STEPS = 5
 
 // ── CSS ───────────────────────────────────────────────────────────────────────
 const CSS = `
@@ -159,8 +147,7 @@ function IntakeContent() {
   const [q1, setQ1] = useState<string | null>(null)
   const [q2, setQ2] = useState<string[]>([])
   const [q3, setQ3] = useState<string | null>(null)
-  const [q4, setQ4] = useState<string[]>([])
-  const [q5, setQ5] = useState('')
+  const [q4, setQ4] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -179,7 +166,7 @@ function IntakeContent() {
       await fetch('/api/intake', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, owner, q1, q2, q3, q4, q5 }),
+        body: JSON.stringify({ name, email, owner, q1, q2, q3, q4 }),
       })
     } catch {
       // fire and forget — never block them from reaching the calendar
@@ -194,8 +181,8 @@ function IntakeContent() {
     advance()
   }
 
-  // Progress bar shows on question screens only (1–6)
-  const progressStep = screen >= 1 && screen <= 6 ? screen : null
+  // Progress bar shows on question screens only (1–5)
+  const progressStep = screen >= 1 && screen <= 5 ? screen : null
 
   return (
     <div className="in-grain" style={{ background: P.bg, minHeight: '100vh', fontFamily: 'var(--font-inter),-apple-system,sans-serif', color: P.text }}>
@@ -227,7 +214,7 @@ function IntakeContent() {
           one-question-at-a-time forms. Padding is the safe minimum so tall
           screens (the calendar) clear the fixed nav instead of tucking under it. */}
       <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '112px clamp(20px,4vw,48px) 72px' }}>
-        <div key={screen} className="in-up" style={{ width: '100%', maxWidth: screen === 7 ? 820 : 620 }}>
+        <div key={screen} className="in-up" style={{ width: '100%', maxWidth: screen === 6 ? 820 : 620 }}>
 
           {/* 0 — Welcome */}
           {screen === 0 && (
@@ -299,31 +286,16 @@ function IntakeContent() {
             </div>
           )}
 
-          {/* 4 — What they want (multi) */}
+          {/* 4 — What's missing (open, optional) */}
           {screen === 4 && (
             <div>
-              <QuestionHeader step={4} question="What would you most like to do together?" hint="Select all that apply." />
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                {Q4_OPTS.map(o => (
-                  <OptionCard key={o} label={o} multi selected={q4.includes(o)} onSelect={() => toggle(q4, setQ4, o)} />
-                ))}
-              </div>
-              <div style={{ marginTop: '2rem' }}>
-                <button className="in-btn" onClick={advance} disabled={q4.length === 0}>Continue →</button>
-              </div>
-            </div>
-          )}
-
-          {/* 5 — Anything else (optional) */}
-          {screen === 5 && (
-            <div>
-              <QuestionHeader step={5} question="Anything else you'd like us to know before we talk?" hint="Optional — skip if nothing comes to mind." />
+              <QuestionHeader step={4} question="What do you wish you had around you right now?" hint="Optional, and there's no wrong answer." />
               <textarea
                 className="in-input"
                 rows={5}
-                value={q5}
-                onChange={e => setQ5(e.target.value)}
-                placeholder="Whatever feels relevant..."
+                value={q4}
+                onChange={e => setQ4(e.target.value)}
+                placeholder="Even a few words helps."
                 style={{ resize: 'vertical', lineHeight: 1.6 }}
               />
               <div style={{ marginTop: '2rem' }}>
@@ -332,10 +304,10 @@ function IntakeContent() {
             </div>
           )}
 
-          {/* 6 — Name + email */}
-          {screen === 6 && (
+          {/* 5 — Name + email */}
+          {screen === 5 && (
             <div>
-              <QuestionHeader step={6} question="Last thing — who are we talking to?" />
+              <QuestionHeader step={5} question="Last thing, who are we talking to?" />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <input
                   className="in-input"
@@ -365,8 +337,8 @@ function IntakeContent() {
             </div>
           )}
 
-          {/* 7 — Booking */}
-          {screen === 7 && (
+          {/* 6 — Booking */}
+          {screen === 6 && (
             <div>
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <h2 style={{ ...serif, fontSize: 'clamp(24px,3.5vw,32px)', fontWeight: 400, lineHeight: 1.2, letterSpacing: '-0.02em', margin: '0 0 0.85rem' }}>
