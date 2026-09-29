@@ -236,7 +236,7 @@ function IntakeContent() {
               </h1>
 
               <p style={{ fontSize: '16px', lineHeight: 1.75, color: bodyText, margin: '0 auto 2.5rem', maxWidth: 470 }}>
-                A few quick questions. Then pick a time to chat about where you&rsquo;re at and how this community could help.
+                A few quick questions so we can learn more about your integration. Then pick a time to chat with us.
               </p>
 
               <button className="in-btn" onClick={advance}>Get started →</button>
