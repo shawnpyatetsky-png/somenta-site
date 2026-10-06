@@ -174,7 +174,7 @@ function LandingPadContent() {
                 </span>
               </div>
 
-              {/* Primary action — right where the free offer ends */}
+              {/* Primary action — right where the benefit list ends */}
               <div style={{ margin: '1.4rem 0 0.25rem' }}>
                 <a
                   href={CIRCLE_URL}
@@ -191,7 +191,7 @@ function LandingPadContent() {
                     if (typeof gtag === 'function') gtag('event', 'landing_pad_join')
                   }}
                 >
-                  Join the Founding Cohort (Free) →
+                  Join the Founding Cohort →
                 </a>
               </div>
 
