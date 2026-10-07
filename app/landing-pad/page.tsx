@@ -46,6 +46,9 @@ const CSS = `
   }
   .lp-btn:hover{background:#B06A30;transform:translateY(-2px);box-shadow:0 6px 22px rgba(200,120,64,.28)}
 
+  .lp-talk{color:${P.rust};text-decoration:none;font-weight:600;border-bottom:1px solid rgba(184,80,48,.3);transition:border-color .2s}
+  .lp-talk:hover{border-bottom-color:${P.rust}}
+
   @media(max-width:640px){.lp-inner{padding:1.75rem 1.25rem!important}}
 
   /* Paper grain — same material as the rest of the site */
@@ -194,6 +197,31 @@ function LandingPadContent() {
                   Join the Founding Cohort →
                 </a>
               </div>
+
+              {/* Secondary path — somewhere to go for the ones who aren't
+                  ready to join on their own, instead of leaving */}
+              <p style={{
+                fontSize: '13px', lineHeight: 1.6, color: P.muted,
+                textAlign: 'center', margin: '0.9rem 0 0',
+                fontFamily: 'var(--font-inter), -apple-system, sans-serif',
+              }}>
+                Rather talk to someone first?{' '}
+                <a
+                  href="/intake"
+                  className="lp-talk"
+                  onClick={() => {
+                    navigator.sendBeacon(
+                      '/api/quiz/conversion',
+                      new Blob([JSON.stringify({ email, cta: 'landing_pad_call' })], { type: 'application/json' })
+                    )
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const gtag = (window as any).gtag
+                    if (typeof gtag === 'function') gtag('event', 'landing_pad_call')
+                  }}
+                >
+                  Book a call
+                </a>
+              </p>
 
               {/* Divider */}
               <div style={{ height: 1, background: P.div, margin: '1.4rem 0 1.25rem' }} />
