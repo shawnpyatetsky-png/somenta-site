@@ -328,7 +328,7 @@ function SeatReservePopup({ email }: { email: string }) {
             margin: '0 0 1.75rem',
             fontFamily: 'var(--font-inter), -apple-system, sans-serif',
           }}>
-            Your people are here. Live classes, daily practices, and a small pod walking the same path as you, free to start.
+            Your people are here. Live classes, daily practices, and a small pod walking the same path as you.
           </p>
 
           <a
