@@ -5,7 +5,8 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { P, serif, photoGrade } from '@/lib/theme'
 
-const CIRCLE_URL = 'https://community.joinsomenta.com/join?invitation_token=62db94618ed1ee9815bfd2323aa78bb89565f2ef-e4478c1a-4a2c-4dd5-b62b-e82e90cdbc7d'
+// Paid checkout, not the free invite link — the quiz ends at the wall
+const CHECKOUT_URL = 'https://community.joinsomenta.com/checkout/founding-membership'
 
 const Q4_TESTIMONIAL: Record<string, { quote: string; attribution: string; avatar: string }> = {
   A: {
@@ -180,7 +181,7 @@ function LandingPadContent() {
               {/* Primary action — right where the benefit list ends */}
               <div style={{ margin: '1.4rem 0 0.25rem' }}>
                 <a
-                  href={CIRCLE_URL}
+                  href={CHECKOUT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="lp-btn"
@@ -360,7 +361,7 @@ function SeatReservePopup({ email }: { email: string }) {
           </p>
 
           <a
-            href={CIRCLE_URL}
+            href={CHECKOUT_URL}
             className="lp-btn"
             onClick={() => {
               navigator.sendBeacon(
