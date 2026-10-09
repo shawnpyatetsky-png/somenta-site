@@ -1749,7 +1749,7 @@ const FAQ_CATEGORIES: FAQCategory[] = [
       {
         q: "How much does it cost, and am I locked into a contract?",
         paras: [
-          "Membership begins at $25/month, but we offer a $10/month introductory rate for your first 3 months so you can establish your daily rhythm without financial pressure.",
+          "Your first month is free, so you can settle into a rhythm before paying for anything. After that, membership is $25/month.",
           "You are never locked in. You can cancel anytime, or use our \"Pause\" feature to step away for a month to integrate on your own and return right where you left off.",
           "We also offer a free Find Your Path Assessment to recommend the exact tier of support that feels best for you right now.",
         ],
@@ -1897,7 +1897,7 @@ const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: 'What exactly is Somenta?', acceptedAnswer: { '@type': 'Answer', text: 'Somenta is an online, peer-supported digital sanctuary designed to help you integrate profound insights and live in balance. Our framework is built on a unique blend of holistic integration, peer support, and somatic (body-based) practices — such as breathwork, guided meditation, and Yoga Nidra — designed to gently regulate your nervous system and help you build supportive daily rhythms.' } },
-    { '@type': 'Question', name: 'How much does Somenta cost?', acceptedAnswer: { '@type': 'Answer', text: 'Foundation membership begins at $10/month for your first 3 months (then $25/month). The Intimate Peer Pod begins at $40/month for your first 3 months (then $60/month). You can cancel or pause anytime.' } },
+    { '@type': 'Question', name: 'How much does Somenta cost?', acceptedAnswer: { '@type': 'Answer', text: 'Your first month is free. After that, membership is $25/month. You can cancel or pause anytime.' } },
     { '@type': 'Question', name: 'How much time does Somenta take each week?', acceptedAnswer: { '@type': 'Answer', text: 'Your baseline commitment is just over an hour a week: a 60-minute Live Class and four bite-sized, 2-minute daily check-ins. There is no falling behind — flexible participation builds in permission to miss days without guilt.' } },
     { '@type': 'Question', name: 'How is Somenta different from meditation or breathwork apps?', acceptedAnswer: { '@type': 'Answer', text: 'Most wellness apps are solo content libraries that rely entirely on your own willpower. Somenta removes this friction by giving you a single curated daily rhythm anchored by a live peer community — giving you the accountability and human connection required to make your insights land permanently.' } },
     { '@type': 'Question', name: 'What is an Intimate Peer Pod?', acceptedAnswer: { '@type': 'Answer', text: 'An Intimate Peer Pod is a 12-week facilitated share circle sprint designed for deep, reflective work. You are carefully matched with a small group of 8 to 10 peers and an expert facilitator, meeting with the same trusted people each week to build profound emotional safety and peer accountability.' } },
